@@ -8,7 +8,7 @@ We'll use a really common Node.js project workflow!
 First, let's clone our repository, and install all of our node dependencies:
 
 ```
-git clone https://github.com/uclaacm/bias-by-us.git
+git clone https://github.com/Nikita2662/josies-list.git
 cd bias-by-us
 npm install
 npm install react-scripts
