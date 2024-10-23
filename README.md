@@ -9,7 +9,7 @@ First, let's clone our repository, and install all of our node dependencies:
 
 ```
 git clone https://github.com/Nikita2662/josies-list.git
-cd bias-by-us
+cd josies-list
 npm install
 npm install react-scripts
 ```
