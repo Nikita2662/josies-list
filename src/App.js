@@ -1,22 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import { googleLogout, GoogleLogin } from '@react-oauth/google';
 
 function App() {
+  const [user, setUser] = useState([]);
+
+  function logout() {
+    googleLogout();
+    setUser(null);  
+    //define logout
+  }
+  
+  
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <h4>Sign-In with Google</h4> 
+          <GoogleLogin onSuccess={console.log("logged in")} onError={console.log("error")} />
+        </div>
       </header>
     </div>
   );
