@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { googleLogout, GoogleLogin } from "@react-oauth/google";
+import Landing from "./screens/Landing";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -11,6 +12,9 @@ function App() {
     //define logout
   }
 
+  return <Landing />;
+
+  /*  
   return (
     <div className="App">
       <header className="App-header">
@@ -24,6 +28,7 @@ function App() {
       </header>
     </div>
   );
+*/
 }
 
 export default App;

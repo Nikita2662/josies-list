@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  height: 95px;
+  padding: 13px 160px;
+  justify-content: space-between;
+  align-items: center;
+  background: #dbf4ad;
+}
+.nav-links {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.nav-links p {
+  color: #3ea467;
+  font-family: Figtree;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+svg.container {
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
