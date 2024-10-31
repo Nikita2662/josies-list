@@ -1,0 +1,27 @@
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  top: 60px;
+  left: 200px;
+  width: min-content;
+}
+.josie-title {
+  color: #42cafd;
+}
+.list-title {
+  color: #ffd4d9;
+}
+.title-container h1 {
+  font-size: 130px;
+  font-weight: 400;
+  font-family: "Bagel Fat One";
+  margin: 0;
+  width: min-content;
+}
+.big-logo {
+  position: absolute;
+  bottom: 100px;
+  right: 400px;
+}
