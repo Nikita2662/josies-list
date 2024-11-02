@@ -1,4 +1,4 @@
-function Logo({ size }) {
+function Logo({ size = 50, className }) {
   return (
     <svg
       width={size.toString()}
@@ -6,6 +6,7 @@ function Logo({ size }) {
       viewBox="0 0 550 550"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <circle cx="275" cy="275" r="275" fill="#3EA467" />
       <mask
