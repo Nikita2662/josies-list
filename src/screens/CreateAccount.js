@@ -17,19 +17,19 @@ function CreateAccount(){
             <Header />
             <SafeArea>
                 <div className="ca-container">
-                    <h1>create your account</h1>      
+                    <h1>Create Your Account</h1>      
                 </div>
                 <div className="grid-container">
                     <div className="grid-item">
                         <div className="small-text">
-                            <h1>profile picture</h1>
+                            <h1>Profile Picture</h1>
                         </div>
                         <Button onClick={handleClick} className="photo-button">+</Button>
                     </div>
                     <div className="grid-item">
-                        <TextBox label="first name" placeholder="" className="text-box-container-top" />
-                        <TextBox label="last name" placeholder="" className="text-box-container-bottom" />  
-                        <TextBox label="biography" placeholder="" className="text-box-container-bottom" />
+                        <TextBox label="First Name" placeholder="Josie" className="text-box-container-top" />
+                        <TextBox label="Last Name" placeholder="Bruin" className="text-box-container-bottom" />  
+                        <TextBox label="Biography" placeholder="Class of 1919, Rieber Hall" className="text-box-container-bottom" />
                     </div>
                 </div>
                 <div>
