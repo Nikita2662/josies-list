@@ -107,10 +107,12 @@
 .p-sign {
   margin-top: 150px;
   margin-right: 100px;
+  margin-bottom: 1px;
   color: black;
   font-size: 20px;
   font-weight: bold;
   font-family: "Figtree";
+  line-height: 0.5;
 
 }
 .p-or {
@@ -165,7 +167,13 @@
 img {
   max-width: 100%; /* Responsive */
   height: auto;    /* Maintain aspect ratio */
-  font-family: "Figtree";
+
+}
+.greenFlag{
+
+  margin-bottom: 15px; /* Space below the heading */
+  margin-left: 70px; /* Space below the heading */
+  justify-content: flex-end;
 }
 
 
