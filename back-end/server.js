@@ -27,20 +27,23 @@ app.listen(port, () => {
   console.log('Node.js HTTP server is running on port ' + port);
 });
 //
+
 //Create a connection with the MongoDB
-var CONNECTION_STRING="mongodb+srv://Admin:lCNavxtIML74MxCj@josies-list-cluster.o5u3b.mongodb.net/?retryWrites=true&w=majority&appName=josies-list-cluster"
-console.log("hey something is right in the connection")
+const express = require('express');
+const mongoose = require('mongoose');
 
+const app = express();
 
-var DATABASENAME="sample_mflix";
-var database;
+// MongoDB connection
+mongoose.connect('mongodb+srv://Admin:lCNavxtIML74MxCj@josies-list-cluster.o5u3b.mongodb.net/?retryWrites=true&w=majority&appName=josies-list-cluster', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected...'))
+  .catch(err => console.log(err));
 
-//Start Express app and listen to requests
-app.listen(5038, ()=> { //this number could be a potential problem
-  Mongoclient.connect(CONNECTION_STRING,(error,client)=>{
-      database=client.db(DATABASENAME);
-      console.log("Mongo DB Connection Successful!!!");
-  })
-})
+// Define routes
+app.get('/', (req, res) => {
+  res.send('The server works!!');
+});
 
-//MERN App
+// Start the server
+const port2 = process.env.PORT || 3000;
+app.listen(port, 3000)
