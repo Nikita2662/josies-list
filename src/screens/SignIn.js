@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import Logo from "../components/Logo";
 import './SignIn.css';
 import React, { useState } from 'react';
 
@@ -20,6 +21,7 @@ function SignIn() {
           <h1 className="head-title">Josie's List</h1>
           <p className="p-byUcla" > made by UCLA students</p>
           <p className="p-forUcla" > for UCLA students</p>
+          <Logo size={150} className="p-logo" />
           </div>
 
      
