@@ -21,13 +21,13 @@
   flex-direction: column; /* Aligns items vertically */
 
   padding-top:264px;
-  padding-right:50px;
+  padding-right:20px;
   padding-bottom:642px;
+  padding-left:20px;
   padding-top:264px;
   padding-bottom:642px;
   line-height: 0.5; /* Adjust the value for spacing between lines */
-  border: 8px solid teal; /* Border around the column */
-
+  
 }
 
 
@@ -36,9 +36,9 @@
   padding-top:284px;
   padding-bottom:620px;
   flex-direction: column; /* Aligns items vertically */
-  border: 2px solid black; /* Border around the column */
+  
   padding-left:50px;
-
+  padding-right:50px;
 }
 
 
@@ -46,9 +46,15 @@
 
 /* Left Flex Items for Welcome */
 .head-title{
-  color: #FF1F58;
-  font-size: 85px;
+
+  font-size: 95px;
   text-align: right;
+  font-family: "Bagel Fat One";
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  justify-content: center;
+  color: #ff1f58;
 
 }
 
@@ -57,21 +63,24 @@
 
 .p-welcome {
  
-  color: green;
+  color: #3EA467;
   font-weight: bold;
-  font-size: 28px;
-  margin-left: 170px;
-
- 
+  font-size: 38px;
+  font-family: "Figtree";
+  margin-left:15%;
+  letter-spacing: 1.5px; 
+  font-weight: bold;
+  font-family: "Figtree";
  
 }
 .p-byUcla {
   color: #42CAFD;
-  font-size: 28px;
+  font-size: 38px;
   /*margin-right: 700px;*/
  text-align: right;
   letter-spacing: 1.5px; 
   font-weight: bold;
+  font-family: "Figtree";
 
 }
 
@@ -79,9 +88,10 @@
 .p-forUcla {
   color: #0276B6;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 38px;
   letter-spacing: 1.5px; 
   text-align: right;
+  font-family: "Figtree";
   
 }
 
@@ -96,6 +106,16 @@
   color: black;
   font-size: 20px;
   font-weight: bold;
+  font-family: "Figtree";
+
+}
+.p-or {
+
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Figtree";
 
 }
 .button {
@@ -107,6 +127,7 @@
   font-size: 16px;
   cursor: pointer;
  /* margin: 10px;*/
+ font-family: "Figtree";
 }
 
 
@@ -117,6 +138,7 @@
   color: #FF1F58;
   box-shadow: 0 4px 8px rgba(255, 105, 180, 0.5);
   margin-bottom: 15px; /* Space below the heading */
+  font-family: "Figtree";
 }
 
 
@@ -124,6 +146,7 @@
   background-color: #D5F3FF;
   color: #0276B6;
   box-shadow: 0 4px 8px rgb(142, 180, 237);
+  font-family: "Figtree";
 }
 
 
@@ -131,21 +154,24 @@
   color: black;
   font-weight: bold;
   font-size: 12px;
+  font-family: "Figtree";
 }
 
 
 img {
   max-width: 100%; /* Responsive */
   height: auto;    /* Maintain aspect ratio */
+  font-family: "Figtree";
 }
 
 
-.App-header {
+.header {
   background-color:#ffffff;
   min-height: 100vh;
   display: flex;
   font-size: calc(10px + 2vmin);
   color: rgb(0, 0, 0);
+  font-family: "Figtree";
 }
 
 
