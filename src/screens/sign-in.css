@@ -46,6 +46,7 @@
     font-size: 85px;
     letter-spacing: 2.5px; 
     text-align: right;
+    font-family: "Bagel Fat One";
   
   }
   
@@ -61,6 +62,7 @@
     font-weight: bold;
     font-size: 38px;
     text-align: left;
+    font-family: "Figtree";
   
    
    
@@ -72,6 +74,7 @@
     text-align: right;
     letter-spacing: 1.5px; 
     font-weight: bold;
+    font-family: "Figtree";
   }
   
   
@@ -81,6 +84,7 @@
     font-size: 28px;
     letter-spacing: 1.5px; 
     text-align: right;
+    font-family: "Figtree";
     
   }
   
@@ -93,6 +97,7 @@
     color: black;
     font-size: 20px;
     font-weight: bold;
+    font-family: "Figtree";
   
   }
   .p-or {
@@ -100,6 +105,7 @@
     font-size: 20px;
     font-weight: bold;
     text-align:center;
+    font-family: "Figtree";
   
   }
   
@@ -110,6 +116,7 @@
     font-size: 16px;
     cursor: pointer;
    /* margin: 10px;*/
+   font-family: "Figtree";
   }
   
   
@@ -117,6 +124,7 @@
     background-color: #FFD4D9;
     color: #FF1F58;
     box-shadow: 0 4px 8px rgba(255, 105, 180, 0.5);
+    font-family: "Figtree";
   }
   
   
@@ -124,6 +132,7 @@
     background-color: #D5F3FF;
     color: #0276B6;
     box-shadow: 0 4px 8px rgb(142, 180, 237);
+    font-family: "Figtree";
   }
   
   
@@ -131,6 +140,7 @@
     color: black;
     font-weight: bold;
     font-size: 12px;
+    font-family: "Figtree";
   }
   
   
