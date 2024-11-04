@@ -1,0 +1,32 @@
+.listed-photo {
+    border: none;              
+    border-radius: 10px;
+    margin-top: 0px;
+    left: 0px;
+    width: 265px;
+    height: 265px;
+}
+.listing-text {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: "Figtree";
+    color: black;
+    width: 265px;
+    margin-left: 0px;
+    top: 5px;
+    position: relative;
+    text-align: center;
+    margin: 0px;
+}
+.price-text {
+    font-size: 20px;
+    font-family: "Figtree";
+    color: black;
+    width: 265px;
+    margin-left: 0px;
+    font-weight: 400;
+    top: 5px;
+    position: relative;
+    text-align: center;
+    margin: 0px;
+}
