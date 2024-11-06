@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// TO DO: Add Image Field
 const productSchema = new Schema({
     itemName: { type: String, required: true }, 
     description: { type: String, default: 'No description listed for this item.' },
@@ -8,4 +9,5 @@ const productSchema = new Schema({
     seller: String
 })
 
-module.exports = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema);
+module.exports(Product);
