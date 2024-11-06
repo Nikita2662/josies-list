@@ -1,0 +1,204 @@
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+ 
+}
+
+
+/* Creates a grid box for one side with the welcome text, and the other side sign in */
+.column-left {
+  float: left;
+  width: 50%;
+  flex-direction: column; /* Aligns items vertically */
+
+  padding-top:264px;
+  padding-right:20px;
+  padding-bottom:642px;
+  padding-left:20px;
+  padding-top:264px;
+  padding-bottom:642px;
+  line-height: 0.5; /* Adjust the value for spacing between lines */
+  
+}
+
+
+.column-right { 
+  width: 50%;
+  padding-top:284px;
+  padding-bottom:620px;
+  flex-direction: column; /* Aligns items vertically */
+  
+  padding-left:50px;
+  padding-right:50px;
+}
+
+
+
+
+/* Left Flex Items for Welcome */
+.head-title{
+
+  font-size: 95px;
+  text-align: right;
+  font-family: "Bagel Fat One";
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  justify-content: center;
+  color: #ff1f58;
+
+}
+
+
+
+
+.p-welcome {
+ 
+  color: #3EA467;
+  font-weight: bold;
+  font-size: 38px;
+  font-family: "Figtree";
+  margin-left:15%;
+  letter-spacing: 1.5px; 
+  font-weight: bold;
+  font-family: "Figtree";
+ 
+}
+.p-byUcla {
+  color: #42CAFD;
+  font-size: 38px;
+  /*margin-right: 700px;*/
+ text-align: right;
+  letter-spacing: 1.5px; 
+  font-weight: bold;
+  font-family: "Figtree";
+
+}
+.p-logo{
+  text-align: right;
+  margin-left:75%;
+}
+
+
+.p-forUcla {
+  color: #0276B6;
+  font-weight: bold;
+  font-size: 38px;
+  letter-spacing: 1.5px; 
+  text-align: right;
+  font-family: "Figtree";
+  
+}
+
+
+
+
+
+
+.p-sign {
+  margin-top: 150px;
+  margin-right: 100px;
+  margin-bottom: 1px;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Figtree";
+  line-height: 0.5;
+
+}
+.p-or {
+
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Figtree";
+
+}
+.button {
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: 456px;
+  height: 52px;
+  border: 1px;
+  font-size: 16px;
+  cursor: pointer;
+ /* margin: 10px;*/
+ font-family: "Figtree";
+}
+
+
+
+
+.sign-in {
+  background-color: #FFD4D9;
+  color: #FF1F58;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.5);
+  margin-bottom: 15px; /* Space below the heading */
+  font-family: "Figtree";
+}
+
+
+.create-account {
+  background-color: #D5F3FF;
+  color: #0276B6;
+  box-shadow: 0 4px 8px rgb(142, 180, 237);
+  font-family: "Figtree";
+}
+
+
+.p-google {
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: "Figtree";
+}
+
+
+img {
+  max-width: 100%; /* Responsive */
+  height: auto;    /* Maintain aspect ratio */
+
+}
+.greenFlag{
+
+  margin-bottom: 15px; /* Space below the heading */
+  margin-left: 70px; /* Space below the heading */
+  justify-content: flex-end;
+}
+
+
+.header {
+  background-color:#ffffff;
+  min-height: 100vh;
+  display: flex;
+  font-size: calc(10px + 2vmin);
+  color: rgb(0, 0, 0);
+  font-family: "Figtree";
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
