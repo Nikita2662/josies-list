@@ -8,14 +8,14 @@ import { useContext } from "react";
 let primaryColorDark = colors.darkPrimary;
 
 function Header() {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <nav>
-      <div className="logo-title">
+      <Link className="logo-title" to={"/"}>
         <Logo size={50} />
         <h1>Josie's List</h1>
-      </div>
+      </Link>
       <div className="nav-links">
         <p>Buy</p>
         <p>Sell</p>
