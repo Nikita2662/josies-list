@@ -1,12 +1,8 @@
 import "./App.css";
-import Landing from "./screens/Landing";
-import CreateAccount from "./screens/CreateAccount";
-import SignIn from './screens/SignIn'; 
+import Search from "./screens/Search";
 
 function App() {
-  return <SignIn/>;
+  return <Search />;
 }
-
-
 
 export default App;
