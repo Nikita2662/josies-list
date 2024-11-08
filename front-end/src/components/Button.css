@@ -1,0 +1,67 @@
+.photo-button {
+    background-color: #ffd4d9; 
+    border: none;              
+    border-radius: 10px;    
+    font-family: Figtree;
+    font-size: 500px;
+    color: #ff1f58;
+    cursor: pointer;           
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 95px;
+    position: relative;
+    width: 360px;
+    height: 360px;
+}
+.photo-button:hover {
+  background-color: #ff1f58; /* Darker shade on hover */
+  color: #ffd4d9; 
+}
+
+.ca-button {
+  background-color: #DBF4AD; 
+  border: none;              
+  border-radius: 10px;        
+  font-family: Figtree;
+  font-size: 24px;    
+  font-weight: 700;
+  color: #3EA467;
+  cursor: pointer;           
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 95px;
+  top: 60px;
+  position: relative;
+  width: 930px;
+  height: 52px;
+}
+.ca-button:hover{
+  background-color: #3EA467; /* Darker shade on hover */
+  color: #DBF4AD; 
+}
+
+.listing-button {
+  background-color: #ffd4d9; 
+  border: none;              
+  border-radius: 10px;    
+  font-family: Figtree;
+  font-size: 200px;
+  color: #ff1f58;
+  cursor: pointer;           
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+  position: relative;
+  width: 265px;
+  height: 265px;
+}
+.listing-button:hover {
+background-color: #ff1f58; /* Darker shade on hover */
+color: #ffd4d9; 
+}
