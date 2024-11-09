@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(cors()); 
 app.use(express.json());
 app.use('/products', require('./routes/productRoutes'));
+app.use("/user", require('./routes/users')); 
 
 
 // MongoDB connection
