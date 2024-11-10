@@ -17,8 +17,8 @@ function Listings({className="listed-photo" , src , itemName , price, descriptio
     <div style={{ flexGrow: 1 }}>2</div>
     </div>
     </div>
-    
-    <Comment/>
+
+    <Comment />
     </SafeArea>
     </div>
     );
