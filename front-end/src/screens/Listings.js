@@ -10,13 +10,12 @@ function Listings(){
         <div>
             <Header/>
          <SafeArea>
-    <p>Helo World</p>
     <div class="flex-container">
-    <div>
+    <div class="flex1">
     <div style={{ flexGrow: 0 }}>1</div>
     <div style={{ flexGrow: 1 }}>2</div>
     </div>
-    <div> <div style={{ flexGrow: 8 }}>3</div> </div>
+    <div class="flex2"> <div style={{ flexGrow: 8 }}>3</div> </div>
     
     </div>
     </SafeArea>

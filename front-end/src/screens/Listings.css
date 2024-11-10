@@ -3,9 +3,22 @@
     display: flex;
     background-color: DodgerBlue;
     color: white;
-    margin: 10px;
+    margin: 40px;
     text-align: center;
     font-size: 30px;
     flex-grow:3px;
+    
+}
+
+.flex1 > div {
+
+    display: flex;
+    background-color:pink;
+    color: white;
+    font-size: 30px;
+    border-color: black;
+    height:350px;
+    flex-direction: column;
+
     
 }
