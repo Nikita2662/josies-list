@@ -2,8 +2,9 @@ import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
 import "./Listings.css";
 import React, { useState } from 'react';
+import Comment from "../components/Comments.js"
 
-function Listings(){
+function Listings({className="listed-photo" , src , itemName , price, description}){
 
 
     return (
@@ -15,9 +16,9 @@ function Listings(){
     <div style={{ flexGrow: 0 }}>1</div>
     <div style={{ flexGrow: 1 }}>2</div>
     </div>
-    <div class="flex2"> <div style={{ flexGrow: 8 }}>3</div> </div>
-    
     </div>
+    
+    <Comment/>
     </SafeArea>
     </div>
     );

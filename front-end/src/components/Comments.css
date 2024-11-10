@@ -1,5 +1,60 @@
-.small-textbox {
-    width: 150px;
-    height: 30px;
-    font-size: 12px;
-  }
+
+  .flexComment >div {
+
+    display: flex;
+    color: black;
+    margin: 30px;
+    text-align: center;
+    font-size: 10px;
+    flex-direction: column;
+   
+    
+}
+
+
+.text-box-container-top {
+    display: flex;
+    flex-direction: column; 
+    margin: 10px 0; 
+    font-family: Figtree;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    position: relative;
+    margin-left: 0px;
+    width: 455px;
+    height: 52px;
+    flex-shrink: 0;
+    top: 164px;
+}
+.text-box-container-bottom {
+    display: flex;
+    flex-direction: column; 
+    margin: 10px 0; 
+    font-family: Figtree;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    position: relative;
+    margin-left: 0px;   
+    margin-top: 60px;
+    width: 455px;
+    height: 52px;
+    flex-shrink: 0;
+    top: 164px;
+}
+.text-box {
+    padding: 10px; 
+    border: none; 
+    border-radius:10px; 
+    font-size: 14px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: black;
+    font-family: Figtree;
+    background-color: #ffd4d9;
+}
+.text-box:focus {
+    border-color: none; 
+    outline: none; 
+}
