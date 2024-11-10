@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Comment from "../components/Comments.js"
 
 function Listings({className="listed-photo" , src , itemName , price, description}){
-
+    
 
     return (
         <div>
@@ -18,7 +18,7 @@ function Listings({className="listed-photo" , src , itemName , price, descriptio
     </div>
     </div>
 
-    <Comment />
+    <Comment productId={303}/>
     </SafeArea>
     </div>
     );
