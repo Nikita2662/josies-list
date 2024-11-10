@@ -1,0 +1,11 @@
+.flex-container > div {
+
+    display: flex;
+    background-color: DodgerBlue;
+    color: white;
+    margin: 10px;
+    text-align: center;
+    font-size: 30px;
+    flex-grow:3px;
+    
+}
