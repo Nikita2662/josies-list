@@ -6,9 +6,8 @@ const productRoutes = express.Router();
 
 
 // 1 - Retrieve all 
-productRoutes.route("./products").get(async (req, res) => {
-    let productDB = Product; 
-    let data = await Product.find({}).toArray(); 
+productRoutes.route("/products").get(async (req, res) => {
+    let data = await Product.find({}); 
 
     if (data.length > 0) {
         res.json(data);
@@ -18,9 +17,8 @@ productRoutes.route("./products").get(async (req, res) => {
 });
 
 // 2 - Retrieve one
-productRoutes.route("./products/:id").get(async (req, res) => {
-    let productDB = Product; 
-    let data = await Product.findOne({_id: new ObjectId(req.params.id)}).toArray(); 
+productRoutes.route("/products/:id").get(async (req, res) => {
+    let data = await Product.findOne({_id: new ObjectId(req.params.id)}); 
 
     if (Object.keys(data).length > 0) {
         res.json(data);
@@ -30,8 +28,7 @@ productRoutes.route("./products/:id").get(async (req, res) => {
 });
 
 // 3 - Create one
-productRoutes.route("./products").post(async (req, res) => {
-    let productDB = Product; 
+productRoutes.route("/products").post(async (req, res) => {
     let productObject = {
         itemName: req.body.itemName,
         description: req.body.description,
@@ -43,8 +40,7 @@ productRoutes.route("./products").post(async (req, res) => {
 });
 
 // 4 - Update One
-productRoutes.route("./products/:id").put(async (req, res) => {
-    let productDB = Product; 
+productRoutes.route("/products/:id").put(async (req, res) => {
     let productObject = { 
         $set: {
             itemName: req.body.itemName,
@@ -58,9 +54,8 @@ productRoutes.route("./products/:id").put(async (req, res) => {
 });
 
 // 5 - Delete One 
-productRoutes.route("./products/:id").delete(async (req, res) => {
-    let productDB = Product; 
-    let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}).toArray(); 
+productRoutes.route("/products/:id").delete(async (req, res) => {
+    let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}); 
     res.json(data); 
 });
 
