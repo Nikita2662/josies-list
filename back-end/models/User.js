@@ -13,7 +13,7 @@ const userSchema = new schema({
     },
     username: {
         type: String,
-        default: userId
+        required: true
     },
     bio: {
         type: String,
