@@ -19,8 +19,12 @@ const userSchema = new schema({
         type: String,
         default: "None"
     }
-
-    // can also add user methods here
+    // insert any user methods here
 })
+
+// custom query methods
+userSchema.query.byEmail = function(email) { // allows you to find user by email, rather than the self defined ID (alternatively, could just rewrite the default id to the user_id, which is the email)
+    return this.find({ user_id: email});
+}
 
 module.exports = mongoose.model('User', userSchema);
