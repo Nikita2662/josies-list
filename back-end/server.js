@@ -24,10 +24,12 @@ mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTo
 mongoose.connection.once('open', () => {
   app.listen(port, () => {
     console.log('Server started on port ' + port);
-    let testUser = new User({user_id: 'testemail@g.ucla.edu'});
+    let testUser = new User({
+                            user_id: 'testemail@g.ucla.edu',
+                            username: 'joe bruin'
+                            });
 
-    msg
-        .save()
+    testUser.save()
         .then((doc) => {console.log(doc);})
         .catch((err) => {console.error(err);});
 

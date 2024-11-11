@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
-// can add more attributes once these are tested
+// NEED TO ADD ALL ATTRIBUTES, ONCE THESE ARE TESTED
 const userSchema = new schema({
     user_id: { // email
         type: String,
@@ -19,6 +19,7 @@ const userSchema = new schema({
         type: String,
         default: "None"
     }
+
     // can also add user methods here
 })
 
