@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
+const User = require('./models/User.js'');
 //const Product = require('./models/Product.js'); 
 const Products = require('./routes/productRoutes');
 
@@ -23,6 +24,9 @@ mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTo
 mongoose.connection.once('open', () => {
   app.listen(port, () => {
     console.log('Server started on port ' + port);
+    let testUser = new User({userID: 'testemail@g.ucla.edu'});
+
+
     // const testItem = new Product();
     // testItem.set('itemName', 'Coffee Table');
     // testItem.set('price', 5); 
