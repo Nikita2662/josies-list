@@ -11,11 +11,14 @@ function UploadImage() {
     return (
         <div>
            
-            <img src={image} alt="Uploaded" width={120} height={120} />
+            <img src={image} alt="Uploaded" width={120} height={120} 
+            onClick={() => document.getElementById('invoke').click()}
+            />
   
             <input 
                 type="file"
-               
+                id="invoke" 
+                
                 onChange={(event) => {
         if (event.target.files[0]) {
             // Create a temporary URL for the selected file
