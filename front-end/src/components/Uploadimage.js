@@ -12,13 +12,13 @@ function UploadImage() {
         <div>
            
             <img src={image} alt="Uploaded" width={120} height={120} 
-            onClick={() => document.getElementById('invoke').click()}
+            onClick={() => document.getElementById('invoke').click() }
             />
   
             <input 
                 type="file"
                 id="invoke" 
-                
+                style={{ display: 'none' }} 
                 onChange={(event) => {
         if (event.target.files[0]) {
             // Create a temporary URL for the selected file
