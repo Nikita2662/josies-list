@@ -11,8 +11,10 @@ function UploadImage({w=200, h=200}) {
     return (
         <div>
            
-            <img src={image} alt="Uploaded" width={w} height={h} style={{
-                    borderRadius: '10px' }}
+            <img src={image} alt="Uploaded" width={w} height={h}  style={{
+                    borderRadius: '10px'
+                
+                }}
             onClick={() => document.getElementById('invoke').click() }
             />
   
