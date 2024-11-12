@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import imgUrl from './emptyupload.png'; // Placeholder image if no file is selected
 
-function UploadImage() {
+function UploadImage({w=200, h=200}) {
     // State to store the image URL (or placeholder initially)
     const [image, setImage] = useState(imgUrl);
 
@@ -11,7 +11,8 @@ function UploadImage() {
     return (
         <div>
            
-            <img src={image} alt="Uploaded" width={120} height={120} 
+            <img src={image} alt="Uploaded" width={w} height={h} style={{
+                    borderRadius: '10px' }}
             onClick={() => document.getElementById('invoke').click() }
             />
   
