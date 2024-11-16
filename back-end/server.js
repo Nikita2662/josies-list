@@ -1,44 +1,40 @@
-//Database-Server
-//Adding API Methods by importing MERN npm packages
-const express=require("express");
+require('dotenv').config()
+const express = require("express");
+const cors = require("cors");
 const mongoose = require('mongoose');
-const cors=require("cors");
-const multer=require("multer");
+const Product = require('./models/Product.js'); 
+const Products = require('./routes/productRoutes');
+
 const app = express();
-//Create an instance of an Express app
-app.use(cors());  
+const port = process.env.PORT || 3000;
 
+app.use(cors()); 
+app.use(express.json());
+app.use('/', require('./routes/productRoutes'));
 
-//Adding routes for connection to front-end
-// app.get('/', (req, res) => {
-//   res.send('this is the root node'); 
-// });
-
-const usersRoute = require('./routes/users.js');
-const productsRoute = require('./routes/products.js');
-
-app.use('/users', usersRoute)
-app.use('/products', productsRoute)
-
-// // const port = 3000;
-
-// app.listen(port, () => {
-//   console.log('Node.js HTTP server is running on port ' + port);
-// });
-// //
-
-//Create a connection with the MongoDB
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://Admin:lCNavxtIML74MxCj@josies-list-cluster.o5u3b.mongodb.net/?retryWrites=true&w=majority&appName=josies-list-cluster', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err));
 
-// Define routes
-app.get('/', (req, res) => {
-  res.send('The server works!!');
+// only listen for requests if successfully connected
+mongoose.connection.once('open', () => {
+  app.listen(port, () => {
+    console.log('Server started on port ' + port);
+    const testItem = new Product();
+    testItem.set('itemName', 'Coffee Table');
+    testItem.set('price', 5); 
+    testItem.set('seller', 'Sarah');
+    testItem.set('description', 'the key description');
+    testItem.save()
+      .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
+      .catch(err => console.log("Error Saving: ", err))
+    console.log(testItem); 
+  })
 });
 
-// Start the server
-const port = process.env.PORT || 5038;
-app.listen(port, 5038)
+module.exports = app; 
+
+
+
