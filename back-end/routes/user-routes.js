@@ -5,14 +5,18 @@ const userDB = require("../models/User"); // import model!
 // const ObjectId = require("mongodb").ObjectId; // delete this line
 
 // get all users
-router.route("/users").get(async(req, res) => {
+router.route("/users").get(async (req, res) => {
     let collection = await userDB.find({}); // find without query finds all
     res.send(collection).status(200);
 })
 
 // get a specific user by id (email)
-router.route("/users/:id").get(async(req, res) => {
-    let user = await userDB.findOne().byEmail(req.params.user_id);
+router.route("/users/:id").get(async (req, res) => {
+    let user = await userDB.findOne({
+        _id: req.params._id
+    })
+
+    //  .byEmail(req.params._id); // DELETE (appended to findOne)
 
     //if (!user) res.send("Not found").status(404);
     res.send(user).status(200);
@@ -52,24 +56,24 @@ router.route("/users").post(async(req, res) => {
 }) */
 
 // finish creating new user, upon Create New Account (front-end)
-router.route("/users/:id").post(async(req, res) => {
+router.route("/users/:id").post(async (req, res) => {
     userDB.create({
         user_id: req.body.user_id,
         username: req.body.username,
         bio: req.body.bio,
     })
-    .then(() => {
-        res.status(201).send({
-            status: true,
-            message: "User added successfully",
+        .then(() => {
+            res.status(201).send({
+                status: true,
+                message: "User added successfully",
+            });
+        })
+        .catch((err) => {
+            res.status(400).send({
+                status: false,
+                message: "Error adding user",
+            });
         });
-    })
-    .catch((err) => {
-        res.status(400).send({
-            status: false,
-            message: "Error adding user",
-        });
-    }); 
 })
 
 module.exports = router; 
