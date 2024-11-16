@@ -4,6 +4,16 @@ const ObjectId = require('mongodb').ObjectId;
 
 const commentRoutes = express.Router();
 
+// get comments for a product
+commentRoutes.route("/comments/all/:id").get(async (req, res) => {
+    let comments = await Comment.find({ productID: req.params.id });
+
+    if (comments.length > 0) {
+        res.json(comments); 
+    } else {
+        throw new Error("Error: Data was not found");
+    }
+});
 
 // 2 - Retrieve a comment
 commentRoutes.route("/comments/:id").get(async (req, res) => {
