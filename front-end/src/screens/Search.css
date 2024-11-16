@@ -38,6 +38,7 @@
   height: 100%;
   background-color: transparent;
   border-width: 0;
+  cursor: pointer;
 }
 
 .filters-button {
@@ -68,6 +69,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 50px;
 }
