@@ -33,6 +33,7 @@ productRoutes.route("/products").post(async (req, res) => {
         itemName: req.body.itemName,
         description: req.body.description,
         price: req.body.price,
+        image: req.body.iamge, 
         seller: req.body.seller
     }
     let data = await Product.insertOne(productObject); 
@@ -46,6 +47,7 @@ productRoutes.route("/products/:id").put(async (req, res) => {
             itemName: req.body.itemName,
             description: req.body.description,
             price: req.body.price,
+            image: req.body.image,
             seller: req.body.seller
         } 
     }
