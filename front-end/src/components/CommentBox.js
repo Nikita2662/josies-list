@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "./TextBox.css";
+import "./CommentBox.css";
 
-const TextBox = ({ label, placeholder, className}) => {
+const CommentBox = ({ label, placeholder, className}) => {
 
     const [authorName, setAuthorName] = useState('User Wrote');
     const [commentText, setCommentText] = useState('');
@@ -10,7 +10,18 @@ const TextBox = ({ label, placeholder, className}) => {
     const [textareaheight, setTextareaheight] = useState(1);
     const [comments, setComments] = useState([]);
 
-  
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+            setIsPressed(true);
+            if (text.trim() !== '') {  // Make sure the comment isn't empty
+                setComments([...comments, { authorName, text }]);  // Append to comments array
+                setText('');  // Clear the text input field after submission
+
+              }
+
+        }
+    }
 
     const handleChange = (event) => {
         setText(event.target.value); 
@@ -30,7 +41,7 @@ const TextBox = ({ label, placeholder, className}) => {
       <textarea
         value={text}
         onChange={handleChange}
-        
+        onKeyDown={handleKeyDown}  
         placeholder={placeholder}
         className="text-box"
       />
@@ -38,7 +49,14 @@ const TextBox = ({ label, placeholder, className}) => {
 
     <div>
    
- 
+  {comments.map((comment, index) => (
+   
+     <button className="text-button"
+      >
+      {comment.authorName}:<br /> {comment.text}
+    </button>
+    
+  ))}
  
 </div>
 
@@ -47,4 +65,4 @@ const TextBox = ({ label, placeholder, className}) => {
     );
 };
 
-export default TextBox;
+export default CommentBox;

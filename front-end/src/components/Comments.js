@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TextBox from './TextBox';
+import CommentBox from './CommentBox';
 import "./Comments.css"
 
 const Comment= ({ productId }) => {
@@ -10,7 +10,7 @@ const Comment= ({ productId }) => {
     <div className='flexComment'>
    <div> <h1>Comment</h1></div>
     
-        <div> <TextBox  label="Author Name"
+        <div> <CommentBox  label="Author Name"
         placeholder="Type your comment here..."  className="text-box" /></div>
 
 

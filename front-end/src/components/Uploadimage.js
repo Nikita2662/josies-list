@@ -12,7 +12,8 @@ function UploadImage({w, h}) {
         <div>
            
             <img src={image} alt="Uploaded" width={w} height={h}  style={{
-                    borderRadius: '10px'
+                    borderRadius: '10px',
+                    marginBottom: '200px'
                 
                 }}
             onClick={() => document.getElementById('invoke').click() }
