@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import imgUrl from './emptyupload.png'; // Placeholder image if no file is selected
 
-function UploadImage({w=200, h=200}) {
+function UploadImage({w, h}) {
     // State to store the image URL (or placeholder initially)
     const [image, setImage] = useState(imgUrl);
 
