@@ -2,24 +2,15 @@ require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user-routes');
-
-const User = require('./models/User.js'); // DELETE LATER after testing
-
 //const Product = require('./models/Product.js'); 
-//const Products = require('./routes/productRoutes');
+const Products = require('./routes/productRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors()); 
 app.use(express.json());
-//app.use('/products', require('./routes/productRoutes'));
-app.use("/", userRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Backend is working');
-});
+app.use('/products', require('./routes/productRoutes'));
 
 
 // MongoDB connection
@@ -30,21 +21,7 @@ mongoose.connect(process.env.DATABASE_URI)
 // only listen for requests if successfully connected
 mongoose.connection.once('open', () => {
   app.listen(port, () => {
-    console.log('Server started on port Hello!1! ' + port);
-
-
-    
-    // USER TESTING WITH direct creation of a user -- works
-    /* let testUser = new User({
-                            user_id: 'testemail@g.ucla.edu',
-                            username: 'joe bruin'
-                            });
-
-    testUser.save()
-        .then((doc) => {console.log(doc);})
-        .catch((err) => {console.error(err);}); */
-
-
+    console.log('Server started on port ' + port);
     // const testItem = new Product();
     // testItem.set('itemName', 'Coffee Table');
     // testItem.set('price', 5); 
