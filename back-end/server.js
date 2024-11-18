@@ -17,16 +17,22 @@ app.use(express.json());
 //app.use('/products', require('./routes/productRoutes'));
 app.use("/", userRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Backend is working');
+});
+
 
 // MongoDB connection
-mongoose.connect(process.env.DATABASE_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DATABASE_URI)
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err));
 
 // only listen for requests if successfully connected
 mongoose.connection.once('open', () => {
   app.listen(port, () => {
-    console.log('Server started on port ' + port);
+    console.log('Server started on port Hello!1! ' + port);
+
+
     
     // USER TESTING WITH direct creation of a user -- works
     /* let testUser = new User({
