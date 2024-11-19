@@ -9,10 +9,20 @@ import ListedItem from "../components/ListedItem";
 import empty from "../empty.png";
 import "./Profile.css";
 
+function showUserListings(listings){
+    return listings.map((item, index) => (
+        <ListedItem 
+            itemName={item.itemName} 
+            price={item.price} 
+            src="https://placehold.co/265"  // replace later with product image
+        />
+    ));
+}
+
 function Profile({userID}){
 
     const [user, setUser] = useState(null);
-    const [listings, setListings] = useState([])
+    const [userListings, setUserListings] = useState([])
 
     // fetches the data from specific userID and places into user
     useEffect(() => {
@@ -24,7 +34,17 @@ function Profile({userID}){
         fetchData();
     }, [userID]);
 
-    // TODO: get all listings relevant to specific userID
+    // Get all listings relevant to specific userID --> wait for sarah to update backend
+    ///*
+    useEffect(() => {
+        const fetchListings = async () => {
+            let response = await fetch(`http://localhost:5000/products/${userID}`)
+            const listings = await response.json()
+            setUserListings(listings);
+        };
+        fetchListings();
+    }, [userID]);
+    //*/
 
     // TODO: handle create listing for user 
     const handleClick = () => {
