@@ -5,7 +5,7 @@ import "./CreateAccount.css";
 import Button from "../components/Button.js";
 import TextBox from "../components/TextBox.js";
 
-function CreateAccount{userID}){
+function CreateAccount({userID}){
 
     // add app.use(express.json()); in backend? for JSON input
 
