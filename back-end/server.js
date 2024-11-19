@@ -6,7 +6,7 @@ const Product = require('./models/Product.js');
 const Comment = require('./models/Comment.js');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5038;
 
 app.use(cors()); 
 app.use(express.json());
