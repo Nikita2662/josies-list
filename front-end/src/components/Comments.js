@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import CommentBox from './CommentBox';
 import "./Comments.css"
 
-const Comment= ({ productId }) => {
+const Comment= ({ productID }) => {
   
-
-
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
+    const [comments, setComments] = useState([]);
+    
+  
     return(
     <div className='flexComment'>
    <div> <h1 className="commentheader">Comments</h1></div>
     
-        <div> <CommentBox  label="Author Name"
+        <div> <CommentBox productId={productID} label="Author Name"
         placeholder="Type your comment here..."  className="text-box" /></div>
 
 

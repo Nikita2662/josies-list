@@ -67,7 +67,7 @@ function Listings({ productId }){
     </div>
     </div>
 
-    <Comment />
+    <Comment  productID = {productId}/>
     </SafeArea>
     </div>
     );
