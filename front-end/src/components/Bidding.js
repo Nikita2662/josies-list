@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import "./CommentBox.css";
 
-const CommentBox = ({ label, placeholder, className="text-box" , isBidding, userEmail}) => {
+const BiddingBox = ({ label, placeholder, className="text-box" , isBidding, userEmail}) => {
 
-    const [authorName, setAuthorName] = useState('User Wrote');
+    const [authorName, setAuthorName] = useState('Submit Your Offer?');
     const [commentText, setCommentText] = useState('');
     const [isPressed, setIsPressed] = useState(false);
     const [text, setText] = useState('');
@@ -16,8 +16,16 @@ const CommentBox = ({ label, placeholder, className="text-box" , isBidding, user
             e.preventDefault(); 
             setIsPressed(true);
             if (text.trim() !== '') {  // Make sure the comment isn't empty
-                setComments([...comments, { authorName, text }]);  // Append to comments array
-                setText('');  // Clear the text input field after submission
+                const existingComment = comments.findIndex(comment=>comment.text);
+
+                if (existingComment !== -1) {
+                    const updatedComments = [...comments];
+                    updatedComments[existingComment].text = text;
+                    
+                    setComments(updatedComments);
+                } else {
+                    setComments([...comments, { authorName, text }]);
+                }
 
               }
             
@@ -54,7 +62,7 @@ const CommentBox = ({ label, placeholder, className="text-box" , isBidding, user
    
      <button className={className}
       >
-      {comment.authorName}:<br /> {comment.text}
+      {comment.authorName}:<br /> ${comment.text}
     </button>
     
   ))}
@@ -66,4 +74,4 @@ const CommentBox = ({ label, placeholder, className="text-box" , isBidding, user
     );
 };
 
-export default CommentBox;
+export default BiddingBox;

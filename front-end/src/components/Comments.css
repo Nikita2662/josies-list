@@ -3,11 +3,16 @@
 
     display: flex;
     color: black;
-    margin: 30px;
+ 
+ 
+  
     text-align: center;
     font-size: 10px;
     flex-direction: column;
    
+}
+.commentheader{
+    margin-top: 90px;
 }
 
 

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
 import "./CreateAccount.css";
 import Button from "../components/Button.js";
-import TextBox from "../components/TextBox.js";
+import TextBox from "../components/Comments.js";
 
 function CreateAccount(){
     
