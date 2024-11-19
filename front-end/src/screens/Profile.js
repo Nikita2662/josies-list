@@ -9,12 +9,13 @@ import ListedItem from "../components/ListedItem";
 import empty from "../empty.png";
 import "./Profile.css";
 
+// generate user listing format based on listings input
 function showUserListings(listings){
-    return listings.map((item, index) => (
+    return listings.map((item) => (
         <ListedItem 
             itemName={item.itemName} 
             price={item.price} 
-            src="https://placehold.co/265"  // replace later with product image
+            src={empty}  // replace later with product image
         />
     ));
 }
@@ -46,7 +47,7 @@ function Profile({userID}){
     }, [userID]);
     //*/
 
-    // TODO: handle create listing for user 
+    // TODO: handle create listing for user () --> add user input to listing page?
     const handleClick = () => {
         alert('Button clicked!');
     };
@@ -57,7 +58,7 @@ function Profile({userID}){
             <SafeArea>
                 <div className="grid-container">
                     <div className="grid-item">
-                        <img className="profile-photo" src={profilepic} alt="User profile photo" />
+                        <img className="profile-photo" src={profilepic} alt="User profile" />
                     </div>
                     <div className="grid-item">
                         <h1 className="small-text">{user.username}</h1>
@@ -76,7 +77,7 @@ function Profile({userID}){
                 </div>
                 <div className="product-container">
                     <div className="product-item">
-                        <ListedItem itemName="item" price="0" src={empty} ListedItem/>
+                        {showUserListings(userListings)}
                     </div>
                     <div className="product-item">
                         <Button onClick={handleClick} className="listing-button">+</Button>
