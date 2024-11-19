@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
 import Button from "../components/Button.js";
@@ -9,7 +9,24 @@ import ListedItem from "../components/ListedItem";
 import empty from "../empty.png";
 import "./Profile.css";
 
-function Profile(){
+function Profile({userID}){
+
+    const [user, setUser] = useState(null);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/users/${userID}`)
+                const data = await response.json();
+                setUser(data);
+            } catch (error) {
+                console.error("Error fetching data:", error)
+            }
+        };
+
+        fetchData();
+        
+    }, [userID]);
 
     const handleClick = () => {
         alert('Button clicked!');
@@ -24,8 +41,8 @@ function Profile(){
                         <img className="profile-photo" src={profilepic} alt="User profile photo" />
                     </div>
                     <div className="grid-item">
-                        <h1 className="small-text">Josie Bruin</h1>
-                        <h2 className="bio-text">Class of 1919, Rieber Hall</h2>
+                        <h1 className="small-text">{user.username}</h1>
+                        <h2 className="bio-text">{user.bio}</h2>
                         <div>
                             <Star className="star" fill="#FF1F58"/>
                             <Star className="star"/>
