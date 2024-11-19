@@ -12,22 +12,21 @@ import "./Profile.css";
 function Profile({userID}){
 
     const [user, setUser] = useState(null);
-    
+    const [listings, setListings] = useState([])
+
+    // fetches the data from specific userID and places into user
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch(`http://localhost:3000/users/${userID}`)
-                const data = await response.json();
-                setUser(data);
-            } catch (error) {
-                console.error("Error fetching data:", error)
-            }
+            let response = await fetch(`http://localhost:5000/users/${userID}`)
+            const data = await response.json();
+            setUser(data);
         };
-
         fetchData();
-        
     }, [userID]);
 
+    // TODO: get all listings relevant to specific userID
+
+    // TODO: handle create listing for user 
     const handleClick = () => {
         alert('Button clicked!');
     };
