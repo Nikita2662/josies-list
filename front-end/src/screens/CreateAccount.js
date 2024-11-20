@@ -7,11 +7,11 @@ import TextBox from "../components/TextBox.js";
 
 function CreateAccount({userID}){
 
-    // add app.use(express.json()); in backend? for JSON input
-
     const [username, setUsername] = useState('');
     const [bio, setBio] = useState('');
+    const [filename, setFilename] = useState('');
 
+    // TODO: should send to user profile after updating
     const updateUser = async(event) => {
         event.preventDefault();
         
@@ -43,10 +43,16 @@ function CreateAccount({userID}){
         }
 
     };
+
+    // TODO: send image to backend to link to user
+    const handleFileChange = (event) => {
+        if (event.target.files.length > 0) {
+            setFilename(event.target.files[0].name);
+            setSelectedFile(event.target.files[0]);
+        }
+    }
     
-    const handleClick = () => {
-        alert('Button clicked!');
-      };
+    // TODO: change username to first & last name when niki updates backend
     
     return (
   
@@ -61,7 +67,18 @@ function CreateAccount({userID}){
                         <div className="small-text">
                             <h1>Profile Picture</h1>
                         </div>
-                        <Button onClick={handleClick} className="photo-button">+</Button>
+                        <div>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                style={{ display: "none" }}
+                                id="profile-pic-file"
+                                onChange={handleFileChange}
+                            />
+                            <label htmlFor="profile-pic-file">
+                                <Button onClick={handleFileChange} className="photo-button">+</Button>
+                            </label>
+                        </div>
                     </div>
                     <div className="grid-item">
                         <TextBox 
