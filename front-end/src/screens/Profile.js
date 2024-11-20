@@ -9,25 +9,45 @@ import ListedItem from "../components/ListedItem";
 import empty from "../empty.png";
 import "./Profile.css";
 
+// generate user listing format based on listings input
+function showUserListings(listings){
+    return listings.map((item) => (
+        <ListedItem 
+            itemName={item.itemName} 
+            price={item.price} 
+            src={empty}  // replace later with product image
+        />
+    ));
+}
+
 function Profile({userID}){
 
     const [user, setUser] = useState(null);
-    
+    const [userListings, setUserListings] = useState([])
+
+    // fetches the data from specific userID and places into user
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await fetch(`http://localhost:3000/users/${userID}`)
-                const data = await response.json();
-                setUser(data);
-            } catch (error) {
-                console.error("Error fetching data:", error)
-            }
+            let response = await fetch(`http://localhost:5000/users/${userID}`)
+            const data = await response.json();
+            setUser(data);
         };
-
         fetchData();
-        
     }, [userID]);
 
+    // Get all listings relevant to specific userID --> wait for sarah to update backend
+    ///*
+    useEffect(() => {
+        const fetchListings = async () => {
+            let response = await fetch(`http://localhost:5000/products/${userID}`)
+            const listings = await response.json()
+            setUserListings(listings);
+        };
+        fetchListings();
+    }, [userID]);
+    //*/
+
+    // TODO: handle create listing for user () --> add user input to listing page?
     const handleClick = () => {
         alert('Button clicked!');
     };
@@ -38,7 +58,7 @@ function Profile({userID}){
             <SafeArea>
                 <div className="grid-container">
                     <div className="grid-item">
-                        <img className="profile-photo" src={profilepic} alt="User profile photo" />
+                        <img className="profile-photo" src={profilepic} alt="User profile" />
                     </div>
                     <div className="grid-item">
                         <h1 className="small-text">{user.username}</h1>
@@ -57,7 +77,7 @@ function Profile({userID}){
                 </div>
                 <div className="product-container">
                     <div className="product-item">
-                        <ListedItem itemName="item" price="0" src={empty} ListedItem/>
+                        {showUserListings(userListings)}
                     </div>
                     <div className="product-item">
                         <Button onClick={handleClick} className="listing-button">+</Button>
