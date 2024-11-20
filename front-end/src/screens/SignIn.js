@@ -8,8 +8,11 @@ import Logo from "../components/Logo";
 import SafeArea from "../components/SafeArea";
 
 import "./SignIn.css";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+  const navigate = useNavigate();
+
   const createAccountClick = useGoogleLogin({
     onSuccess: (tokenResponse) => createAccount(tokenResponse),
   });
@@ -25,6 +28,7 @@ function SignIn() {
     console.log(email);
 
     //create an account on the backend
+    navigate("/create-account", { state: { email: email } });
   }
 
   return (
