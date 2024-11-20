@@ -7,7 +7,7 @@ const productRoutes = express.Router();
 
 // 1 - Get Products by Search
 productRoutes.route("/search").get(async (req, res) => {
-    const { SearchQuery } = req.query;
+    const { SearchQuery} = req.query;
     if (!SearchQuery) {
         return res.status(400).json("A search query is required for search.");
     }
@@ -15,7 +15,9 @@ productRoutes.route("/search").get(async (req, res) => {
     let data = await Product.find({
         $or: [
             { itemName: { $regex: SearchQuery, $options: 'i' } },
-            { description: { $regex: SearchQuery, $options: 'i' } }
+            { description: { $regex: SearchQuery, $options: 'i' } },
+            { tags: { $in: ['Dorm', 'Books', 'Clothing'] } }
+            
         ]
     });
 
