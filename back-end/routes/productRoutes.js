@@ -32,7 +32,9 @@ productRoutes.route("/products").post(async (req, res) => {
     let productObject = {
         itemName: req.body.itemName,
         description: req.body.description,
+        tags: req.body.tags,
         price: req.body.price,
+        image: req.body.iamge, 
         seller: req.body.seller
     }
     let data = await Product.insertOne(productObject); 
@@ -45,7 +47,9 @@ productRoutes.route("/products/:id").put(async (req, res) => {
         $set: {
             itemName: req.body.itemName,
             description: req.body.description,
+            tags: req.body.tags,
             price: req.body.price,
+            image: req.body.image,
             seller: req.body.seller
         } 
     }
