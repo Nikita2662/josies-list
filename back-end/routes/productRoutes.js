@@ -7,25 +7,34 @@ const productRoutes = express.Router();
 
 // 1 - Get Products by Search
 productRoutes.route("/search").get(async (req, res) => {
-    const { SearchQuery} = req.query;
-    if (!SearchQuery) {
-        return res.status(400).json("A search query is required for search.");
-    }
+    const {SearchQuery, tags} = req.query;
+    try {
+        const query = []
+        if(SearchQuery) {
+            query.push(
 
-    let data = await Product.find({
-        $or: [
             { itemName: { $regex: SearchQuery, $options: 'i' } },
-            { description: { $regex: SearchQuery, $options: 'i' } },
-            { tags: { $in: ['Dorm', 'Books', 'Clothing'] } }
-            
-        ]
-    });
+            { description: { $regex: SearchQuery, $options: 'i' } }
+            )
+        }
 
-    if (data.length > 0) {
-        res.json(data);
-    } else {
-        res.status(404).json("No matching products found.");
+        if(tags) {
+            const tagsArray = tags.split(',')
+            query.push( { tags: { $in: tagsArray } } )
+        }
+
+        let data = await Product.find({ $or: query });
+
+        if (data.length > 0) {
+            res.json(data);
+        } else {
+            res.status(404).json("No matching products found.");
+        }
+
+    } catch (error) {
+        res.status(404).json({message: error.message})
     }
+    
 });
 
 // 2 - Retrieve all 
