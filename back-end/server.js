@@ -4,6 +4,12 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 const Product = require('./models/Product.js'); 
 const Comment = require('./models/Comment.js');
+const userRoutes = require('./routes/user-routes');
+
+const User = require('./models/User.js'); // DELETE LATER after testing
+
+//const Product = require('./models/Product.js'); 
+//const Products = require('./routes/productRoutes');
 
 const app = express();
 const port = process.env.PORT || 5038;
@@ -12,6 +18,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/', require('./routes/productRoutes'));
 app.use('/', require('./routes/commentRoutes'));
+//app.use('/products', require('./routes/productRoutes'));
+app.use("/", userRoutes);
 
 
 // MongoDB connection
@@ -32,6 +40,25 @@ mongoose.connection.once('open', () => {
       .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
       .catch(err => console.log("Error Saving: ", err))
     console.log(testItem); 
+    
+    // USER TESTING WITH direct creation of a user -- works
+    /* let testUser = new User({
+                            user_id: 'testemail@g.ucla.edu',
+                            username: 'joe bruin'
+                            });
+
+    testUser.save()
+        .then((doc) => {console.log(doc);})
+        .catch((err) => {console.error(err);}); */
+
+
+    // const testItem = new Product();
+    // testItem.set('itemName', 'Coffee Table');
+    // testItem.set('price', 5); 
+    // testItem.save()
+    //   .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
+    //   .catch(err => console.log("Error Saving: ", err))
+    // console.log(testItem); 
   })
 });
 
