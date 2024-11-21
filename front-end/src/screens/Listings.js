@@ -5,11 +5,14 @@ import React, { useState, useEffect } from 'react';
 import Comment from "../components/Comments.js"
 import Image from "../components/Uploadimage.js"
 import BiddingBox from "../components/Bidding.js"
+import { UserContext } from "../App.js";
 
-function Listings({ productId , userId}){
+function Listings({ productId }){
     const [product, setProduct] = useState(null); 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
+
+    const { user } = React.useContext(UserContext);
     
     const fetchProduct = async () => {
         const response = await fetch(`http://localhost:5038/products/${productId}`);
@@ -67,7 +70,7 @@ function Listings({ productId , userId}){
     </div>
     </div>
 
-    <Comment  productID = {productId}  userID = {userId}/>
+    <Comment  productID = {productId}  userID = {user._id}/>
     </SafeArea>
     </div>
     );
