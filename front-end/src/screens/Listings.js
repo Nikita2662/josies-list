@@ -6,12 +6,14 @@ import Comment from "../components/Comments.js"
 import Image from "../components/Uploadimage.js"
 import BiddingBox from "../components/Bidding.js"
 import { UserContext } from "../App.js";
+import { useParams } from "react-router-dom";
 
-function Listings({ productId }){
+function Listings(){
     const [product, setProduct] = useState(null); 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
 
+    const { productId } = useParams();
     const { user } = React.useContext(UserContext);
     
     const fetchProduct = async () => {
