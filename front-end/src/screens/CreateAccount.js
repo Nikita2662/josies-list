@@ -23,17 +23,6 @@ function CreateAccount() {
       _id: email,
     };
 
-    //REMOVE THIS LATER
-    const delResponse = await fetch("http://localhost:5000/users/del", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body1),
-    });
-    console.log(await delResponse.json());
-    //STOP REMOVING HERE
-
     const response1 = await fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
