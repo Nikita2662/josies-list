@@ -2,7 +2,7 @@ import "./App.css";
 import Landing from "./screens/Landing";
 import SignIn from "./screens/SignIn";
 import Profile from "./screens/Profile";
-import Product from "./screens/Product"
+import Listing from "./screens/Listings"
 import CreateAccount from "./screens/CreateAccount";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
@@ -31,7 +31,7 @@ function App() {
     },
     {
       path: "/product/:id",
-      element: <Product />,
+      element: <Listing />,
     },
   ]);
 
