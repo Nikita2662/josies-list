@@ -6,7 +6,7 @@ import Listings from "./screens/Listings";
 import Image from "./components/Uploadimage"
 import Comments from "./components/Comments"
 function App() {
-  return <Listings productId={"673ecaa8cc90c2f30742d186"}/>;
+  return <Listings productId={"673ed3c941d6d297c270353d"}  userId = {"testemail@g.ucla.edu"} />;
 }
 
 

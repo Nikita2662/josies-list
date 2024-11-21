@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CommentBox from './CommentBox';
 import "./Comments.css"
 
-const Comment= ({ productID }) => {
+const Comment= ({ productID,userID  }) => {
   
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
@@ -13,7 +13,7 @@ const Comment= ({ productID }) => {
     <div className='flexComment'>
    <div> <h1 className="commentheader">Comments</h1></div>
     
-        <div> <CommentBox productId={productID} label="Author Name"
+        <div> <CommentBox productId={productID} userId={userID} label="Author Name"
         placeholder="Type your comment here..."  className="text-box" /></div>
 
 

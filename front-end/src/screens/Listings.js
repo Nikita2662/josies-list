@@ -6,7 +6,7 @@ import Comment from "../components/Comments.js"
 import Image from "../components/Uploadimage.js"
 import BiddingBox from "../components/Bidding.js"
 
-function Listings({ productId }){
+function Listings({ productId , userId}){
     const [product, setProduct] = useState(null); 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
@@ -67,7 +67,7 @@ function Listings({ productId }){
     </div>
     </div>
 
-    <Comment  productID = {productId}/>
+    <Comment  productID = {productId}  userID = {userId}/>
     </SafeArea>
     </div>
     );
