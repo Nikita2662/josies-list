@@ -30,7 +30,7 @@ function App() {
       element: <CreateAccount />,
     },
     {
-      path: "/product/:id",
+      path: "/products/:id",
       element: <Listing />,
     },
   ]);
