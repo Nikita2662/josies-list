@@ -1,12 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
-const Product = require("./models/Product.js");
-const Products = require("./routes/productRoutes");
-const userRoutes = require('./routes/user-routes');
+const mongoose = require('mongoose');
+const Product = require('./models/Product.js'); 
 const Comment = require('./models/Comment.js');
-const User = require('./models/User.js');
+const User = require('./models/User.js'); // DELETE LATER after testing
+const userRoutes = require('./routes/user-routes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,9 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/', require('./routes/productRoutes'));
 app.use('/', require('./routes/commentRoutes'));
-//app.use('/products', require('./routes/productRoutes'));
 app.use("/", userRoutes);
-
 
 // MongoDB connection
 mongoose

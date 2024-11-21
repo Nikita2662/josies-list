@@ -1,15 +1,35 @@
+import React from "react";
+import { useGoogleLogin } from "@react-oauth/google";
+
 import Header from "../components/Header";
 import BlueFlag from "../components/blueFlag.png";
 import GreenFlag from "../components/greenFlag.png";
 import Logo from "../components/Logo";
 import SafeArea from "../components/SafeArea";
-import { useGoogleLogin } from "@react-oauth/google";
+
 import "./SignIn.css";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
+  const navigate = useNavigate();
+
   const createAccountClick = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
+    onSuccess: (tokenResponse) => createAccount(tokenResponse),
   });
+
+  async function createAccount(tokenResponse) {
+    //get the email
+    let accessToken = tokenResponse.access_token;
+    let response = await fetch(
+      "https://oauth2.googleapis.com/tokeninfo?access_token=" + accessToken
+    );
+    let data = await response.json();
+    let email = data.email;
+    console.log(email);
+
+    //create an account on the backend
+    navigate("/create-account", { state: { email: email } });
+  }
 
   return (
     <>
