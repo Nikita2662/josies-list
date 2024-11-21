@@ -34,31 +34,31 @@ mongoose.connection.once('open', () => {
     console.log(testItem); 
 
     const commentItem = new Comment({
-      user: 'John Doe',
-      content: 'This is a great product! I highly recommend it.',
-      productID: testItem._id
-  });
-  
-  console.log("Saving comment for productID:", testItem._id); // Log product ID to verify
-  commentItem.save()
-    .then(savedComment => {
-      console.log("Comment Saved: ", savedComment.content);
-    })
-    .catch(err => console.log("Error Saving Comment: ", err));
-  
-  // Same for the second comment
-  const commentItem2 = new Comment({
-      user: 'Krisha Basrur',
-      content: 'I think this product is really great in terms of quality',
-      productID: testItem._id
-  });
-  
-  console.log("Saving second comment for productID:", testItem._id);
-  commentItem2.save()
-    .then(savedComment2 => {
-      console.log("Comment Saved: ", savedComment2.content);
-    })
-    .catch(err => console.log("Error Saving Comment: ", err));
+    user: 'John Doe',
+    content: 'This is a great product! I highly recommend it.',
+    productID: testItem._id
+});
+
+console.log("Saving comment for productID:", testItem._id); // Log product ID to verify
+commentItem.save()
+  .then(savedComment => {
+    console.log("Comment Saved: ", savedComment.content);
+  })
+  .catch(err => console.log("Error Saving Comment: ", err));
+
+// Same for the second comment
+const commentItem2 = new Comment({
+    user: 'Krisha Basrur',
+    content: 'I think this product is really great in terms of quality',
+    productID: testItem._id
+});
+
+console.log("Saving second comment for productID:", testItem._id);
+commentItem2.save()
+  .then(savedComment2 => {
+    console.log("Comment Saved: ", savedComment2.content);
+  })
+  .catch(err => console.log("Error Saving Comment: ", err));
 
   })
 });
