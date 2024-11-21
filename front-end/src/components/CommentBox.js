@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./CommentBox.css";
 
-const CommentBox = ({ productId, label, placeholder, className = "text-box", isBidding, userEmail }) => {
+const CommentBox = ({ productId, label, placeholder, userId, className = "text-box", isBidding, userEmail }) => {
     const [authorName, setAuthorName] = useState('User Wrote');
     const [isPressed, setIsPressed] = useState(false);
     const [text, setText] = useState('');
@@ -10,16 +10,47 @@ const CommentBox = ({ productId, label, placeholder, className = "text-box", isB
     const [loading, setLoading] = useState(true);  // Set loading to true initially
 
     // Handle Enter key press
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            setIsPressed(true);
-            if (text.trim() !== '') {
-                setComments([...comments, { authorName, text }]);
-                setText('');
-            }
-        }
-    };
+   
+  async function createComment(post){
+    if (text.trim()) {
+      try {
+          const url = 'http://localhost:5038/comments';
+          const headers= { 'Content-Type': 'application/json' };
+              const body = JSON.stringify({
+               user: post.user, 
+                content: post.content,
+              productID: post.productID
+              });
+              const response = await fetch(url, { method: 'POST', headers, body }); 
+          
+
+          if (!response.ok) {
+              throw new Error('Failed to add comment');
+          }
+        
+          const newComment = await response.json();
+          setComments([...comments, newComment]);
+          setText('');  // Clear the text field after submission
+
+        } catch (err) {
+          setError('Failed to submit comment' + err);
+      }
+    
+    }
+  }
+    const handleKeyDown = async (e) => {
+      if (e.key === 'Enter') {
+      e.preventDefault();
+      createComment({
+        user: 'Nina',
+        content: 'This is a test post',
+        productID: productId,
+      });
+      }
+  };
+
+
+   
 
     // Handle textarea changes (auto-resizing)
     const handleChange = (event) => {
