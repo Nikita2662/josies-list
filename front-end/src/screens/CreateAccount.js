@@ -4,11 +4,11 @@ import SafeArea from "../components/SafeArea";
 import "./CreateAccount.css";
 import Button from "../components/Button.js";
 import TextBox from "../components/TextBox.js";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
 
 function CreateAccount() {
-  // add app.use(express.json()); in backend? for JSON input
+  const navigate = useNavigate();
 
   const [bio, setBio] = useState("");
   const [name, setName] = useState("");
@@ -18,9 +18,7 @@ function CreateAccount() {
 
   const { setUser } = React.useContext(UserContext);
 
-  const createUser = async (event) => {
-    event.preventDefault();
-
+  const createUser = async () => {
     const body1 = {
       _id: email,
     };
@@ -76,6 +74,7 @@ function CreateAccount() {
     };
 
     setUser(user);
+    navigate("/profile");
   };
 
   const handleClick = () => {
