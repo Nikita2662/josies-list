@@ -11,6 +11,26 @@ const CommentBox = ({ productId, label, placeholder, userId, className = "text-b
 
     // Handle Enter key press
    
+
+    async function fetchAuthor (userId) {
+      try {
+          const response = await fetch(`http://localhost:5038/comments/{userId}`);
+          if (!response.ok) {
+              setError('user not found');
+              setLoading(false); // Stop loading if there's an error
+              return;
+          }
+
+          const user_data = await response.json();
+
+          setAuthorName(user_data.username);  // Directly set fetched data into comments state
+          setLoading(false);   // Stop loading when data is fetched
+      } catch (error) {
+          setError('Failed to fetch comments');
+          setLoading(false); // Stop loading if there was an error
+      }
+  };
+
   async function createComment(post){
     if (text.trim()) {
       try {
@@ -42,8 +62,8 @@ const CommentBox = ({ productId, label, placeholder, userId, className = "text-b
       if (e.key === 'Enter') {
       e.preventDefault();
       createComment({
-        user: 'Nina',
-        content: 'This is a test post',
+        user: authorName ,
+        content: text,
         productID: productId,
       });
       }
@@ -58,6 +78,7 @@ const CommentBox = ({ productId, label, placeholder, userId, className = "text-b
         const textarea = event.target;
         textarea.style.height = 'auto'; // Reset height to auto to calculate scrollHeight
         textarea.style.height = `${textarea.scrollHeight}px`; // Adjust the height based on content
+
     };
 
     // Fetch comments for the product
@@ -78,6 +99,8 @@ const CommentBox = ({ productId, label, placeholder, userId, className = "text-b
             setLoading(false); // Stop loading if there was an error
         }
     };
+
+
 
     // Fetch comments when the component mounts or productId changes
     useEffect(() => {
