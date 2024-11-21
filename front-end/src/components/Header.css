@@ -30,6 +30,10 @@ nav {
   line-height: normal;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .container {
   width: 60;
   height: 95px;

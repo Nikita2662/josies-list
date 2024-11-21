@@ -3,6 +3,7 @@ import Landing from "./screens/Landing";
 import SignIn from "./screens/SignIn";
 import Profile from "./screens/Profile";
 import CreateAccount from "./screens/CreateAccount";
+import Search from "./screens/Search";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
 
@@ -27,6 +28,10 @@ function App() {
     {
       path: "/create-account",
       element: <CreateAccount />,
+    },
+    {
+      path: "/search",
+      element: <Search />,
     },
   ]);
 
