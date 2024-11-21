@@ -52,24 +52,6 @@ router.route("/users").post(async (req, res) => {
     });
 });
 
-//TEMPORARY
-router.route("/users/del").delete(async (req, res) => {
-  userDB
-    .deleteOne({ _id: req.body._id })
-    .then(() => {
-      res.status(200).send({
-        status: true,
-        message: "User deleted successfully",
-      });
-    })
-    .catch((err) => {
-      res.status(400).send({
-        status: false,
-        message: "Error deleting user",
-      });
-    });
-});
-
 // upon Create New Account completion --> finish creating new user, ie. add username and bio (PROVIDE EMAIL IN ROUTE, username and bio in request body)
 router.route("/users/:id").post(async (req, res) => {
   userDB
