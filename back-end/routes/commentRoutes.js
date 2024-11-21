@@ -33,7 +33,7 @@ commentRoutes.route("/comments").post(async (req, res) => {
         content: req.body.content,
         productID: req.body.productID
     }
-    let data = await Comment.insertOne(commentObject); 
+    let data = await Comment.create(commentObject);
     res.json(data);
 });
 
