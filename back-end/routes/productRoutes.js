@@ -5,7 +5,39 @@ const ObjectId = require('mongodb').ObjectId;
 const productRoutes = express.Router();
 
 
-// 1 - Retrieve all 
+// 1 - Get Products by Search
+productRoutes.route("/search").get(async (req, res) => {
+    const {SearchQuery, tags} = req.query;
+    try {
+        const query = []
+        if(SearchQuery) {
+            query.push(
+
+            { itemName: { $regex: SearchQuery, $options: 'i' } },
+            { description: { $regex: SearchQuery, $options: 'i' } }
+            )
+        }
+
+        if(tags) {
+            const tagsArray = tags.split(',')
+            query.push( { tags: { $in: tagsArray } } )
+        }
+
+        let data = await Product.find({ $or: query });
+
+        if (data.length > 0) {
+            res.json(data);
+        } else {
+            res.status(404).json("No matching products found.");
+        }
+
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+    
+});
+
+// 2 - Retrieve all 
 productRoutes.route("/products").get(async (req, res) => {
     let data = await Product.find({}); 
 
@@ -16,7 +48,7 @@ productRoutes.route("/products").get(async (req, res) => {
     }
 });
 
-// 2 - Retrieve one
+// 3 - Retrieve one
 productRoutes.route("/products/:id").get(async (req, res) => {
     let data = await Product.findOne({_id: new ObjectId(req.params.id)}); 
 
@@ -27,7 +59,7 @@ productRoutes.route("/products/:id").get(async (req, res) => {
     }
 });
 
-// 3 - Create one
+// 4 - Create one
 productRoutes.route("/products").post(async (req, res) => {
     let productObject = {
         itemName: req.body.itemName,
@@ -41,7 +73,7 @@ productRoutes.route("/products").post(async (req, res) => {
     res.json(data);
 });
 
-// 4 - Update One
+// 5 - Update One
 productRoutes.route("/products/:id").put(async (req, res) => {
     let productObject = { 
         $set: {
@@ -57,10 +89,12 @@ productRoutes.route("/products/:id").put(async (req, res) => {
     res.json(data);
 });
 
-// 5 - Delete One 
+// 6 - Delete One 
 productRoutes.route("/products/:id").delete(async (req, res) => {
     let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}); 
     res.json(data); 
 });
+
+
 
 module.exports = productRoutes; 

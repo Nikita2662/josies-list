@@ -32,33 +32,15 @@ mongoose
 mongoose.connection.once("open", () => {
   app.listen(port, () => {
     console.log('Server started on port ' + port);
-    const testItem = new Product();
-    testItem.set('itemName', 'Coffee Table');
-    testItem.set('price', 5); 
-    testItem.set('seller', 'Sarah');
-    testItem.set('description', 'the key description');
-    testItem.save()
-      .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
-      .catch(err => console.log("Error Saving: ", err))
-    console.log(testItem); 
-    
-    // USER TESTING WITH direct creation of a user -- works
-    /* let testUser = new User({
-                            user_id: 'testemail@g.ucla.edu',
-                            username: 'joe bruin'
-                            });
-
-    testUser.save()
-        .then((doc) => {console.log(doc);})
-        .catch((err) => {console.error(err);}); */
-
-
     // const testItem = new Product();
-    // testItem.set('itemName', 'Coffee Table');
+    // testItem.set('itemName', 'shirt');
     // testItem.set('price', 5); 
+    // testItem.set('seller', 'Sarah');
+    // testItem.set('description', 'nice shirt');
+    // testItem.set('tags', 'Clothing');
     // testItem.save()
-    //   .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
-    //   .catch(err => console.log("Error Saving: ", err))
+    //  .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
+    //  .catch(err => console.log("Error Saving: ", err))
     // console.log(testItem); 
   })
 });
