@@ -1,33 +1,33 @@
 .text-box-container-top {
     display: flex;
     flex-direction: column; 
-    margin: 10px 0; 
+    margin: 0px 0px; 
     font-family: Figtree;
     font-size: 24px;
     font-weight: 700;
     display: flex;
     position: relative;
-    margin-left: 0px;
+    margin-left: 94px;
     width: 455px;
     height: 52px;
     flex-shrink: 0;
-    top: 164px;
+    top: 0px;
 }
 .text-box-container-bottom {
     display: flex;
     flex-direction: column; 
-    margin: 10px 0; 
+    margin: 0px 0px; 
     font-family: Figtree;
     font-size: 24px;
     font-weight: 700;
     display: flex;
     position: relative;
-    margin-left: 0px;   
+    margin-left: 94px;   
     margin-top: 60px;
     width: 455px;
     height: 52px;
     flex-shrink: 0;
-    top: 164px;
+    top: 0px;
 }
 .text-box {
     padding: 10px; 
