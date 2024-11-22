@@ -5,8 +5,8 @@ import "./ListedItem.css";
 function ListedItem({ className = "listed-photo", src, itemName, price, _id }) {
   const navigate = useNavigate();
 
-  const goToProduct = (id) => {
-    navigate(`/products/${id}`);
+  const goToProduct = () => {
+    navigate(`/products/${_id}`);
   };
 
   return (
