@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import imgUrl from './emptyupload.png'; // Placeholder image if no file is selected
+import React, { useState } from "react";
+import imgUrl from "../profilepic.png"; // Placeholder image if no file is selected
 
-function UploadImage({w, h}) {
-    // State to store the image URL (or placeholder initially)
-    const [image, setImage] = useState(imgUrl);
-    const [imageDimensions, setImageDimensions] = useState({ width: w, height: h });
+function UploadImage({ w, h }) {
+  // State to store the image URL (or placeholder initially)
+  const [image, setImage] = useState(imgUrl);
+  const [imageDimensions, setImageDimensions] = useState({
+    width: w,
+    height: h,
+  });
 
   const handleImageLoad = (event) => {
     const imgElement = event.target;
@@ -18,36 +21,34 @@ function UploadImage({w, h}) {
       setImageDimensions({ width: w, height: h });
     }
   };
-    
 
-    return (
-        <div>
-           
-            <img src={image} alt="Uploaded" width={imageDimensions.width}
+  return (
+    <div>
+      <img
+        src={image}
+        alt="Uploaded"
+        width={imageDimensions.width}
         height={imageDimensions.height}
-         style={{
-                    borderRadius: '10px',
-                    marginBottom: '200px',
-                    objectFit: 'cover'
-                    
-                
-                }}
-            onClick={() => document.getElementById('invoke').click() }
-            />
-  
-            <input 
-                type="file"
-                id="invoke" 
-                style={{ display: 'none' }} 
-                onChange={(event) => {
-        if (event.target.files[0]) {
-          
+        style={{
+          borderRadius: "10px",
+          marginBottom: "200px",
+          objectFit: "cover",
+        }}
+        onClick={() => document.getElementById("invoke").click()}
+      />
+
+      <input
+        type="file"
+        id="invoke"
+        style={{ display: "none" }}
+        onChange={(event) => {
+          if (event.target.files[0]) {
             setImage(URL.createObjectURL(event.target.files[0]));
-        }
-    }} // Trigger openImg when the user selects a file
-            />
-        </div>
-    );
+          }
+        }} // Trigger openImg when the user selects a file
+      />
+    </div>
+  );
 }
 
 export default UploadImage;
