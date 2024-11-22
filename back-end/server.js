@@ -38,8 +38,26 @@ mongoose.connection.once("open", () => {
     // testItem.save()
     //  .then(savedItem => console.log("Item Saved: ", savedItem.itemName))
     //  .catch(err => console.log("Error Saving: ", err))
-    // console.log(testItem); 
+    // console.log(testItem);
+
+
+
+
+    /*  const commentItem = new Comment();
+
+// Set properties of the comment
+    commentItem.set('authorName', 'John Doe');  // The name of the comment author
+    commentItem.set('content', 'This is a great product! I highly recommend it.');  // The content of the comment
+    commentItem.set('productID', testItem._id);  // Link this comment to the testItem (product) by using the product's _id
+    commentItem.save()
+      .then(savedComment => console.log("Comment Saved: ", savedComment.content))
+      .catch(err => console.log("Error Saving Comment: ", err));
+    console.log(savedContent);  */
+    
   })
 });
+
+
+
 
 module.exports = app;

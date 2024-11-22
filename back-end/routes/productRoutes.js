@@ -5,39 +5,7 @@ const ObjectId = require('mongodb').ObjectId;
 const productRoutes = express.Router();
 
 
-// 1 - Get Products by Search
-productRoutes.route("/search").get(async (req, res) => {
-    const {SearchQuery, tags} = req.query;
-    try {
-        const query = []
-        if(SearchQuery) {
-            query.push(
-
-            { itemName: { $regex: SearchQuery, $options: 'i' } },
-            { description: { $regex: SearchQuery, $options: 'i' } }
-            )
-        }
-
-        if(tags) {
-            const tagsArray = tags.split(',')
-            query.push( { tags: { $in: tagsArray } } )
-        }
-
-        let data = await Product.find({ $or: query });
-
-        if (data.length > 0) {
-            res.json(data);
-        } else {
-            res.status(404).json("No matching products found.");
-        }
-
-    } catch (error) {
-        res.status(404).json({message: error.message})
-    }
-    
-});
-
-// 2 - Retrieve all 
+// 1 - Retrieve all 
 productRoutes.route("/products").get(async (req, res) => {
     let data = await Product.find({}); 
 
@@ -48,7 +16,7 @@ productRoutes.route("/products").get(async (req, res) => {
     }
 });
 
-// 3 - Retrieve one
+// 2 - Retrieve one
 productRoutes.route("/products/:id").get(async (req, res) => {
     let data = await Product.findOne({_id: new ObjectId(req.params.id)}); 
 
@@ -56,6 +24,17 @@ productRoutes.route("/products/:id").get(async (req, res) => {
         res.json(data);
     } else {
         throw new Error("Error: Data was not found.");
+    }
+});
+
+//3 - Retrieve all products for a user
+productRoutes.route("/products/user/:id").get(async (req, res) => {
+    let products = await Product.find({ seller: req.params.id });
+
+    if (products.length > 0) {
+        res.json(comments); 
+    } else {
+        throw new Error("Error: Products for user not found");
     }
 });
 
@@ -94,7 +73,5 @@ productRoutes.route("/products/:id").delete(async (req, res) => {
     let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}); 
     res.json(data); 
 });
-
-
 
 module.exports = productRoutes; 
