@@ -27,25 +27,40 @@ productRoutes.route("/products/:id").get(async (req, res) => {
     }
 });
 
-// 3 - Create one
+//3 - Retrieve all products for a user
+productRoutes.route("/products/user/:id").get(async (req, res) => {
+    let products = await Product.find({ seller: req.params.id });
+
+    if (products.length > 0) {
+        res.json(comments); 
+    } else {
+        throw new Error("Error: Products for user not found");
+    }
+});
+
+// 4 - Create one
 productRoutes.route("/products").post(async (req, res) => {
     let productObject = {
         itemName: req.body.itemName,
         description: req.body.description,
+        tags: req.body.tags,
         price: req.body.price,
+        image: req.body.iamge, 
         seller: req.body.seller
     }
     let data = await Product.insertOne(productObject); 
     res.json(data);
 });
 
-// 4 - Update One
+// 5 - Update One
 productRoutes.route("/products/:id").put(async (req, res) => {
     let productObject = { 
         $set: {
             itemName: req.body.itemName,
             description: req.body.description,
+            tags: req.body.tags,
             price: req.body.price,
+            image: req.body.image,
             seller: req.body.seller
         } 
     }
@@ -53,7 +68,7 @@ productRoutes.route("/products/:id").put(async (req, res) => {
     res.json(data);
 });
 
-// 5 - Delete One 
+// 6 - Delete One 
 productRoutes.route("/products/:id").delete(async (req, res) => {
     let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}); 
     res.json(data); 

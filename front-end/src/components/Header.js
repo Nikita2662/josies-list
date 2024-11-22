@@ -1,19 +1,29 @@
 import "./Header.css";
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
+import { UserContext } from "../App";
+import { colors } from "../colors";
+import { useContext } from "react";
 
-let primaryColorDark = "#3ea467";
+let primaryColorDark = colors.darkPrimary;
 
 function Header() {
+  const { user } = useContext(UserContext);
+
   return (
     <nav>
-      <div className="logo-title">
+      <Link className="logo-title" to={"/"}>
         <Logo size={50} />
         <h1>Josie's List</h1>
-      </div>
+      </Link>
       <div className="nav-links">
-        <p>Buy</p>
-        <p>Sell</p>
-        <div className="container">
+        <Link to={user == null ? "/sign-in" : "/search"} className="link">
+          <p>Buy</p>
+        </Link>
+        <Link to={"/sign-in"} className="link">
+          <p>Sell</p>
+        </Link>
+        <Link className="container" to={user == null ? "/sign-in" : "/profile"}>
           <svg
             viewBox="0 0 256 256"
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +60,7 @@ function Header() {
               strokeWidth="12"
             />
           </svg>
-        </div>
+        </Link>
       </div>
     </nav>
   );
