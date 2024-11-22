@@ -16,12 +16,13 @@ function displaySearchResults(data) {
       src="https://placehold.co/265"
       itemName={item.itemName}
       price={item.price}
+      _id={item._id}
     />
   ));
 }
 
 async function getAllProducts() {
-  let result = await fetch("http://localhost:5000/products");
+  let result = await fetch("http://localhost:5002/products");
   return await result.json();
 }
 
