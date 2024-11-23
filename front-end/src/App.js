@@ -4,6 +4,8 @@ import SignIn from "./screens/SignIn";
 import Profile from "./screens/Profile";
 import Listing from "./screens/Listings"
 import CreateAccount from "./screens/CreateAccount";
+import Search from "./screens/Search";
+import Listings from "./screens/Listings";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
 
@@ -28,6 +30,14 @@ function App() {
     {
       path: "/create-account",
       element: <CreateAccount />,
+    },
+    {
+      path: "/search",
+      element: <Search />,
+    },
+    {
+      path: "/listing",
+      element: <Listings />,
     },
     {
       path: "/products/:id",

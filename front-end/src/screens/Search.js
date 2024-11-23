@@ -9,6 +9,10 @@ import SearchIcon from "../components/icons/SearchIcon.js";
 import "./Search.css";
 
 function displaySearchResults(data) {
+  if (typeof data === "string") {
+    return <h1>{data}</h1>;
+  }
+
   return data.map((item, index) => (
     <ListedItem
       key={index}
@@ -21,21 +25,17 @@ function displaySearchResults(data) {
   ));
 }
 
-async function getAllProducts() {
-  let result = await fetch("http://localhost:5002/products");
-  return await result.json();
-}
-
 function Search() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [tag, setTag] = useState("");
 
-  //TODO - Integrate with backend search API
-  function getSearchResults(searchQuery) {
-    getAllProducts().then((response) => {
-      console.log(response);
-      setSearchResults(response);
-    });
+  async function getSearchResults(searchQuery, tag) {
+    let result = await fetch(
+      "http://localhost:5000/search?SearchQuery=" + searchQuery + "&tags=" + tag
+    );
+    let data = await result.json();
+    setSearchResults(data);
   }
 
   return (
@@ -47,11 +47,14 @@ function Search() {
             placeholder="search"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button onClick={() => getSearchResults(searchQuery)}>
+          <button onClick={() => getSearchResults(searchQuery, tag)}>
             <SearchIcon size={50} />
           </button>
         </div>
-        <select className="filters-button">
+        <select
+          className="filters-button"
+          onChange={(e) => setTag(e.target.value)}
+        >
           <option value="" disabled selected>
             filters
           </option>
