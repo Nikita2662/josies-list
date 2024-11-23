@@ -6,7 +6,7 @@ function ListedItem({ className = "listed-photo", src, itemName, price, _id }) {
   const navigate = useNavigate();
 
   const goToProduct = () => {
-    navigate(`/products/${_id}`);
+    navigate(`/listings/${_id}`);
   };
 
   return (

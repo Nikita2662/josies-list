@@ -36,12 +36,8 @@ function App() {
       element: <Search />,
     },
     {
-      path: "/listing",
+      path: "/listing/:id",
       element: <Listings />,
-    },
-    {
-      path: "/products/:id",
-      element: <Listing />,
     },
     {
       path: "*",
