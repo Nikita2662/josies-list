@@ -33,6 +33,10 @@ function App() {
       path: "/products/:id",
       element: <Listing />,
     },
+    {
+      path: "*",
+      element: <div>404 - Page Not Found</div>,
+    },
   ]);
 
   return (
