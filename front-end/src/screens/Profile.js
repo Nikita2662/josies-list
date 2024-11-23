@@ -6,12 +6,31 @@ import profilepic from "../profilepic.png";
 import Star from "../components/Star";
 import Flag from "../components/Flag";
 import ListedItem from "../components/ListedItem";
-import empty from "../empty.png";
+//import empty from "../empty.png";
 import { UserContext } from "../App.js";
 import "./Profile.css";
 
 function Profile() {
   const { user } = React.useContext(UserContext);
+
+  function displaySearchResults(data) {
+    return data.map((item, index) => (
+      <ListedItem
+        key={index}
+        className="listed-photo"
+        src="https://placehold.co/265"
+        itemName={item.itemName}
+        price={item.price}
+        _id={item._id}
+      />
+    ));
+  }
+
+  async function getUserProducts() {
+    let products = await fetch(`http://localhost:5002/products/user/${user._id}`);
+    return await products.json();
+  }
+  
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -45,7 +64,7 @@ function Profile() {
         </div>
         <div className="product-container">
           <div className="product-item">
-            <ListedItem itemName="item" price="0" src={empty} ListedItem />
+          {displaySearchResults(getUserProducts())}
           </div>
           <div className="product-item">
             <Button onClick={handleClick} className="listing-button">
