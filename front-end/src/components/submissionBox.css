@@ -35,12 +35,11 @@
     padding: 10px; 
     border: none; 
     border-radius:10px; 
-    font-size: 24px; 
+    font-size: 14px; 
     width: 100%; 
     box-sizing: border-box; 
     color: black;
     font-family: Figtree;
-    background-color: #ffd4d9;
     margin-bottom: 20px;
 }
 .text-box:focus {

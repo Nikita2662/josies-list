@@ -5,8 +5,9 @@ import SignIn from './screens/SignIn';
 import Listings from "./screens/Listings";
 import Image from "./components/Uploadimage"
 import Comments from "./components/Comments"
+import Sell from "./screens/Sell";
 function App() {
-  return <Listings productId={"673ed3c941d6d297c270353d"}  userId = {"testemail@g.ucla.edu"} />;
+  return <Sell />;
 }
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "./TextBox.css";
+import "../screens/Sell.css"
 
-const TextBox = ({ label, placeholder, className}) => {
+ const TextBox = ({ label, placeholder, className, onTextSubmit}) => {
 
     const [authorName, setAuthorName] = useState('User Wrote');
     const [commentText, setCommentText] = useState('');
@@ -18,6 +18,9 @@ const TextBox = ({ label, placeholder, className}) => {
       textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
     
+    if (onTextSubmit) {
+      onTextSubmit(text);
+    }
 
 
     };
@@ -25,16 +28,16 @@ const TextBox = ({ label, placeholder, className}) => {
 
     return (
       <div >
-    <div className={className}>
+  
       {label && <label>{label}</label>} {/* Render label if provided */}
-      <textarea
+      <textarea className={className}
         value={text}
         onChange={handleChange}
-        
+       
         placeholder={placeholder}
-        className="text-box"
+        
       />
-    </div>
+   
 
     <div>
    
