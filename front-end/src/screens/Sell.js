@@ -54,7 +54,7 @@ function Sell() {
     }
     if (tags && description && productName && price) {
       try {
-        const url = "http://localhost:5038/products";
+        const url = "http://localhost:5000/products";
         const headers = { "Content-Type": "application/json" };
         const body = JSON.stringify({
           itemName: productName,

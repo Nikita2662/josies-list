@@ -65,7 +65,7 @@ productRoutes.route("/products").post(async (req, res) => {
     description: req.body.description,
     tags: req.body.tags,
     price: req.body.price,
-    image: req.body.iamge,
+    image: req.body.image,
     seller: req.body.seller,
   };
   let data = await Product.create(productObject);
