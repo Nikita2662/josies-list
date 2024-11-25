@@ -7,12 +7,13 @@ const commentRoutes = express.Router();
 // get comments for a product
 commentRoutes.route("/comments/all/:id").get(async (req, res) => {
     let comments = await Comment.find({ productID: req.params.id });
-
     if (comments.length > 0) {
         res.json(comments); 
-    } else {
-        throw new Error("Error: Data was not found");
+    }   else {
+        // If no comments are found, send an empty array (for products that dont have a commment)
+        res.json([]);  
     }
+    
 });
 
 // 2 - Retrieve a comment
