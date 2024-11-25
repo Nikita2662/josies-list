@@ -17,7 +17,7 @@ router.route("/users/:id").get(async (req, res) => {
   //  .byEmail(req.params._id); // DELETE (appended to findOne)
 
   //if (!user) res.send("Not found").status(404);
-  res.send(user).status(200);
+  res.json(user).status(200);
 });
 
 /* DELETE THIS IF ABOVE WORKS
@@ -67,6 +67,24 @@ router.route("/users/:id").post(async (req, res) => {
       res.status(400).send({
         status: false,
         message: "Error updating user",
+      });
+    });
+});
+
+//temporary delete function
+router.route("/users/delete/:id").delete(async (req, res) => {
+  userDB
+    .findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send({
+        status: true,
+        message: "User deleted successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(400).send({
+        status: false,
+        message: "Error deleting user",
       });
     });
 });

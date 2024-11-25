@@ -2,10 +2,9 @@ import "./App.css";
 import Landing from "./screens/Landing";
 import SignIn from "./screens/SignIn";
 import Profile from "./screens/Profile";
-import Listing from "./screens/Listings"
+import Listing from "./screens/Listings";
 import CreateAccount from "./screens/CreateAccount";
 import Search from "./screens/Search";
-import Listings from "./screens/Listings";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
 
@@ -36,8 +35,8 @@ function App() {
       element: <Search />,
     },
     {
-      path: "/listing/:id",
-      element: <Listings />,
+      path: "/listing/",
+      element: <Listing />,
     },
     {
       path: "*",
