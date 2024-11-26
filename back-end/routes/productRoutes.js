@@ -64,4 +64,18 @@ productRoutes.route("./products/:id").delete(async (req, res) => {
     res.json(data); 
 });
 
+// 4 - Create one
+productRoutes.route("/products").post(async (req, res) => {
+  let productObject = {
+    itemName: req.body.itemName,
+    description: req.body.description,
+    tags: req.body.tags,
+    price: req.body.price,
+    image: req.body.image,
+    seller: req.body.seller,
+  };
+  let data = await Product.create(productObject);
+  res.json(data);
+});
+
 module.exports = productRoutes; 
