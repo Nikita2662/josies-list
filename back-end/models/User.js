@@ -5,10 +5,7 @@ const userSchema = new schema({
     _id: { // email
         type: String, // always required and unique
     },
-    username: {
-        type: String,
-        required: true
-    },
+    username: String,
     bio: {
         type: String,
         default: "None"
