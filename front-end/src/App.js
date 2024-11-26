@@ -7,7 +7,7 @@ import Image from "./components/Uploadimage"
 import Comments from "./components/Comments"
 import Sell from "./screens/Sell";
 function App() {
-  return <Sell />;
+  return <Listings productId={"6743e380f1034da8192318df"}/>;
 }
 
 

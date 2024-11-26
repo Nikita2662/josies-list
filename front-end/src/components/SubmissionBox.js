@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../screens/Sell.css"
 
- const TextBox = ({ label, placeholder, className, onTextSubmit}) => {
+ const SubmissionBox = ({ label, placeholder, className, onTextSubmit}) => {
 
     const [authorName, setAuthorName] = useState('User Wrote');
     const [commentText, setCommentText] = useState('');
@@ -19,7 +19,7 @@ import "../screens/Sell.css"
     textarea.style.height = `${textarea.scrollHeight}px`;
     
     if (onTextSubmit) {
-      onTextSubmit(text);
+      onTextSubmit(event.target.value);
     }
 
 
@@ -50,4 +50,4 @@ import "../screens/Sell.css"
     );
 };
 
-export default TextBox;
+export default SubmissionBox;

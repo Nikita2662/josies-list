@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import imgUrl from './emptyupload.png'; // Placeholder image if no file is selected
 import "../screens/Sell.css"
 
@@ -19,12 +19,15 @@ function UploadImage({w, h , c="",m=30, onImageChange}) {
       setImageDimensions({ width: w, height: h });
     }
 
-   if (onImageChange){
-    onImageChange=image;
-   }
-   
+
+
   };
 
+  useEffect(() => {
+    if (onImageChange) {
+        onImageChange(image); // Pass the updated image URL to the parent
+    }
+}, [image, onImageChange]);
  
     
 
@@ -42,6 +45,7 @@ function UploadImage({w, h , c="",m=30, onImageChange}) {
                 
                 }}
             onClick={() => document.getElementById('invoke').click() }
+            onLoad={handleImageLoad}
             />
   
             <input 
@@ -52,7 +56,8 @@ function UploadImage({w, h , c="",m=30, onImageChange}) {
         if (event.target.files[0]) {
           
             setImage(URL.createObjectURL(event.target.files[0]));
-            handleImageLoad()
+            console.log("THIS IS THE IMAGE URL"+image)
+          
         }
     }} // Trigger openImg when the user selects a file
             />

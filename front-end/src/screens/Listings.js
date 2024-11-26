@@ -51,7 +51,7 @@ function Listings({ productId , userId}){
          <SafeArea>
     <div class="flex-container">
     <div class="flex1">
-    <div > <Image w={470} h={270} style={{objectFit: 'cover'}}/></div>
+    <div > <img w={470} h={270} style={{objectFit: 'cover'}} src={product?.image}/></div>
     <div class="flex2">
     <div> 
 

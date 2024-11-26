@@ -40,9 +40,10 @@ function Sell() {
     };
 
     async function createProduct(){
+        console.log("THIS IS THE SELL IMAGE URL"+image)
 
-        if (!tags || !description || !productName || !price) {
-            throw new Error('All fields are required' + description+" "+price+" "+productName+" "+tags+" ");
+        if (!tags || !description || !productName || !price ||!image) {
+            throw new Error('All fields are required' + description+" "+price+" "+productName+" "+tags+" "+image);
             return; // Optionally display a message to the user or return early
         }
    if (tags && description && productName && price){
@@ -53,8 +54,9 @@ function Sell() {
                     itemName: productName,
                     description: description,
                     price: price,
-                    image: image, // Image URL or base64 data
-                    seller: "Seller Name"
+                    image: image, 
+                    //tags:tags
+                    seller: "Test Seller Name (Update Sell.js to grab actuall seller name)"
                 });
                 const response = await fetch(url, { method: 'POST', headers, body }); 
             

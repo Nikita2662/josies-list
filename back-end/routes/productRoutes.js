@@ -37,7 +37,7 @@ productRoutes.route("/products").post(async (req, res) => {
         image: req.body.iamge, 
         seller: req.body.seller
     }
-    let data = await Product.insertOne(productObject); 
+    let data = await Product.create(productObject); 
     res.json(data);
 });
 

@@ -90,12 +90,13 @@ const CommentBox = ({ productId, label, placeholder, userId, className = "text-b
                 setLoading(false); // Stop loading if there's an error
                 return;
             }
-
-            const data = await response.json();
+                const data = await response.json();
+            
+           
             setComments(data);  // Directly set fetched data into comments state
             setLoading(false);   // Stop loading when data is fetched
         } catch (error) {
-            setError('Failed to fetch comments');
+            setError('Failed to fetch comments ' + error);
             setLoading(false); // Stop loading if there was an error
         }
     };
