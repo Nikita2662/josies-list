@@ -3,9 +3,7 @@ const schema = mongoose.Schema;
 
 const userSchema = new schema({
     _id: { // email
-        type: String,
-        required: true,
-        unique: true // makes sure it's a unique value
+        type: String, // always required and unique
     },
     username: {
         type: String,
