@@ -8,7 +8,7 @@ const User = require('./models/User.js'); // DELETE LATER after testing
 const userRoutes = require('./routes/user-routes');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5038;
 
 app.use(cors());
 app.use(express.json());
