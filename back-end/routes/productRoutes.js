@@ -46,7 +46,8 @@ productRoutes.route("/products").post(async (req, res) => {
         tags: req.body.tags,
         price: req.body.price,
         image: req.body.iamge, 
-        seller: req.body.seller
+        seller_name: req.body.seller_name,
+        seller_email: req.body.seller_email
     }
     let data = await Product.insertOne(productObject); 
     res.json(data);
@@ -61,7 +62,8 @@ productRoutes.route("/products/:id").put(async (req, res) => {
             tags: req.body.tags,
             price: req.body.price,
             image: req.body.image,
-            seller: req.body.seller
+            seller_name: req.body.seller_name,
+            seller_email: req.body.seller_email
         } 
     }
     let data = await Product.updateOne({_id: new ObjectId(req.params.id)}, productObject); 
