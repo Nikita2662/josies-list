@@ -23,7 +23,7 @@ function CreateAccount() {
       _id: email,
     };
 
-    const response1 = await fetch("http://localhost:5000/users", {
+    const response1 = await fetch("http://localhost:5038/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ function CreateAccount() {
       name: name,
     };
 
-    const response2 = await fetch(`http://localhost:5000/users/${email}`, {
+    const response2 = await fetch(`http://localhost:5038/users/${email}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -29,7 +29,7 @@ function SignIn() {
     let email = data.email;
 
     //check if the user exists in the database
-    let response2 = await fetch("http://localhost:5000/users/" + email, {
+    let response2 = await fetch("http://localhost:5038/users/" + email, {
       method: "GET",
     });
     let data2 = await response2.json();

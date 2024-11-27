@@ -28,7 +28,7 @@ function Profile() {
 
   async function getUserProducts() {
     let products = await fetch(
-      `http://localhost:5000/products/user/${user._id}`
+      `http://localhost:5038/products/user/${user._id}`
     );
     let data = await products.json();
     return data;

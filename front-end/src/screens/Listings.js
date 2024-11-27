@@ -21,7 +21,7 @@ function Listings() {
   const fetchProduct = async () => {
     if (!loading) return;
 
-    const response = await fetch(`http://localhost:5000/products/${productId}`);
+    const response = await fetch(`http://localhost:5038/products/${productId}`);
     if (!response.ok) {
       setError("Product not found");
       return;
@@ -48,28 +48,28 @@ function Listings() {
     <div>
       <Header />
       <SafeArea>
-        <div class="flex-container">
-          <div class="flex1">
+        <div className="flex-container">
+          <div className="flex1">
             <div>
               {" "}
               <Image w={470} h={270} style={{ objectFit: "cover" }} />
             </div>
-            <div class="flex2">
+            <div className="flex2">
               <div>
-                <h2 class="productName"> {product?.itemName}</h2>
-                <p class="productSeller">
+                <h2 className="productName"> {product?.itemName}</h2>
+                <p className="productSeller">
                   {" "}
                   Posted By: &nbsp;{" "}
                   <span style={{ color: "#42CAFD" }}> {product?.seller}</span>
                 </p>
-                <p class="productDescription"> {product?.description}</p>
-                <p class="productPrice">
+                <p className="productDescription"> {product?.description}</p>
+                <p className="productPrice">
                   {" "}
                   Current Selling Price: ${product?.price}
                 </p>
                 <BiddingBox
                   placeholder="Enter Your Bidding Price"
-                  class="bidding"
+                  className="bidding"
                 />
               </div>
             </div>
