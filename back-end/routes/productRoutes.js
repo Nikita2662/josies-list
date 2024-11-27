@@ -37,11 +37,7 @@ productRoutes.route("/search").get(async (req, res) => {
 productRoutes.route("/products").get(async (req, res) => {
   let data = await Product.find({});
 
-  if (data.length > 0) {
-    res.json(data);
-  } else {
-    throw new Error("Error: Data was not found.");
-  }
+  res.json(data);
 });
 
 // 2 - Retrieve one
@@ -51,7 +47,7 @@ productRoutes.route("/products/:id").get(async (req, res) => {
   if (Object.keys(data).length > 0) {
     res.json(data);
   } else {
-    throw new Error("Error: Data was not found.");
+    res.status(404).json("Error: No data found.");
   }
 });
 
@@ -59,11 +55,7 @@ productRoutes.route("/products/:id").get(async (req, res) => {
 productRoutes.route("/products/user/:id").get(async (req, res) => {
   let products = await Product.find({ seller: req.params.id });
 
-  if (products.length > 0) {
-    res.json(comments);
-  } else {
-    throw new Error("Error: Products for user not found");
-  }
+  res.json(products);
 });
 
 // 4 - Create one
@@ -73,7 +65,7 @@ productRoutes.route("/products").post(async (req, res) => {
     description: req.body.description,
     tags: req.body.tags,
     price: req.body.price,
-    image: req.body.iamge,
+    image: req.body.image,
     seller: req.body.seller,
   };
   let data = await Product.create(productObject);

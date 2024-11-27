@@ -20,7 +20,7 @@ function Header() {
         <Link to={user == null ? "/sign-in" : "/search"} className="link">
           <p>Buy</p>
         </Link>
-        <Link to={"/sign-in"} className="link">
+        <Link to={user == null ? "/sign-in" : "/sell"} className="link">
           <p>Sell</p>
         </Link>
         <Link className="container" to={user == null ? "/sign-in" : "/profile"}>

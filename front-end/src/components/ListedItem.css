@@ -5,6 +5,7 @@
   left: 0px;
   width: 265px;
   height: 265px;
+  cursor: pointer;
 }
 .listing-text {
   font-size: 24px;
