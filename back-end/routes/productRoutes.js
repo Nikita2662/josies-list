@@ -4,41 +4,49 @@ const ObjectId = require('mongodb').ObjectId;
 
 const productRoutes = express.Router();
 
-
-// 1 - Retrieve all 
+// 1 - Get all products
 productRoutes.route("/products").get(async (req, res) => {
     let data = await Product.find({}); 
 
     if (data.length > 0) {
         res.json(data);
     } else {
-        throw new Error("Error: Data was not found.");
+        res.status(400).send({
+            status: false,
+            message: "Error: Products were not found",
+        });
     }
 });
 
-// 2 - Retrieve one
+// 2 - Retrieve one product
 productRoutes.route("/products/:id").get(async (req, res) => {
     let data = await Product.findOne({_id: new ObjectId(req.params.id)}); 
 
     if (Object.keys(data).length > 0) {
         res.json(data);
     } else {
-        throw new Error("Error: Data was not found.");
+        res.status(400).send({
+            status: false,
+            message: "Error: Product does not exit",
+        });
     }
 });
 
-//3 - Retrieve all products for a user
+// 3 - Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
     let products = await Product.find({ seller: req.params.id });
 
     if (products.length > 0) {
         res.json(comments); 
     } else {
-        throw new Error("Error: Products for user not found");
+        res.status(400).send({
+            status: false,
+            message: "Error: User does not have any products",
+        });;
     }
 });
 
-// 4 - Create one
+// 4 - Create a product
 productRoutes.route("/products").post(async (req, res) => {
     let productObject = {
         itemName: req.body.itemName,
@@ -53,7 +61,7 @@ productRoutes.route("/products").post(async (req, res) => {
     res.json(data);
 });
 
-// 5 - Update One
+// 5 - Update a product
 productRoutes.route("/products/:id").put(async (req, res) => {
     let productObject = { 
         $set: {
@@ -70,7 +78,7 @@ productRoutes.route("/products/:id").put(async (req, res) => {
     res.json(data);
 });
 
-// 6 - Delete One 
+// 6 - Delete a product
 productRoutes.route("/products/:id").delete(async (req, res) => {
     let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}); 
     res.json(data); 
