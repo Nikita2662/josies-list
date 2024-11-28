@@ -6,7 +6,15 @@ const productSchema = new Schema({
     itemName: { type: String, required: true }, 
     description: { type: String, default: 'No description listed for this item.' },
     price: { type: Number, required: true, default: 0 }, 
-    seller: String
+    seller: String,
+    highestBid: Number,
+    highestBidder: {
+        type: String, 
+        default: "", 
+        required: function() {
+            return this.highestBid? true : false // require bidder only if highest bid exists
+        }
+    }
 })
 
 const Product = mongoose.model('Product', productSchema);

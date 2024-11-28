@@ -42,6 +42,29 @@ productRoutes.route("./products").post(async (req, res) => {
     res.json(data);
 });
 
+/* // 3.5 - Add Bid
+productRoutes.route("./products/:id").put(async (req, res) => {
+    let data = await Product.findByIdAndUpdate(
+        req.params.id, 
+        {highestBid: ()}
+    )
+}) */
+
+serDB.findByIdAndUpdate(req.params.id, req.body, { new: true }) // will return the new user object to postman
+
+        .then(() => {
+            res.status(201).send({
+                status: true,
+                message: "User updated successfully",
+            });
+        })
+        .catch((err) => {
+            res.status(400).send({
+                status: false,
+                message: "Error updating user",
+            });
+        });
+
 // 4 - Update One
 productRoutes.route("./products/:id").put(async (req, res) => {
     let productDB = Product; 

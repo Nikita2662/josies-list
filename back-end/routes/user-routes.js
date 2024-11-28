@@ -41,7 +41,7 @@ router.route("/users").post(async (req, res) => {
 })
 
 // upon Create New Account completion --> finish creating new user, ie. add username, name, profile picture, and bio (PROVIDE EMAIL IN ROUTE, username name pfp and bio in request body)
-router.route("/users/:id").post(async (req, res) => {
+router.route("/users/:id").put(async (req, res) => {
     userDB.findByIdAndUpdate(req.params.id, req.body, { new: true }) // will return the new user object to postman
 
         .then(() => {
