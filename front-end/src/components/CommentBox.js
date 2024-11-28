@@ -51,7 +51,8 @@ const CommentBox = ({
         const response = await fetch(url, { method: "POST", headers, body });
 
         if (!response.ok) {
-          throw new Error("Failed to add comment");
+         // throw new Error("Failed to add comment");
+         console.log("Failed to add comment");
         }
 
         const newComment = await response.json();

@@ -38,19 +38,8 @@ function Sell() {
     console.log("THIS IS THE SELL IMAGE URL" + image);
 
     if (!tags || !description || !productName || !price || !image) {
-      throw new Error(
-        "All fields are required" +
-          description +
-          " " +
-          price +
-          " " +
-          productName +
-          " " +
-          tags +
-          " " +
-          image
-      );
-      return; // Optionally display a message to the user or return early
+      console.log("All fields are required");
+      //return; // Optionally display a message to the user or return early
     }
     if (tags && description && productName && price) {
       try {
@@ -67,7 +56,7 @@ function Sell() {
         });
         const response = await fetch(url, { method: "POST", headers, body });
       } catch (err) {
-        throw new Error("Failed to add product, refresh again");
+        //throw new Error("Failed to add product, refresh again");
       }
     } else {
       //throw new Error('Failed to add everything, refresh again');
