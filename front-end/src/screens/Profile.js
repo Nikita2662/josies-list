@@ -51,7 +51,8 @@ function Profile() {
             />
           </div>
           <div className="grid-item">
-            <h1 className="small-text">{user.name}</h1>
+            <h1 className="small-text">{user.username}</h1>
+          
             <h2 className="bio-text">{user.bio}</h2>
             <div>
               <Star className="star" fill="#FF1F58" />
