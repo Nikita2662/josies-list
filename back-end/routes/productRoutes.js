@@ -1,12 +1,40 @@
-const express = require('express');
-const Product = require('../models/Product');
-const ObjectId = require('mongodb').ObjectId;
+const express = require("express");
+const Product = require("../models/Product");
+const ObjectId = require("mongodb").ObjectId;
 
 const productRoutes = express.Router();
 
-// 1 - Get all products
+productRoutes.route("/search").get(async (req, res) => {
+  const { SearchQuery, tags } = req.query;
+  try {
+    const query = [];
+    if (SearchQuery) {
+      query.push(
+        { itemName: { $regex: SearchQuery, $options: "i" } },
+        { description: { $regex: SearchQuery, $options: "i" } }
+      );
+    }
+
+    const tagsQuery = [];
+    if (tags) {
+      const tagsArray = tags.split(",");
+      tagsQuery.push({ tags: { $in: tagsArray } });
+    }
+
+    let data = await Product.find({ $or: query, $and: tagsQuery });
+
+    if (data.length > 0) {
+      res.json(data);
+    } else {
+      res.status(404).json("No matching products found.");
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+});
+// 1 - Get allproducts
 productRoutes.route("/products").get(async (req, res) => {
-    let data = await Product.find({}); 
+  let data = await Product.find({});
 
     if (data.length > 0) {
         res.json(data);
@@ -20,7 +48,7 @@ productRoutes.route("/products").get(async (req, res) => {
 
 // 2 - Retrieve one product
 productRoutes.route("/products/:id").get(async (req, res) => {
-    let data = await Product.findOne({_id: new ObjectId(req.params.id)}); 
+  let data = await Product.findOne({ _id: new ObjectId(req.params.id) });
 
     if (Object.keys(data).length > 0) {
         res.json(data);
@@ -34,7 +62,7 @@ productRoutes.route("/products/:id").get(async (req, res) => {
 
 // 3 - Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
-    let products = await Product.find({ seller: req.params.id });
+  let products = await Product.find({ seller: req.params.id });
 
     if (products.length > 0) {
         res.json(comments); 
@@ -80,8 +108,7 @@ productRoutes.route("/products/:id").put(async (req, res) => {
 
 // 6 - Delete a product
 productRoutes.route("/products/:id").delete(async (req, res) => {
-    let data = await Product.deleteOne({_id: new ObjectId(req.params.id)}); 
-    res.json(data); 
+  let data = await Product.deleteOne({ _id: new ObjectId(req.params.id) });
+  res.json(data);
 });
-
-module.exports = productRoutes; 
+module.exports = productRoutes;

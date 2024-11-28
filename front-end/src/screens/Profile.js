@@ -6,12 +6,34 @@ import profilepic from "../profilepic.png";
 import Star from "../components/Star";
 import Flag from "../components/Flag";
 import ListedItem from "../components/ListedItem";
-import empty from "../empty.png";
 import { UserContext } from "../App.js";
 import "./Profile.css";
 
 function Profile() {
   const { user } = React.useContext(UserContext);
+  const [products, setProducts] = React.useState([]);
+
+  function displaySearchResults(data) {
+    return data.map((item, index) => (
+      <ListedItem
+        key={index}
+        className="listed-photo"
+        src="https://placehold.co/265"
+        itemName={item.itemName}
+        price={item.price}
+        _id={item._id}
+      />
+    ));
+  }
+
+  async function getUserProducts() {
+    let products = await fetch(
+      `http://localhost:5000/products/user/${user._id}`
+    );
+    let data = await products.json();
+    return data;
+  }
+
   const handleClick = () => {
     alert("Button clicked!");
   };
@@ -44,16 +66,14 @@ function Profile() {
           <Flag text="Listed Items" svgclass="flag" textclass="flag-text" />
         </div>
         <div className="product-container">
-          <div className="product-item">
-            <ListedItem itemName="item" price="0" src={empty} ListedItem />
-          </div>
-          <div className="product-item">
+          <div className="product-item">{displaySearchResults(products)}</div>
+          {/*<div className="product-item">
             <Button onClick={handleClick} className="listing-button">
               +
             </Button>
             <h2 className="listing-text">Item Name</h2>
             <h2 className="price-text">$##</h2>
-          </div>
+          </div>*/}
         </div>
       </SafeArea>
     </div>

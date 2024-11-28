@@ -6,6 +6,13 @@ const Product = require('./models/Product.js');
 const Comment = require('./models/Comment.js');
 const User = require('./models/User.js'); // DELETE LATER after testing
 const userRoutes = require('./routes/user-routes');
+const bidRoutes = require('./routes/bid-routes')
+
+const User = require('./models/User.js'); // DELETE LATER after testing
+const Bid = require('./models/Bid.js');
+
+//const Product = require('./models/Product.js'); 
+//const Products = require('./routes/productRoutes');
 
 const app = express();
 const port = process.env.PORT || 5038;
@@ -15,6 +22,7 @@ app.use(express.json());
 app.use('/', require('./routes/productRoutes'));
 app.use('/', require('./routes/commentRoutes'));
 app.use("/", userRoutes);
+app.use("/", bidRoutes);
 
 // MongoDB connection
 mongoose

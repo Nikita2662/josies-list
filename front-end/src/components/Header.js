@@ -17,8 +17,12 @@ function Header() {
         <h1>Josie's List</h1>
       </Link>
       <div className="nav-links">
-        <p>Buy</p>
-        <p>Sell</p>
+        <Link to={user == null ? "/sign-in" : "/search"} className="link">
+          <p>Buy</p>
+        </Link>
+        <Link to={user == null ? "/sign-in" : "/sell"} className="link">
+          <p>Sell</p>
+        </Link>
         <Link className="container" to={user == null ? "/sign-in" : "/profile"}>
           <svg
             viewBox="0 0 256 256"
