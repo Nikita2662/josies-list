@@ -12,7 +12,7 @@ const User = require('./models/User.js');
 //const Products = require('./routes/productRoutes');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5038;
 
 app.use(cors()); 
 app.use(express.json());
