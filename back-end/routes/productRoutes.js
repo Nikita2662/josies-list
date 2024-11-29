@@ -60,6 +60,11 @@ productRoutes.route("/products/:id").get(async (req, res) => {
     }
 });
 
+// 2.5 - Retrieve highest bid for a given product (SELLER)
+productRoutes.route("/products/:id/sell").get(async (req, res) => {
+  
+})
+
 // 3 - Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
   let products = await Product.find({ seller: req.params.id });
