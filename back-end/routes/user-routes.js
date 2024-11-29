@@ -27,8 +27,8 @@ router.route("/users").post(async (req, res) => {
   userDB
     .create({
       _id: req.body._id,
-      username: req.body._id, // username is set to email as well, for now
-      picture: req.body.picture, // picture is set to the user's Google profile picture, for now
+      username: req.body.username,
+      picture: req.body.picture,
       bio: req.body.bio,
     })
     .then(() => {

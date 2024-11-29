@@ -7,7 +7,6 @@ import TextBox from "../components/TextBox.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
 import UploadImage from "../components/Uploadimage.js";
-import lz from "lz-string";
 
 function CreateAccount() {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ function CreateAccount() {
       _id: email,
       username: name,
       bio: bio,
-      picture: lz.compress(image),
+      picture: image,
     };
 
     console.log(body1);
@@ -48,14 +47,7 @@ function CreateAccount() {
       return;
     }
 
-    let user = {
-      _id: email,
-      bio: bio,
-      username: name,
-      picture: lz.decompress(result.picture),
-    };
-
-    setUser(user);
+    setUser(body1);
     navigate("/profile");
   };
 

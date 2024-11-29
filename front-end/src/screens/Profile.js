@@ -34,6 +34,8 @@ function Profile() {
     return data;
   }
 
+  console.log(user);
+
   return (
     <div>
       <Header />

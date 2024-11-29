@@ -20,7 +20,7 @@ function displaySearchResults(data) {
     <ListedItem
       key={index}
       className="listed-photo"
-      src={lz.decompress(item.image)}
+      src={item.image}
       itemName={item.itemName}
       price={item.price}
       _id={item._id}

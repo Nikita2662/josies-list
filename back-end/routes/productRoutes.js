@@ -1,7 +1,7 @@
 const express = require("express");
 const Product = require("../models/Product");
 const ObjectId = require("mongodb").ObjectId;
-const { checkDuplicateProduct } = require('../controllers/productController');
+const { checkDuplicateProduct } = require("../controllers/productController");
 
 const productRoutes = express.Router();
 
@@ -35,56 +35,55 @@ productRoutes.route("/search").get(async (req, res) => {
   }
 });
 
-
 // 2 - Retrieve all
 productRoutes.route("/products").get(async (req, res) => {
   let data = await Product.find({});
 
-    if (data.length > 0) {
-        res.json(data);
-    } else {
-        res.status(400).send({
-            status: false,
-            message: "Error: Products were not found",
-        });
-    }
+  if (data.length > 0) {
+    res.json(data);
+  } else {
+    res.status(400).send({
+      status: false,
+      message: "Error: Products were not found",
+    });
+  }
 });
 
 // 3 - Retrieve one
 productRoutes.route("/products/:id").get(async (req, res) => {
   let data = await Product.findOne({ _id: new ObjectId(req.params.id) });
 
-    if (Object.keys(data).length > 0) {
-        res.json(data);
-    } else {
-        res.status(400).send({
-            status: false,
-            message: "Error: Product does not exit",
-        });
-    }
+  if (Object.keys(data).length > 0) {
+    res.json(data);
+  } else {
+    res.status(400).send({
+      status: false,
+      message: "Error: Product does not exit",
+    });
+  }
 });
 
 // 4 - Retrieve all products for a user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
-  let products = await Product.find({ seller: req.params.id });
+  let products = await Product.find({ seller_email: req.params.id });
 
-    if (products.length > 0) {
-        res.json(comments); 
-    } else {
-        res.status(400).send({
-            status: false,
-            message: "Error: User does not have any products",
-        });;
-    }
+  if (products.length > 0) {
+    res.json(comments);
+  } else {
+    res.status(400).send({
+      status: false,
+      message: "Error: User does not have any products",
+    });
+  }
 });
 
 // 5 - Create one + Check Duplicate
 productRoutes.route("/products").post(async (req, res) => {
-  const isNotNewProduct = await checkDuplicateProduct(req.body)
+  const isNotNewProduct = await checkDuplicateProduct(req.body);
   if (isNotNewProduct.duplicate) {
     return res.json({
       success: false,
-      message: "This product already exists"
+      message: "This product already exists",
     });
   }
   let productObject = {
@@ -101,19 +100,22 @@ productRoutes.route("/products").post(async (req, res) => {
 
 // 6 - Update One
 productRoutes.route("/products/:id").put(async (req, res) => {
-    let productObject = { 
-        $set: {
-            itemName: req.body.itemName,
-            description: req.body.description,
-            tags: req.body.tags,
-            price: req.body.price,
-            image: req.body.image,
-            seller_name: req.body.seller_name,
-            seller_email: req.body.seller_email
-        } 
-    }
-    let data = await Product.updateOne({_id: new ObjectId(req.params.id)}, productObject); 
-    res.json(data);
+  let productObject = {
+    $set: {
+      itemName: req.body.itemName,
+      description: req.body.description,
+      tags: req.body.tags,
+      price: req.body.price,
+      image: req.body.image,
+      seller_name: req.body.seller_name,
+      seller_email: req.body.seller_email,
+    },
+  };
+  let data = await Product.updateOne(
+    { _id: new ObjectId(req.params.id) },
+    productObject
+  );
+  res.json(data);
 });
 
 // 7 - Delete One
