@@ -2,13 +2,8 @@ require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
-<<<<<<< Updated upstream
-const userRoutes = require('./routes/user-routes');
-const bidRoutes = require('./routes/bid-routes')
-=======
 const Product = require('./models/Product.js'); 
 const Comment = require('./models/Comment.js');
->>>>>>> Stashed changes
 
 const userRoutes = require('./routes/user-routes');
 const User = require('./models/User.js'); 
