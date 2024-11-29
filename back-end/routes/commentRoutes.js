@@ -23,7 +23,8 @@ commentRoutes.route("/comments/:id").get(async (req, res) => {
     if (Object.keys(data).length > 0) {
         res.json(data);
     } else {
-        throw new Error("Error: Data was not found.");
+        //throw new Error("Error: Data was not found."); 
+        console.log("Error in retreiving comment");
     }
 });
 
