@@ -17,7 +17,7 @@ const checkDuplicateProduct = async ({ itemName, description, price, tags, selle
 
         return { duplicate: false }; //returns false if a duplicate was not found
 
-    } catch (error) 
+    } catch (error) { //
         return res.status(500).json({ message: error });
     }
 };
