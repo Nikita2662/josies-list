@@ -5,8 +5,11 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     itemName: { type: String, required: true }, 
     description: { type: String, default: 'No description listed for this item.' },
-    price: { type: Number, required: true, default: 0 }, 
-    seller: String,
+    price: { type: Number, required: true, default: 0 },
+    tags: { type: [String], default: [] },
+    image: String,
+    seller_name: String,
+    seller_email: String,
     highestBid: Number,
     highestBidder: {
         type: String, 

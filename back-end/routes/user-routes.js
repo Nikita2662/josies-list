@@ -19,12 +19,13 @@ router.route("/users/:id").get(async (req, res) => {
   });
 })
 
-// Google auth --> create new user and set _id and picture (as well as username temporarily) --> TO FRONT-END: just provide id (email) and Google profile picture
+// GOOGLE AUTH - send in Google photo and verified email
+// creates new user and adds to database (id, picture, and temp username)
 router.route("/users").post(async (req, res) => {
   userDB.create({
       _id: req.body._id,
       username: req.body._id, // username is set to email as well, for now
-      picture: req.picture // picture is set to the user's Google profile picture, for now
+      picture: req.body.picture // picture is set to the user's Google profile picture, for now
     })
     .then(() => {
       res.status(201).send({
@@ -36,11 +37,11 @@ router.route("/users").post(async (req, res) => {
       res.status(400).send({
         status: false,
         message: "Error adding user",
-      });
+      }); 
     });
 });
 
-// upon Create New Account completion --> finish creating new user, ie. add username, name, profile picture, and bio (PROVIDE EMAIL IN ROUTE, username name pfp and bio in request body)
+// EDIT USER or CREATE NEW ACC - send in all fields the user has filled in (username, name, profile picture, and/or bio) in request body. Provide email in route
 router.route("/users/:id").put(async (req, res) => {
     userDB.findByIdAndUpdate(req.params.id, req.body, { new: true }) // will return the new user object to postman
 
@@ -53,27 +54,29 @@ router.route("/users/:id").put(async (req, res) => {
     .catch((err) => {
       res.status(400).send({
         status: false,
-        message: "Error updating user",
+        message: "Error updating user's data",
       });
     });
 });
 
-//temporary delete function
-router.route("/users/delete/:id").delete(async (req, res) => {
-  userDB
-    .findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.status(200).send({
-        status: true,
-        message: "User deleted successfully",
-      });
-    })
-    .catch((err) => {
+// Delete a user by ID 
+router.route("/users/:id").delete(async (req, res) => {
+  userDB.deleteOne({ _id: req.params.id })
+  .then(() => {
+    res.status(201).send({
+      status: true,
+      message: "User deleted successfully (or never existed)", // If we want to throw error if user doesn't exist, change to implement with https://stackoverflow.com/questions/57121449/how-do-i-give-document-does-not-exist-feedback-to-the-user-when-using-the-mong
+    });
+  }) 
+  .catch((err) => {
       res.status(400).send({
         status: false,
         message: "Error deleting user",
       });
-    });
-});
+  })
+})
+
+
+
 
 module.exports = router;
