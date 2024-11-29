@@ -1,9 +1,11 @@
 import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
 import "./Sell.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../App";
 import TextBox from "../components/SubmissionBox";
 import UploadImage from "../components/Uploadimage";
+import { useNavigate } from "react-router-dom";
 
 function Sell() {
   const [tags, setTags] = useState(null);
@@ -12,11 +14,13 @@ function Sell() {
   const [image, setImage] = useState(null);
   const [price, setPrice] = useState(null);
 
-  async function createProduct() {
-    console.log("THIS IS THE SELL IMAGE URL" + image);
+  let { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
-    let allFilled = tags && description && productName && price && image;
-    if (!allFilled) {
+  async function createProduct() {
+    let isFormComplete = description && productName && price && image;
+    if (!isFormComplete) {
+      alert("All fields required to create a product");
       return;
     }
 
@@ -27,17 +31,15 @@ function Sell() {
       description: description,
       price: price,
       image: image,
-      //tags:tags
-      seller_name:
-        "Test Seller Name (Update Sell.js to grab actuall seller name)",
-      seller_id: "",
+      tags: tags.split(" "),
+      seller_name: user.username,
+      seller_email: user._id,
     });
-
-    console.log(body);
 
     let response = await fetch(url, { method: "POST", headers, body });
     if (response.ok) {
       alert("Product created successfully");
+      navigate("/");
     } else {
       alert("Error creating product, please try again");
     }

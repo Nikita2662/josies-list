@@ -1,6 +1,4 @@
 import { useState } from "react";
-import lz from "lz-string";
-
 import Header from "../components/Header.js";
 import SafeArea from "../components/SafeArea.js";
 import ListedItem from "../components/ListedItem.js";
@@ -13,8 +11,6 @@ function displaySearchResults(data) {
   if (typeof data === "string") {
     return <h1>{data}</h1>;
   }
-
-  console.log(data);
 
   return data.map((item, index) => (
     <ListedItem

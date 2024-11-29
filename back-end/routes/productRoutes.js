@@ -26,12 +26,12 @@ productRoutes.route("/search").get(async (req, res) => {
     let data = await Product.find({ $or: query, $and: tagsQuery });
 
     if (data.length > 0) {
-      res.json(data);
+      res.json(data).status(200);
     } else {
-      res.status(404).json("No matching products found.");
+      res.status(200).json("No matching products found.");
     }
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 });
 
@@ -68,11 +68,11 @@ productRoutes.route("/products/user/:id").get(async (req, res) => {
   let products = await Product.find({ seller_email: req.params.id });
 
   if (products.length > 0) {
-    res.json(comments);
+    res.json(products);
   } else {
     res.status(400).send({
       status: false,
-      message: "Error: User does not have any products",
+      message: "User does not have any products",
     });
   }
 });
@@ -86,13 +86,15 @@ productRoutes.route("/products").post(async (req, res) => {
       message: "This product already exists",
     });
   }
+
   let productObject = {
     itemName: req.body.itemName,
     description: req.body.description,
     tags: req.body.tags,
     price: req.body.price,
-    image: req.body.iamge,
-    seller: req.body.seller,
+    image: req.body.image,
+    seller_name: req.body.seller_name,
+    seller_email: req.body.seller_email,
   };
   let data = await Product.create(productObject);
   res.json(data);

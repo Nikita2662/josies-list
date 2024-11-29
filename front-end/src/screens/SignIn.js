@@ -42,8 +42,6 @@ function SignIn() {
         picture: data2.picture,
       };
 
-      console.log(newUser);
-
       setUser(newUser);
       navigate("/profile");
     } else {

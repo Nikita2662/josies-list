@@ -1,8 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
-import Button from "../components/Button.js";
-import profilepic from "../profilepic.png";
 import Star from "../components/Star";
 import Flag from "../components/Flag";
 import ListedItem from "../components/ListedItem";
@@ -12,13 +10,18 @@ import "./Profile.css";
 function Profile() {
   const { user } = React.useContext(UserContext);
   const [products, setProducts] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   function displaySearchResults(data) {
+    if (typeof data === "object" && data.message) {
+      return <h1>{data.message}</h1>;
+    }
+
     return data.map((item, index) => (
       <ListedItem
         key={index}
         className="listed-photo"
-        src="https://placehold.co/265"
+        src={item.image}
         itemName={item.itemName}
         price={item.price}
         _id={item._id}
@@ -27,14 +30,17 @@ function Profile() {
   }
 
   async function getUserProducts() {
+    if (!loading) return;
+
     let products = await fetch(
       `http://localhost:5038/products/user/${user._id}`
     );
     let data = await products.json();
-    return data;
+    setLoading(false);
+    setProducts(data);
   }
 
-  console.log(user);
+  getUserProducts();
 
   return (
     <div>

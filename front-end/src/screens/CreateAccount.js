@@ -28,8 +28,6 @@ function CreateAccount() {
       picture: image,
     };
 
-    console.log(body1);
-
     const response1 = await fetch("http://localhost:5038/users", {
       method: "POST",
       headers: {
@@ -39,8 +37,6 @@ function CreateAccount() {
     });
 
     let result = await response1.json();
-
-    console.log(result);
 
     if (!response1.ok) {
       alert(result.message);
