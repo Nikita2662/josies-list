@@ -2,11 +2,16 @@ require('dotenv').config()
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
+<<<<<<< Updated upstream
 const userRoutes = require('./routes/user-routes');
 const bidRoutes = require('./routes/bid-routes')
+=======
+const Product = require('./models/Product.js'); 
+const Comment = require('./models/Comment.js');
+>>>>>>> Stashed changes
 
-const User = require('./models/User.js'); // DELETE LATER after testing
-const Bid = require('./models/Bid.js');
+const userRoutes = require('./routes/user-routes');
+const User = require('./models/User.js'); 
 
 //const Product = require('./models/Product.js'); 
 //const Products = require('./routes/productRoutes');
@@ -18,7 +23,6 @@ app.use(cors());
 app.use(express.json());
 //app.use('/products', require('./routes/productRoutes'));
 app.use("/", userRoutes);
-app.use("/", bidRoutes);
 
 
 // MongoDB connection
