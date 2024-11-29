@@ -29,14 +29,20 @@ function SignIn() {
     let email = data.email;
 
     //check if the user exists in the database
-    let response2 = await fetch("http://localhost:5000/users/" + email, {
+    let response2 = await fetch("http://localhost:5038/users/" + email, {
       method: "GET",
     });
-    let data2 = await response2.json();
-    console.log(data2);
-    if (data2) {
+    if (response2.ok) {
       //user exists, navigate to the profile page
-      setUser(data2);
+      let data2 = await response2.json();
+      let newUser = {
+        _id: data2._id,
+        bio: data2.bio,
+        username: data2.username,
+        picture: data2.picture,
+      };
+
+      setUser(newUser);
       navigate("/profile");
     } else {
       //user does not exist, navigate to the create account page

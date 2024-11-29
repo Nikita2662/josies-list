@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import Header from "../components/Header.js";
 import SafeArea from "../components/SafeArea.js";
 import ListedItem from "../components/ListedItem.js";
@@ -17,7 +16,7 @@ function displaySearchResults(data) {
     <ListedItem
       key={index}
       className="listed-photo"
-      src="https://placehold.co/265"
+      src={item.image}
       itemName={item.itemName}
       price={item.price}
       _id={item._id}
@@ -32,7 +31,7 @@ function Search() {
 
   async function getSearchResults(searchQuery, tag) {
     let result = await fetch(
-      "http://localhost:5000/search?SearchQuery=" + searchQuery + "&tags=" + tag
+      "http://localhost:5038/search?SearchQuery=" + searchQuery + "&tags=" + tag
     );
     let data = await result.json();
     setSearchResults(data);
@@ -54,10 +53,8 @@ function Search() {
         <select
           className="filters-button"
           onChange={(e) => setTag(e.target.value)}
+          defaultValue={"none"}
         >
-          <option value="" disabled selected>
-            filters
-          </option>
           <option value="none">None</option>
           <option value="clothing">Clothing</option>
           <option value="dorm">Dorm</option>

@@ -21,7 +21,7 @@ const CommentBox = ({
 
   async function fetchAuthor(userId) {
     try {
-      const response = await fetch(`http://localhost:5000/comments/{userId}`);
+      const response = await fetch(`http://localhost:5038/comments/{userId}`);
       if (!response.ok) {
         setError("user not found");
         setLoading(false); // Stop loading if there's an error
@@ -41,7 +41,7 @@ const CommentBox = ({
   async function createComment(post) {
     if (text.trim()) {
       try {
-        const url = "http://localhost:5000/comments";
+        const url = "http://localhost:5038/comments";
         const headers = { "Content-Type": "application/json" };
         const body = JSON.stringify({
           user: post.user,
@@ -86,7 +86,7 @@ const CommentBox = ({
   const fetchProduct = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/comments/all/${productId}`
+        `http://localhost:5038/comments/all/${productId}`
       );
       if (!response.ok) {
         setError("Product not found");

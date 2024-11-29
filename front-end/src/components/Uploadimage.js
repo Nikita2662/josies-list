@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import imgUrl from "./emptyupload.png"; // Placeholder image if no file is selected
 import "../screens/Sell.css";
 
-function UploadImage({ w, h, c = "", m = 30, onImageChange }) {
+function UploadImage({ w, h, c = "photo-button", m = 30, onImageChange }) {
   // State to store the image URL (or placeholder initially)
   const [image, setImage] = useState(imgUrl);
   const [imageDimensions, setImageDimensions] = useState({
@@ -23,11 +23,17 @@ function UploadImage({ w, h, c = "", m = 30, onImageChange }) {
     }
   };
 
-  useEffect(() => {
-    if (onImageChange) {
-      onImageChange(image); // Pass the updated image URL to the parent
+  function handleImageSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImage(e.target.result);
+        onImageChange(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
-  }, [image, onImageChange]);
+  }
 
   return (
     <div>
@@ -51,11 +57,8 @@ function UploadImage({ w, h, c = "", m = 30, onImageChange }) {
         id="invoke"
         style={{ display: "none" }}
         onChange={(event) => {
-          if (event.target.files[0]) {
-            setImage(URL.createObjectURL(event.target.files[0]));
-            console.log("THIS IS THE IMAGE URL" + image);
-          }
-        }} // Trigger openImg when the user selects a file
+          handleImageSelect(event);
+        }}
       />
     </div>
   );
