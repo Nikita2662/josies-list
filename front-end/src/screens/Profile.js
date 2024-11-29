@@ -34,10 +34,6 @@ function Profile() {
     return data;
   }
 
-  const handleClick = () => {
-    alert("Button clicked!");
-  };
-
   return (
     <div>
       <Header />
@@ -46,12 +42,12 @@ function Profile() {
           <div className="grid-item">
             <img
               className="profile-photo"
-              src={profilepic}
+              src={user.picture}
               alt="User profile"
             />
           </div>
           <div className="grid-item">
-            <h1 className="small-text">{user.name}</h1>
+            <h1 className="small-text">{user.username}</h1>
             <h2 className="bio-text">{user.bio}</h2>
             <div>
               <Star className="star" fill="#FF1F58" />

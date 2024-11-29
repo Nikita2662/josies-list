@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import imgUrl from "./emptyupload.png"; // Placeholder image if no file is selected
-import lz from "lz-string";
 import "../screens/Sell.css";
 
-function UploadImage({ w, h, c = "", m = 30, onImageChange }) {
+function UploadImage({ w, h, c = "photo-button", m = 30, onImageChange }) {
   // State to store the image URL (or placeholder initially)
   const [image, setImage] = useState(imgUrl);
   const [imageDimensions, setImageDimensions] = useState({
@@ -29,9 +28,8 @@ function UploadImage({ w, h, c = "", m = 30, onImageChange }) {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        let compressed = lz.compress(e.target.result);
-        setImage(compressed);
-        onImageChange(compressed);
+        setImage(e.target.result);
+        onImageChange(e.target.result);
       };
       reader.readAsDataURL(file);
     }
