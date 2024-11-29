@@ -20,8 +20,8 @@
     flex-direction: row;
     justify-content: flex-start;
     position: relative;
-    width: fit-content;
-    margin-top: 124px;
+    width: 360px;
+    margin-top: 0px;
     top: 0px;
     left: 95px;
 }
@@ -42,8 +42,9 @@
 }
 .grid-container {
     display: grid; 
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: 360px 455px; 
     gap: 116px; 
+    margin-top: 124px;
 }
 .grid-item {
     background-color: none; 

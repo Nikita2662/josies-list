@@ -1,0 +1,51 @@
+
+  .flexComment >div {
+
+    display: flex;
+    color: black;
+ 
+ 
+  
+    text-align: center;
+    font-size: 10px;
+    flex-direction: column;
+   
+}
+.commentheader{
+    margin-top: 90px;
+}
+
+
+.text-box-container {
+    display: flex;
+    flex-direction: column;
+   
+    
+}
+
+/* Textarea styling */
+.text-box {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    
+    color: black;
+    font-family: Figtree;
+    background-color: #ffd4d9;
+    resize: none;  /* Disable manual resizing */
+    width: 100%;  /* Take full width of the parent container */
+    height: 300%; 
+    overflow: hidden;  /* Prevent scrollbars */
+    box-sizing: border-box;  /* Ensure padding doesn't affect overall width/height */
+}
+
+.text-box-container-top {
+    
+    display: flex;
+}
+.text-box-container-bottom {
+  
+    display: flex;
+   
+}

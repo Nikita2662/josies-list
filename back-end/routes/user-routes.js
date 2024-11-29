@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router(); // instance of Express router
 const userDB = require("../models/User"); // import model!
 
@@ -26,36 +26,54 @@ router.route("/users").post(async (req, res) => {
       username: req.body._id, // username is set to email as well, for now
       picture: req.picture // picture is set to the user's Google profile picture, for now
     })
-        .then(() => {
-            res.status(201).send({
-                status: true,
-                message: "User added successfully",
-            });
-        })
-        .catch((err) => {
-            res.status(400).send({
-                status: false,
-                message: "Error adding user",
-            });
-        });
-})
+    .then(() => {
+      res.status(201).send({
+        status: true,
+        message: "User added successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(400).send({
+        status: false,
+        message: "Error adding user",
+      });
+    });
+});
 
 // upon Create New Account completion --> finish creating new user, ie. add username, name, profile picture, and bio (PROVIDE EMAIL IN ROUTE, username name pfp and bio in request body)
 router.route("/users/:id").put(async (req, res) => {
     userDB.findByIdAndUpdate(req.params.id, req.body, { new: true }) // will return the new user object to postman
 
-        .then(() => {
-            res.status(201).send({
-                status: true,
-                message: "User updated successfully",
-            });
-        })
-        .catch((err) => {
-            res.status(400).send({
-                status: false,
-                message: "Error updating user",
-            });
-        });
-})
+    .then(() => {
+      res.status(201).send({
+        status: true,
+        message: "User updated successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(400).send({
+        status: false,
+        message: "Error updating user",
+      });
+    });
+});
 
-module.exports = router; 
+//temporary delete function
+router.route("/users/delete/:id").delete(async (req, res) => {
+  userDB
+    .findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(200).send({
+        status: true,
+        message: "User deleted successfully",
+      });
+    })
+    .catch((err) => {
+      res.status(400).send({
+        status: false,
+        message: "Error deleting user",
+      });
+    });
+});
+
+module.exports = router;

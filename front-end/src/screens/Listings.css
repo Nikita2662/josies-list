@@ -1,0 +1,104 @@
+.flex-container > div {
+
+    display: flex;
+
+    color: black;
+    margin-top: 40px;
+    text-align: center;
+    border-color: black;
+    
+    height:350px;
+    flex-direction: row;
+    margin-bottom: 200px;
+    
+}
+
+.flex1 {
+
+    display: flex;
+   
+    border-color: black;
+  
+    flex-direction: row;
+    
+}
+
+.flex2 {
+
+    display: flex;
+    color: black;
+   
+    text-align: center;
+    border-color: black;
+    margin-left:10px;
+    width:450px;
+    flex-direction: row;
+    
+}
+
+.productName {
+
+    display: flex;
+    color: #000;
+    text-align: left;
+    letter-spacing: 1.5px;
+    margin-bottom:1px;
+    font-family: Figtree;
+    font-size: 46px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    flex-direction: row;
+    
+}
+.productDescription {
+
+    display: flex;
+    color: black;
+    font-family: Figtree;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%; /* 27.2px */
+    width: 100%;
+    text-align: left;
+    word-wrap: break-word; /* Allow long words to wrap inside the container */
+    overflow-wrap: break-word; /* Alternative property to ensure wrapping of long text */
+    flex-direction: row;
+    
+}
+.productPrice {
+
+    display: flex;
+    color: black;
+    text-align: left;
+    border-color: black;
+    flex-direction: row;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.productSeller {
+
+    display: flex;
+    color: black;
+    width: 2000%;
+    text-align: left;
+    font-size: 16px;
+    border-color: black;
+    flex-direction: row;
+    
+}
+
+.bidding {
+
+    display: flex;
+    color: black;
+    width: 80%;
+    text-align: left;
+    font-size: 16px;
+    border-color: black;
+    flex-direction: row;
+    background-color: aliceblue;
+    
+}
