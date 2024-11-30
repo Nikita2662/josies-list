@@ -57,13 +57,6 @@ function Profile() {
           <div className="grid-item">
             <h1 className="small-text">{user.username}</h1>
             <h2 className="bio-text">{user.bio}</h2>
-            <div>
-              <Star className="star" fill="#FF1F58" />
-              <Star className="star" />
-              <Star className="star" />
-              <Star className="star" />
-              <Star className="star" />
-            </div>
           </div>
         </div>
         <div>

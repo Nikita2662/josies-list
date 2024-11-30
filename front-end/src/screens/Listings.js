@@ -33,6 +33,11 @@ function Listings() {
 
   fetchProduct();
 
+  if (product) {
+    product.seller_name = user.name; 
+    product.seller_email = user._id; 
+  }
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
