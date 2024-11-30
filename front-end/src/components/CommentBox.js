@@ -52,7 +52,8 @@ const CommentBox = ({
 
         if (!response.ok) {
          // throw new Error("Failed to add comment");
-         console.log("Failed to add comment");
+         alert("Failed to add comment");
+         
         }
 
         const newComment = await response.json();
@@ -89,7 +90,7 @@ const CommentBox = ({
         `http://localhost:5038/comments/all/${productId}`
       );
       if (!response.ok) {
-        setError("Product not found");
+        //setError("");
         setLoading(false); // Stop loading if there's an error
         return;
       }
@@ -99,7 +100,7 @@ const CommentBox = ({
       setLoading(false); // Stop loading when data is fetched
     } catch (error) {
       console.log(error);
-      setError(error.message);
+      //setError(error.message);
       setLoading(false); // Stop loading if there was an error
     }
   };
@@ -137,7 +138,7 @@ const CommentBox = ({
             </div>
           ))
         ) : (
-          <div>No comments yet.</div>
+          <div> We don't have any comments yet for the product. Please do add one!</div>
         )}
       </div>
     </div>
