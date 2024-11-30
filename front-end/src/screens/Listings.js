@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Comment from "../components/Comments.js";
 import BiddingBox from "../components/Bidding.js";
 import { UserContext } from "../App.js";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 function Listings() {
   const [product, setProduct] = useState(null);
@@ -14,9 +14,13 @@ function Listings() {
 
   const location = useLocation();
 
-  const productId = location.state.productId;
   const { user } = React.useContext(UserContext);
 
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
+
+  const productId = location.state.productId;
   const fetchProduct = async () => {
     if (!loading) return;
 
@@ -33,9 +37,6 @@ function Listings() {
 
   fetchProduct();
 
- 
-  
-
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -51,8 +52,10 @@ function Listings() {
                 <h2 className="productName"> {product?.itemName}</h2>
                 <p className="productSeller">
                   Posted By: &nbsp;
-                  <span style={{ color: "#42CAFD" }}> {product?.seller_name}</span>
-                 
+                  <span style={{ color: "#42CAFD" }}>
+                    {" "}
+                    {product?.seller_name}
+                  </span>
                 </p>
                 <p className="productDescription"> {product?.description}</p>
                 <p className="productPrice">
