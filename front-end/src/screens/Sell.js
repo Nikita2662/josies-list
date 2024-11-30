@@ -18,7 +18,7 @@ function Sell() {
   const navigate = useNavigate();
 
   async function createProduct() {
-    let isFormComplete = description && productName && price && image;
+    let isFormComplete = description && productName && price && image&& (tags === "dorm" || tags === "textbook" ||tags === "clothing") ;
     if (!isFormComplete) {
       alert("All fields required to create a product");
       return;
@@ -49,11 +49,19 @@ function Sell() {
     <div>
       <Header />
       <SafeArea>
-        <TextBox
-          placeholder="Product Tags*"
-          className={"product-type"}
-          onTextSubmit={(newText) => setTags(newText)}
-        />
+        <select placeholder="Product Tags*" className="product-type"
+          onChange={(event)=> 
+            setTags(event.target.value)}
+        >
+          
+          
+          <option value="none">Set a Product Tag*</option>
+          <option value="clothing">Clothing</option>
+          <option value="dorm">Dorm</option>
+          <option value="tech">Textbook</option>
+        
+          console.log(tags);
+        </select>
 
         <TextBox
           className={"product-name"}
