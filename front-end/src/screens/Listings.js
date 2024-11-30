@@ -33,10 +33,8 @@ function Listings() {
 
   fetchProduct();
 
-  if (product) {
-    product.seller_name = user.name; 
-    product.seller_email = user._id; 
-  }
+ 
+  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -52,8 +50,9 @@ function Listings() {
               <div>
                 <h2 className="productName"> {product?.itemName}</h2>
                 <p className="productSeller">
-                  Posted By: {product?.seller_name}
-                  <span style={{ color: "#42CAFD" }}> {product?.seller}</span>
+                  Posted By: &nbsp;
+                  <span style={{ color: "#42CAFD" }}> {product?.seller_name}</span>
+                 
                 </p>
                 <p className="productDescription"> {product?.description}</p>
                 <p className="productPrice">
