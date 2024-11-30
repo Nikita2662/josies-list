@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CommentBox.css";
+import { UserContext } from "../App.js";
 
 const CommentBox = ({
   productId,
@@ -16,6 +17,7 @@ const CommentBox = ({
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true); // Set loading to true initially
+  const { user } = React.useContext(UserContext);
 
   // Handle Enter key press
 
@@ -49,6 +51,7 @@ const CommentBox = ({
           productID: post.productID,
         });
         const response = await fetch(url, { method: "POST", headers, body });
+        console.log(body);
 
         if (!response.ok) {
          // throw new Error("Failed to add comment");
@@ -65,6 +68,7 @@ const CommentBox = ({
     }
   }
   const handleKeyDown = async (e) => {
+    setAuthorName(user.username);
     if (e.key === "Enter") {
       e.preventDefault();
       createComment({
