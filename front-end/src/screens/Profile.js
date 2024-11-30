@@ -1,16 +1,20 @@
 import React from "react";
 import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
-import Star from "../components/Star";
 import Flag from "../components/Flag";
 import ListedItem from "../components/ListedItem";
 import { UserContext } from "../App.js";
 import "./Profile.css";
+import { Navigate } from "react-router-dom";
 
 function Profile() {
   const { user } = React.useContext(UserContext);
   const [products, setProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
 
   function displaySearchResults(data) {
     if (typeof data === "object" && data.message) {

@@ -5,7 +5,7 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../App";
 import TextBox from "../components/SubmissionBox";
 import UploadImage from "../components/Uploadimage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Sell() {
   const [tags, setTags] = useState(null);
@@ -17,8 +17,17 @@ function Sell() {
   let { user } = useContext(UserContext);
   const navigate = useNavigate();
 
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
+
   async function createProduct() {
-    let isFormComplete = description && productName && price && image&& (tags === "dorm" || tags === "textbook" ||tags === "clothing") ;
+    let isFormComplete =
+      description &&
+      productName &&
+      price &&
+      image &&
+      (tags === "dorm" || tags === "textbook" || tags === "clothing");
     if (!isFormComplete) {
       alert("All fields required to create a product");
       return;
@@ -49,17 +58,15 @@ function Sell() {
     <div>
       <Header />
       <SafeArea>
-        <select placeholder="Product Tags*" className="product-type"
-          onChange={(event)=> 
-            setTags(event.target.value)}
+        <select
+          placeholder="Product Tags*"
+          className="product-type"
+          onChange={(event) => setTags(event.target.value)}
         >
-          
-          
           <option value="none">Set a Product Tag*</option>
           <option value="clothing">Clothing</option>
           <option value="dorm">Dorm</option>
           <option value="tech">Textbook</option>
-        
           console.log(tags);
         </select>
 
