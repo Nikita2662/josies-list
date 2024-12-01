@@ -18,7 +18,8 @@ function Sell() {
   const navigate = useNavigate();
 
   async function createProduct() {
-    let isFormComplete = description && productName && price && image&& (tags === "dorm" || tags === "textbook" ||tags === "clothing") ;
+    let isFormComplete = description && productName && Number(price) >= 0  && image&& (tags === "dorm" || tags === "textbook" ||tags === "clothing") ;
+    
     if (!isFormComplete) {
       alert("All fields required to create a product");
       return;
@@ -29,7 +30,7 @@ function Sell() {
     const body = JSON.stringify({
       itemName: productName,
       description: description,
-      price: price,
+      price: Number(price),
       image: image,
       tags: tags.split(" "),
       seller_name: user.username,
