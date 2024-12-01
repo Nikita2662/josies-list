@@ -22,8 +22,14 @@ function Sell() {
   }
 
   async function createProduct() {
-    let isFormComplete = description && productName && Number(price) >= 0  && image&& (tags === "dorm" || tags === "textbook" ||tags === "clothing") ;
-    
+
+    let isFormComplete =
+      description &&
+      productName &&
+      Number(price) >= 0  &&
+      image &&
+      (tags === "dorm" || tags === "textbook" || tags === "clothing");
+
     if (!isFormComplete) {
       alert("All fields required to create a product");
       return;
