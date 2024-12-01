@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Header from "../components/Header.js";
 import SafeArea from "../components/SafeArea.js";
 import ListedItem from "../components/ListedItem.js";
+import { Navigate } from "react-router-dom";
 
 import SearchIcon from "../components/icons/SearchIcon.js";
+import { UserContext } from "../App.js";
 
 import "./Search.css";
 
@@ -28,6 +30,12 @@ function Search() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [tag, setTag] = useState("");
+
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
 
   async function getSearchResults(searchQuery, tag) {
     let result = await fetch(
