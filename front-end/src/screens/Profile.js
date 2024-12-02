@@ -67,14 +67,7 @@ function Profile() {
           <Flag text="Listed Items" svgclass="flag" textclass="flag-text" />
         </div>
         <div className="product-container">
-          <div className="product-item">{displaySearchResults(products)}</div>
-          {/*<div className="product-item">
-            <Button onClick={handleClick} className="listing-button">
-              +
-            </Button>
-            <h2 className="listing-text">Item Name</h2>
-            <h2 className="price-text">$##</h2>
-          </div>*/}
+          {displaySearchResults(products)}
         </div>
       </SafeArea>
     </div>
