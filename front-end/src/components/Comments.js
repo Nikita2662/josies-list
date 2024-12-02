@@ -21,7 +21,7 @@ const Comment = ({ productID, userID }) => {
           userId={userID}
           
           placeholder="Type your comment here..."
-          className="text-box"
+          className={"text-box"}
         />
       </div>
     </div>

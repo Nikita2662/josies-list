@@ -136,7 +136,7 @@ const CommentBox = ({
       <div>
         {comments.length > 0 ? (
           comments.map((comment, index) => (
-            <div key={index} className={className}>
+            <div key={index} className={className} >
               <strong>{comment.user}:</strong> <br />
               {comment.content}
             </div>
