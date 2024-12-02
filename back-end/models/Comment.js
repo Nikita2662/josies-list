@@ -7,6 +7,7 @@ const commentSchema = new Schema(
         user: { type: String, required: true },  //use user email here (id field)
         content: { type: String, required: true },
         productID: { type: String, require: true}, 
+        createdAt: {type: Date, default: Date.now}
     }, 
     { timestamps : true }
 );
