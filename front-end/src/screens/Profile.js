@@ -5,12 +5,14 @@ import Flag from "../components/Flag";
 import ListedItem from "../components/ListedItem";
 import { UserContext } from "../App.js";
 import "./Profile.css";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import Button from "../components/Button"
 
 function Profile() {
   const { user } = React.useContext(UserContext);
   const [products, setProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const navigate = useNavigate();
 
   if (!user) {
     return <Navigate to="/sign-in" />;
@@ -46,6 +48,15 @@ function Profile() {
 
   getUserProducts();
 
+  
+  function goToProduct(user, navigate) {
+    if (user == null) {
+      navigate("/sign-in");
+    } else {
+      navigate("/sell");
+    }
+  }
+
   return (
     <div>
       <Header />
@@ -68,13 +79,13 @@ function Profile() {
         </div>
         <div className="product-container">
           {displaySearchResults(products)}
-          {/*<div className="product-item">
-            <Button onClick={handleClick} className="listing-button">
+          <div className="product-item">
+            <Button onClick={() => goToProduct(user, navigate)} className="listing-button">
               +
             </Button>
-            <h2 className="listing-text">Item Name</h2>
-            <h2 className="price-text">$##</h2>
-          </div>*/}
+            <h2 className="listing-text">Add Listing</h2>
+            <h2 className="price-text">$$</h2>
+          </div>
         </div>
       </SafeArea>
     </div>
