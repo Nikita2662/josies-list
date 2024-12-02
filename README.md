@@ -43,21 +43,21 @@ cd josies-list
 ```
 cd back-end
 npm install
-
 ```
 
 3. Navigate to the frontend directory and install dependencies:
 
 ```
-cd ../front-end 
+cd front-end 
 npm install
-
 ```
 
 4. Set up environment variables:
 
 - Create a .env file in the root directory and add the following:
-MONGO_URI=your-mongo-db-uri
+```
+DATABASE_URI= <your-mongo-db-uri>
+```
 
 5. Start the backend and frontend servers:
 
@@ -66,14 +66,12 @@ Backend:
 ```
 cd back-end
 npm start
-
 ```
 Frontend:
 
 ```
 cd front-end
 npm start
-
 ```
 
 6. Visit the app in your browser at http://localhost:3000.
@@ -82,16 +80,17 @@ npm start
 
 How to Use:
 - Sign up or log in using a valid UCLA email address.
-- Create product listings by adding an image, description, and price.
-- Browse available items using the search feature with tags, descriptions, or item names.
+- Personalize your profile by adding a profile picture, and a biography.
+- Create product listings by adding an image, description, and price for a product you wish to sell.
+- Browse available items using the search bar.
 - Comment on listings to engage with sellers.
-- Make offers on items you want to buy and wait for seller responses.
+- Make offers/bids on items you want to buy and wait for seller responses.
 
 Screenshots:
 
-- Homepage:
+<!-- - Homepage:
 - Product Listings:
-- Search Results:
+- Search Results: -->
 
 ## Contribution Workflow
 
