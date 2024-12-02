@@ -78,7 +78,6 @@ function Profile() {
           <Flag text="Listed Items" svgclass="flag" textclass="flag-text" />
         </div>
         <div className="product-container">
-          {displaySearchResults(products)}
           <div className="product-item">
             <Button onClick={() => goToProduct(user, navigate)} className="listing-button">
               +
@@ -86,6 +85,7 @@ function Profile() {
             <h2 className="listing-text">Add Listing</h2>
             <h2 className="price-text">$$</h2>
           </div>
+          {displaySearchResults(products)}
         </div>
       </SafeArea>
     </div>
