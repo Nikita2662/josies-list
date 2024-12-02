@@ -87,12 +87,12 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
           highest_bid: bid,
           highest_bidder: bidder
         }}
-      )
+      );
 
       res.status(201).send({
         status: true,
         message: "Bid sent successfully."
-      })
+      });
     } catch (error) {
       res.status(400).send({
         status: false,

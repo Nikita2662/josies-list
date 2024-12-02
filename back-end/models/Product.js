@@ -13,13 +13,7 @@ const productSchema = new Schema({
   seller_name: String,
   seller_email: String,
   highest_bid: { type: Number, default: -1 },
-  highest_bidder: {
-    type: String,
-    default: "",
-    required: function () {
-      return this.highest_bid ? true : false; // require bidder only if highest bid exists
-    },
-  },
+  highest_bidder: { type: String, default: "" },
 });
 
 const Product = mongoose.model("Product", productSchema);
