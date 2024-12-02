@@ -80,7 +80,7 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
     try { // if bid is higher than current highest_bid, update
       let result = await Product.updateOne({
         _id: req.params.id,
-        highest_bid: { $lt: bid}
+        highest_bid: { $lt: bid }
       },
       { 
         $set: {
