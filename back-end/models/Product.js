@@ -12,12 +12,12 @@ const productSchema = new Schema({
   image: String,
   seller_name: String,
   seller_email: String,
-  highestBid: Number,
-  highestBidder: {
+  highest_bid: { type: Number, default: -1 },
+  highest_bidder: {
     type: String,
     default: "",
     required: function () {
-      return this.highestBid ? true : false; // require bidder only if highest bid exists
+      return this.highest_bid ? true : false; // require bidder only if highest bid exists
     },
   },
 });

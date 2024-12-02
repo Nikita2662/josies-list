@@ -58,15 +58,56 @@ productRoutes.route("/products/:id").get(async (req, res) => {
   } else {
     res.status(400).send({
       status: false,
-      message: "Error: Product does not exit",
+      message: "Error: Product does not exist",
     });
   }
 });
 
-// 3.5 - Retrieve highest bid for a given product (SELLER)
-productRoutes.route("/products/:id/sell").get(async (req, res) => {
+// 3.25 - Send in new bid (BUYER)
+// Front-end should send bid and bidder_email upon button click
+productRoutes.route("/products/:id/bid").put(async (req, res) => {
+  let bid = req.body.bid;
+  let bidder = req.body.bidder_email;
+
+  if (bid <= 0) { // bid is invalid: should be positive
+    res.status(400).send({
+      status: false,
+      message: "Bid must be a positive value.",
+    });
+  }
   
-})
+  else { // bid is valid
+    try { // if bid is higher than current highest_bid, update
+      let result = await Product.updateOne({
+        _id: req.params.id,
+        highest_bid: { $lt: bid}
+      },
+      { 
+        $set: {
+          highest_bid: bid,
+          highest_bidder: bidder
+        }}
+      )
+
+      res.status(201).send({
+        status: true,
+        message: "Bid sent successfully."
+      })
+    } catch (error) {
+      res.status(400).send({
+        status: false,
+        message: error, 
+      });
+    }
+  }
+});
+
+// 3.5 - Retrieve highest bid for a given product (SELLER)
+// (includes bidder email)
+// if -1, means no bids yet
+productRoutes.route("/products/:id/viewbids").get(async (req, res) => {
+  
+});
 
 // 4 - Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
