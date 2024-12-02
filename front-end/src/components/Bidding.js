@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import "./CommentBox.css";
+import "./Comments.css";
 
-const BiddingBox = ({ label, placeholder, className="text-box" , isBidding, userEmail}) => {
+const BiddingBox = ({ label, placeholder, className="text-box-comment" , isBidding, userEmail}) => {
 
     const [authorName, setAuthorName] = useState('Submit Your Offer?');
     const [commentText, setCommentText] = useState('');
@@ -16,15 +16,25 @@ const BiddingBox = ({ label, placeholder, className="text-box" , isBidding, user
             e.preventDefault(); 
             setIsPressed(true);
             if (text.trim() !== '') {  // Make sure the comment isn't empty
+
                 const existingComment = comments.findIndex(comment=>comment.text);
 
                 if (existingComment !== -1) {
                     const updatedComments = [...comments];
+                    if (Number(text)>=0){
                     updatedComments[existingComment].text = text;
+                    } else{
+                      alert("Please add a valid number");
+                    }
                     
                     setComments(updatedComments);
+                  
                 } else {
+                  if (Number(text)>=0){
                     setComments([...comments, { authorName, text }]);
+                  }else{
+                    alert("Please add a valid number");
+                  }
                 }
 
               }
@@ -33,6 +43,7 @@ const BiddingBox = ({ label, placeholder, className="text-box" , isBidding, user
     }
 
     const handleChange = (event) => {
+
         setText(event.target.value); 
       const textarea=event.target;
       textarea.style.height = 'auto';
@@ -45,14 +56,14 @@ const BiddingBox = ({ label, placeholder, className="text-box" , isBidding, user
 
     return (
       <div >
-    <div className={className}>
+    <div className="text-box-comment">
       {label && <label>{label}</label>} {/* Render label if provided */}
-      <textarea
+      <textarea 
         value={text}
         onChange={handleChange}
         onKeyDown={handleKeyDown}  
         placeholder={placeholder}
-        className={className}
+        style={{ color: "#ff1f58" }}
       />
     </div>
 
