@@ -12,6 +12,7 @@ commentRoutes.route("/comments/all/:id").get(async (req, res) => {
     }   else {
         // If no comments are found, send an empty array (for products that dont have a commment)
         res.json([]);  
+        
     }
     
 });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CommentBox.css";
+import { UserContext } from "../App.js";
 
 const CommentBox = ({
   productId,
@@ -16,12 +17,13 @@ const CommentBox = ({
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true); // Set loading to true initially
+  const { user } = React.useContext(UserContext);
 
   // Handle Enter key press
 
   async function fetchAuthor(userId) {
     try {
-      const response = await fetch(`http://localhost:5000/comments/{userId}`);
+      const response = await fetch(`http://localhost:5038/comments/{userId}`);
       if (!response.ok) {
         setError("user not found");
         setLoading(false); // Stop loading if there's an error
@@ -41,7 +43,7 @@ const CommentBox = ({
   async function createComment(post) {
     if (text.trim()) {
       try {
-        const url = "http://localhost:5000/comments";
+        const url = "http://localhost:5038/comments";
         const headers = { "Content-Type": "application/json" };
         const body = JSON.stringify({
           user: post.user,
@@ -49,10 +51,12 @@ const CommentBox = ({
           productID: post.productID,
         });
         const response = await fetch(url, { method: "POST", headers, body });
+        console.log(body);
 
         if (!response.ok) {
          // throw new Error("Failed to add comment");
-         console.log("Failed to add comment");
+         alert("Failed to add comment");
+         
         }
 
         const newComment = await response.json();
@@ -64,6 +68,7 @@ const CommentBox = ({
     }
   }
   const handleKeyDown = async (e) => {
+    setAuthorName(user.username);
     if (e.key === "Enter") {
       e.preventDefault();
       createComment({
@@ -86,10 +91,10 @@ const CommentBox = ({
   const fetchProduct = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/comments/all/${productId}`
+        `http://localhost:5038/comments/all/${productId}`
       );
       if (!response.ok) {
-        setError("Product not found");
+        //setError("");
         setLoading(false); // Stop loading if there's an error
         return;
       }
@@ -99,7 +104,7 @@ const CommentBox = ({
       setLoading(false); // Stop loading when data is fetched
     } catch (error) {
       console.log(error);
-      setError(error.message);
+      //setError(error.message);
       setLoading(false); // Stop loading if there was an error
     }
   };
@@ -131,13 +136,13 @@ const CommentBox = ({
       <div>
         {comments.length > 0 ? (
           comments.map((comment, index) => (
-            <div key={index} className={className}>
+            <div key={index} className={className} >
               <strong>{comment.user}:</strong> <br />
               {comment.content}
             </div>
           ))
         ) : (
-          <div>No comments yet.</div>
+          <div> We don't have any comments yet for the product. Please do add one!</div>
         )}
       </div>
     </div>

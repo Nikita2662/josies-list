@@ -6,12 +6,14 @@ import Button from "../components/Button.js";
 import TextBox from "../components/TextBox.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
+import UploadImage from "../components/Uploadimage.js";
 
 function CreateAccount() {
   const navigate = useNavigate();
 
   const [bio, setBio] = useState("");
   const [name, setName] = useState("");
+  const [image, setImage] = useState("");
 
   const location = useLocation();
   const email = location.state.email;
@@ -21,9 +23,12 @@ function CreateAccount() {
   const createUser = async () => {
     const body1 = {
       _id: email,
+      username: name,
+      bio: bio,
+      picture: image,
     };
 
-    const response1 = await fetch("http://localhost:5000/users", {
+    const response1 = await fetch("http://localhost:5038/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,43 +36,19 @@ function CreateAccount() {
       body: JSON.stringify(body1),
     });
 
-    if (response1.status === 400) {
-      throw new Error(
-        "User already exists in database, I don't know how we got here"
-      );
+    let result = await response1.json();
+
+    if (!response1.ok) {
+      alert(result.message);
+      return;
     }
 
-    const body2 = {
-      bio: bio,
-      name: name,
-    };
-
-    const response2 = await fetch(`http://localhost:5000/users/${email}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body2),
-    });
-
-    if (response2.status === 400) {
-      throw new Error(
-        "Somehow the user was not created but we got here anyways"
-      );
-    }
-
-    let user = {
-      _id: email,
-      bio: bio,
-      name: name,
-    };
-
-    setUser(user);
+    setUser(body1);
     navigate("/profile");
   };
 
-  const handleClick = () => {
-    alert("Button clicked!");
+  const handleClick = (image) => {
+    setImage(image);
   };
 
   return (
@@ -82,9 +63,8 @@ function CreateAccount() {
             <div className="small-text">
               <h1>Profile Picture</h1>
             </div>
-            <Button onClick={handleClick} className="photo-button">
-              +
-            </Button>
+
+            <UploadImage onImageChange={handleClick} />
           </div>
           <div className="grid-item">
             <TextBox

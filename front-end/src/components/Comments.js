@@ -19,9 +19,9 @@ const Comment = ({ productID, userID }) => {
         <CommentBox
           productId={productID}
           userId={userID}
-          label="Author Name"
+          
           placeholder="Type your comment here..."
-          className="text-box"
+          className={"text-box"}
         />
       </div>
     </div>
