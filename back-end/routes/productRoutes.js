@@ -102,11 +102,18 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
   }
 });
 
-// 3.5 - Retrieve highest bid for a given product (SELLER)
-// (includes bidder email)
-// if -1, means no bids yet
-productRoutes.route("/products/:id/viewbids").get(async (req, res) => {
-  
+// 3.5 - Retrieve highest bid and bidder for a given product (SELLER)
+// if highest bid is returned as -1, that means there are no bids yet
+productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
+  let bid = await Product.findOne({ _id: req.params.id }, { highest_bid: 1, highest_bidder: 1, _id: 0 });
+
+  if (bid != null) res.send(bid).status(200);
+  else
+    res.status(400).send({
+      // ERROR HANDLING
+      status: false,
+      message: "Error retrieving highest bid",
+    });
 });
 
 // 4 - Retrieve all products under a specific user
