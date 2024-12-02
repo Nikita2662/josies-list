@@ -138,7 +138,7 @@ const CommentBox = ({
           comments.map((comment, index) => (
             <div key={index} className={className} >
               
-              <strong>{comment.user}:{new Date(comment.createdAt).toLocaleString()}</strong> <br />
+              <strong>{comment.user}: {" "}  <span style={{ color: "#ff1f58" }}> {new Date(comment.createdAt).toLocaleString()}</span> </strong> <br />
               {comment.content}
             </div>
           ))
