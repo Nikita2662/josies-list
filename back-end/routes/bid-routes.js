@@ -20,6 +20,9 @@ router.route("./products/:id").post(async (req, res) => {
 
 
 
+
+
+
 // Google auth --> create new user and set _id and picture (as well as username temporarily) --> TO FRONT-END: just provide id (email) and Google profile picture
 router.route("/users").post(async (req, res) => {
     userDB.create({

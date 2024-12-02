@@ -24,7 +24,7 @@
 }
 
 /* Textarea styling */
-.text-box {
+.text-box-comment {
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -36,6 +36,7 @@
     width: 100%;  /* Take full width of the parent container */
     overflow-y: auto;  
     box-sizing: border-box; 
+    margin-bottom: 10px;
 }
 
 .text-box-container-top {

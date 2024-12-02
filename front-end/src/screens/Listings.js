@@ -37,6 +37,9 @@ function Listings() {
 
   fetchProduct();
 
+  //Bidding function goes here where Listings calls child class Bidding.js, Bidding.js sends text on an event,
+  // Bidding calls bidding backend routes to check if acceptable number, and if yes, then we send in a new bid and display 
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -65,6 +68,7 @@ function Listings() {
                   placeholder="Enter Your Bidding Price"
                   className="bidding"
                 />
+                <p className="productSeller"> The current bid is:  </p>
               </div>
             </div>
           </div>
