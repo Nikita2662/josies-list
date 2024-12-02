@@ -69,7 +69,7 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
   let bid = req.body.bid;
   let bidder = req.body.bidder_email;
 
-  if (bid <= 0) { // bid is invalid: should be positive
+  if (bid < 0) { // bid is invalid: should be positive
     res.status(400).send({
       status: false,
       message: "Bid must be a positive value.",
@@ -112,7 +112,7 @@ productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
     res.status(400).send({
       // ERROR HANDLING
       status: false,
-      message: "Error retrieving highest bid",
+      message: "Error retrieving highest bid, possibly this product may have been created before bidding feature was set",
     });
 });
 
@@ -148,6 +148,7 @@ productRoutes.route("/products").post(async (req, res) => {
     image: req.body.image,
     seller_name: req.body.seller_name,
     seller_email: req.body.seller_email,
+   
   };
   let data = await Product.create(productObject);
   res.json(data);

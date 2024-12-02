@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
 import "./Listings.css";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Comment from "../components/Comments.js";
 import BiddingBox from "../components/Bidding.js";
 import { UserContext } from "../App.js";
@@ -11,6 +11,7 @@ function Listings() {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [bid, setBid] = useState(null);
 
   const location = useLocation();
 
@@ -21,6 +22,7 @@ function Listings() {
   }
 
   const productId = location.state.productId;
+
   const fetchProduct = async () => {
     if (!loading) return;
 
@@ -35,8 +37,43 @@ function Listings() {
     setLoading(false);
   };
 
-  fetchProduct();
 
+  async function fetchBid(){
+    try {
+      const response = await fetch(
+        `http://localhost:5038/products/${productId}/viewbid`
+      );
+    
+
+
+      const data = await response.json();
+     
+
+      if (!response.ok) {
+        setBid(null);
+        //setError("");
+        setLoading(false); // Stop loading if there's an error
+        //alert(data.message);
+      } else{
+        setBid(data); 
+        setLoading(false);
+      }
+
+      
+    } catch (error) {
+    
+      setBid(null);
+      //alert(error.message ,"could be that this product was created before bidding feature was implemented");
+      setLoading(false); // Stop loading if there was an error
+    }
+  };
+
+
+      fetchProduct();
+      fetchBid();
+   
+
+ 
   //Bidding function goes here where Listings calls child class Bidding.js, Bidding.js sends text on an event,
   // Bidding calls bidding backend routes to check if acceptable number, and if yes, then we send in a new bid and display 
 
@@ -67,8 +104,13 @@ function Listings() {
                 <BiddingBox
                   placeholder="Enter Your Bidding Price"
                   className="bidding"
+                  isBidding={productId}
+                  userEmail={product?.seller_email}
                 />
-                <p className="productSeller"> The current bid is:  </p>
+                <p className="productSeller">{ bid!==null ?
+                 `The current bid is ${bid.highest_bid}, made by ${bid.highest_bidder}` : 
+                 "No bidding for this product, this product may have been created before the bidding feature was implemented" }
+                </p>
               </div>
             </div>
           </div>
