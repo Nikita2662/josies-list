@@ -66,7 +66,7 @@ function Search() {
           <option value="none">None</option>
           <option value="clothing">Clothing</option>
           <option value="dorm">Dorm</option>
-          <option value="tech">Tech</option>
+          <option value="textbook">Textbook</option>
         </select>
         <div className="search-results">
           {displaySearchResults(searchResults)}

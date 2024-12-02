@@ -68,7 +68,7 @@ function Sell() {
           <option value="none">Set a Product Tag*</option>
           <option value="clothing">Clothing</option>
           <option value="dorm">Dorm</option>
-          <option value="tech">Textbook</option>
+          <option value="textbook">Textbook</option>
           console.log(tags);
         </select>
 

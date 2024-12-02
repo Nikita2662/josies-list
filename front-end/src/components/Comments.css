@@ -34,7 +34,6 @@
     background-color: #ffd4d9;
     resize: none;  /* Disable manual resizing */
     width: 100%;  /* Take full width of the parent container */
-   
     overflow-y: auto;  
     box-sizing: border-box; 
 }
