@@ -21,7 +21,7 @@ function ProfileView() {
   
     const fetchUser = async () => {
     
-      try {
+      //try {
         const response = await fetch(`http://localhost:5038/users/${userId}`);
         if (!response.ok) {
           setError("User not found");
@@ -36,11 +36,11 @@ function ProfileView() {
           picture: data.picture,
         };
         setLocalUser(local);
-      } catch (err) {
-          setError("Error fetching user data");
-      } finally {
-        setLoading(false);
-      }
+      //} catch (err) {
+      //    setError("Error fetching user data");
+      //} finally {
+      //  setLoading(false);
+      //}
       
     };
       
@@ -52,7 +52,7 @@ function ProfileView() {
   useEffect(() => {
 
   async function getUserProducts() {
-    if (!localUser) return;
+    if (loading) return;
 
     let products = await fetch(
       `http://localhost:5038/products/user/${userId}`
@@ -66,7 +66,7 @@ function ProfileView() {
 
   }, [userId]);
 
-  if (ploading) return <div>Loading...</div>;
+  if (loading || ploading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   function displaySearchResults(data) {
