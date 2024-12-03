@@ -6,6 +6,7 @@ import Comment from "../components/Comments.js";
 import BiddingBox from "../components/Bidding.js";
 import { UserContext } from "../App.js";
 import { useLocation, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Listings() {
   const [product, setProduct] = useState(null);
@@ -92,10 +93,12 @@ function Listings() {
                 <h2 className="productName"> {product?.itemName}</h2>
                 <p className="productSeller">
                   Posted By: &nbsp;
-                  <span style={{ color: "#42CAFD" }}>
-                    {" "}
-                    {product?.seller_name}
-                  </span>
+                  <Link to={`/profileview/`} state={{ userId: product?.seller_email }}>
+                    <span style={{ color: "#42CAFD" }}>
+                      {" "}
+                      {product?.seller_name}
+                    </span>
+                  </Link>
                 </p>
                 <p className="productDescription"> {product?.description}</p>
                 <p className="productPrice">

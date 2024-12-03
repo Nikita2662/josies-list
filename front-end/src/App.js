@@ -6,6 +6,7 @@ import Listing from "./screens/Listings";
 import CreateAccount from "./screens/CreateAccount";
 import Search from "./screens/Search";
 import Sell from "./screens/Sell";
+import ProfileView from "./screens/ProfileView";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
 
@@ -42,6 +43,10 @@ function App() {
     {
       path: "/sell",
       element: <Sell />,
+    },
+    {
+      path: "/profileview",
+      element: <ProfileView />,
     },
     {
       path: "*",
