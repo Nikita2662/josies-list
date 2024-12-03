@@ -5,34 +5,69 @@ import Flag from "../components/Flag";
 import ListedItem from "../components/ListedItem";
 import "./ProfileView.css";
 import { Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function ProfileView() {
   const [products, setProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [user, setUser] = useState(null);
+  const [ploading, setPLoading] = React.useState(true);
+  const [localUser, setLocalUser] = useState(null);
+  const [error, setError] = useState(null);
   const location = useLocation();
 
-  const userId = location.state.userId;
+  const userId = location.state?.userId;
 
-  const fetchUser = async () => {
-    if (!loading) return;
-
-    const response = await fetch("http://localhost:5038/users/" + userId);
-    if (!response.ok) {
-      setError("User not found");
-      return;
-    }
-    const data = await response.json();
-
-    setUser(data);
+  useEffect(() => {
+  
+    const fetchUser = async () => {
+    
+      try {
+        const response = await fetch(`http://localhost:5038/users/${userId}`);
+        if (!response.ok) {
+          setError("User not found");
+          return;
+        }
+        const data = await response.json();
+        console.log(data);
+        let local = {
+          _id: data._id,
+          bio: data.bio,
+          username: data.username,
+          picture: data.picture,
+        };
+        setLocalUser(local);
+      } catch (err) {
+          setError("Error fetching user data");
+      } finally {
+        setLoading(false);
+      }
+      
+    };
+      
+    fetchUser();
     setLoading(false);
-  };
 
-  fetchUser();
+  }, [userId]); 
 
-  if (!user) {
-    return <Navigate to="/Sell" />;
+  useEffect(() => {
+
+  async function getUserProducts() {
+    if (!localUser) return;
+
+    let products = await fetch(
+      `http://localhost:5038/products/user/${userId}`
+    );
+    let data = await products.json();
+    setPLoading(false);
+    setProducts(data);
   }
+
+  getUserProducts();
+
+  }, [userId]);
+
+  if (ploading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   function displaySearchResults(data) {
     if (typeof data === "object" && data.message) {
@@ -51,19 +86,6 @@ function ProfileView() {
     ));
   }
 
-  async function getUserProducts() {
-    if (!loading) return;
-
-    let products = await fetch(
-      `http://localhost:5038/products/user/${user._id}`
-    );
-    let data = await products.json();
-    setLoading(false);
-    setProducts(data);
-  }
-
-  getUserProducts();
-
   return (
     <div>
       <Header />
@@ -72,13 +94,13 @@ function ProfileView() {
           <div className="grid-item">
             <img
               className="profile-photo"
-              src={user.picture}
+              src={localUser.picture}
               alt="User profile"
             />
           </div>
           <div className="grid-item">
-            <h1 className="small-text">{user.username}</h1>
-            <h2 className="bio-text">{user.bio}</h2>
+            <h1 className="small-text">{localUser.username}</h1>
+            <h2 className="bio-text">{localUser.bio}</h2>
           </div>
         </div>
         <div>
