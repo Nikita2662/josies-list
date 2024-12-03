@@ -67,8 +67,9 @@ function Listings() {
       if ( bid===null ||bid.highest_bid===-1){
         setPrompt("No bidding created yet")
       }else{
-        setPrompt(`The current bid is ${bid.highest_bid}`);
-        if ( bid!==null && bid.highest_bidder===product?.seller_email){
+        setPrompt(`The current bid is $ ${bid.highest_bid}`);
+
+        if ( bid!==null && user._id!==product?.seller_email){
           setPrompt(prevPrompt => prevPrompt + `, made by ${bid.highest_bidder}`);
         }
       }
