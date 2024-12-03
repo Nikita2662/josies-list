@@ -69,7 +69,7 @@ function Listings() {
       }else{
         setPrompt(`The current bid is $ ${bid.highest_bid}`);
 
-        if ( bid!==null && user._id!==product?.seller_email){
+        if ( bid!==null && user._id===product?.seller_email){
           setPrompt(prevPrompt => prevPrompt + `, made by ${bid.highest_bidder}`);
         }
       }
