@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 function ProfileView() {
   const [products, setProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [ploading, setPLoading] = React.useState(true);
   const [localUser, setLocalUser] = useState(null);
   const [error, setError] = useState(null);
   const location = useLocation();
