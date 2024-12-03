@@ -73,17 +73,18 @@ const BiddingBox = ({ label, placeholder, className="text-box-comment" , isBiddi
             bidder_email: user._id
           });
           
-          console.log("user email", userEmail);
+          console.log("user email", body);
 
           const response = await fetch(url, { method: "PUT", headers, body });
          
           const result = await response.json();
-       
-
+          
+          
           if (!response.ok) {
           alert(result.message);
         
           }
+          alert("Bid sent");
   
         }
         else{
