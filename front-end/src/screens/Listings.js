@@ -13,6 +13,7 @@ function Listings() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [bid, setBid] = useState(null);
+  const [prompt, setPrompt]=useState("");
 
   const location = useLocation();
 
@@ -23,6 +24,9 @@ function Listings() {
   }
 
   const productId = location.state.productId;
+
+
+
 
   const fetchProduct = async () => {
     if (!loading) return;
@@ -59,8 +63,16 @@ function Listings() {
         setBid(data); 
         setLoading(false);
       }
-
       
+      if ( bid===null ||bid.highest_bid===-1){
+        setPrompt("No bidding created yet")
+      }else{
+        setPrompt(`The current bid is ${bid.highest_bid}`);
+        if ( bid!==null && bid.highest_bidder===product?.seller_email){
+          setPrompt(prevPrompt => prevPrompt + `, made by ${bid.highest_bidder}`);
+        }
+      }
+
     } catch (error) {
     
       setBid(null);
@@ -70,8 +82,12 @@ function Listings() {
   };
 
 
-      fetchProduct();
-      fetchBid();
+// Only re-run if productId changes
+
+
+fetchProduct();
+fetchBid();
+
    
 
  
@@ -111,7 +127,7 @@ function Listings() {
                   userEmail={product?.seller_email}
                 />
                 <p className="productSeller">{ bid!==null ?
-                 `The current bid is ${bid.highest_bid}, made by ${bid.highest_bidder}` : 
+                 prompt : 
                  "No bidding for this product, this product may have been created before the bidding feature was implemented" }
                 </p>
               </div>

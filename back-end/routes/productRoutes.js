@@ -5,7 +5,7 @@ const { checkDuplicateProduct } = require("../controllers/productController");
 
 const productRoutes = express.Router();
 
-// 1- Search for products
+// Search for products
 productRoutes.route("/search").get(async (req, res) => {
   const { SearchQuery, tags } = req.query;
   try {
@@ -35,7 +35,7 @@ productRoutes.route("/search").get(async (req, res) => {
   }
 });
 
-// 2 - Retrieve all
+// Retrieve all products
 productRoutes.route("/products").get(async (req, res) => {
   let data = await Product.find({});
 
@@ -49,7 +49,7 @@ productRoutes.route("/products").get(async (req, res) => {
   }
 });
 
-// 3 - Retrieve one
+// Retrieve one product by id
 productRoutes.route("/products/:id").get(async (req, res) => {
   let data = await Product.findOne({ _id: new ObjectId(req.params.id) });
 
@@ -63,8 +63,8 @@ productRoutes.route("/products/:id").get(async (req, res) => {
   }
 });
 
-// 3.25 - Send in new bid (BUYER)
-// Front-end should send bid and bidder_email upon button click
+// Send in new bid (BUYER)
+// Get bid and bidder_email upon button click from front-end
 productRoutes.route("/products/:id/bid").put(async (req, res) => {
   let bid = req.body.bid;
   let bidder = req.body.bidder_email;
@@ -102,7 +102,7 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
   }
 });
 
-// 3.5 - Retrieve highest bid and bidder for a given product (SELLER)
+// Retrieve highest bid and bidder for a given product (SELLER)
 // if highest bid is returned as -1, that means there are no bids yet
 productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
   let bid = await Product.findOne({ _id: req.params.id }, { highest_bid: 1, highest_bidder: 1, _id: 0 });
@@ -116,12 +116,12 @@ productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
     });
 });
 
-// 3.75 - SELLER marks product as sold
+// SELLER marks product as sold
 productRoutes.route("/products/:id/acceptbid").put(async (req, res) => {
   Product.findByIdAndUpdate(req.params.id, {"sold": true}, { new: true });
 })
 
-// 4 - Retrieve all products under a specific user
+// Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
   let products = await Product.find({ seller_email: req.params.id });
 
@@ -135,7 +135,7 @@ productRoutes.route("/products/user/:id").get(async (req, res) => {
   }
 });
 
-// 5 - Create one + Check Duplicate
+// Create one + Check Duplicate
 productRoutes.route("/products").post(async (req, res) => {
   const isNotNewProduct = await checkDuplicateProduct(req.body);
   if (isNotNewProduct.duplicate) {
@@ -159,7 +159,7 @@ productRoutes.route("/products").post(async (req, res) => {
   res.json(data);
 });
 
-// 6 - Update One
+// Update a product
 productRoutes.route("/products/:id").put(async (req, res) => {
   let productObject = {
     $set: {
@@ -179,7 +179,7 @@ productRoutes.route("/products/:id").put(async (req, res) => {
   res.json(data);
 });
 
-// 7 - Delete One
+// Delete a product by id
 productRoutes.route("/products/:id").delete(async (req, res) => {
   let data = await Product.deleteOne({ _id: new ObjectId(req.params.id) });
   res.json(data);
