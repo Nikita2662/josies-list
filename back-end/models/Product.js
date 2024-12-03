@@ -14,6 +14,7 @@ const productSchema = new Schema({
   seller_email: String,
   highest_bid: { type: Number, default: -1 },
   highest_bidder: { type: String, default: "" },
+  sold: { type: Boolean, default: false }
 });
 
 const Product = mongoose.model("Product", productSchema);

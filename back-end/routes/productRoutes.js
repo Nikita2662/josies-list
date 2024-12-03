@@ -116,6 +116,11 @@ productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
     });
 });
 
+// 3.75 - SELLER marks product as sold
+productRoutes.route("/products/:id/acceptbid").put(async (req, res) => {
+  Product.findByIdAndUpdate(req.params.id, {"sold": true}, { new: true });
+})
+
 // 4 - Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
   let products = await Product.find({ seller_email: req.params.id });
