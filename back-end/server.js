@@ -5,13 +5,13 @@ const mongoose = require("mongoose");
 const Product = require("./models/Product.js");
 const Comment = require("./models/Comment.js");
 
-const userRoutes = require("./routes/user-routes");
+const userRoutes = require("./routes/userRoutes.js");
 const productRoutes = require("./routes/productRoutes");
 const commentRoutes = require("./routes/commentRoutes");  
 
 
 const app = express();
-const port = process.env.PORT || 5038;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
