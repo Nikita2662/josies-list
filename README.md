@@ -18,13 +18,13 @@ the item, a description of it, and its price.
 - Comment on Products:
 4. Users can comment on posts of items.
 - Bidding:
-5. Users can make bidding offers on items they wish to buy. Sellers will be 
-notified of the offers, and can accept or reject an offer.
+5. Users can make bidding offers on items they wish to buy. Sellers can see the highest bid made and the email of the buyer 
+who made that bid, buyers can see the current highest bid for an item/product. Sellers can mark an item as sold.
 
 ## Tech Stack
-Frontend: React, JavaScript, CSS, HTML
-Backend: Node.js, Express.js, mongoose
-Database: MongoDB
+- Frontend: React, JavaScript, CSS, HTML
+- Backend: Node.js, Express.js, mongoose
+- Database: MongoDB
 
 ## Steps to Set Up Locally
 1. Clone the repository:
@@ -73,6 +73,7 @@ How to Use:
 - Browse available items using the search bar.
 - Comment on listings to engage with sellers.
 - Make offers/bids on items you want to buy and wait for seller responses.
+- View highest bid on your item/product and accept offer, marking product as sold.
 
 Screenshots:
 - Landing Page:
@@ -82,7 +83,7 @@ Screenshots:
 - User Profile Page:
 <img width="1440" alt="sing-in-page" src="front-end/public/user-profile-page.png">
 - Sell Page:
-<img width="1440" alt="sing-in-page" src="front-end/public/user-profile-page.png">
+<img width="1440" alt="sing-in-page" src="front-end/public/sell-page.png">
 - Search Page:
 <img width="1440" alt="sing-in-page" src="front-end/public/search-page.png">
 - Bid Page:
