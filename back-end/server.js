@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Product = require("./models/Product.js");
 const Comment = require("./models/Comment.js");
 
-const userRoutes = require("./routes/user-routes");
+const userRoutes = require("./routes/userRoutes.js");
 const productRoutes = require("./routes/productRoutes");
 const commentRoutes = require("./routes/commentRoutes");  
 
