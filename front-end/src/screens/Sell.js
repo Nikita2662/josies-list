@@ -60,49 +60,51 @@ function Sell() {
     <div>
       <Header />
       <SafeArea>
-        <select
-          placeholder="Product Tags*"
-          className="product-type"
-          onChange={(event) => setTags(event.target.value)}
-        >
-          <option value="none">Set a Product Tag*</option>
-          <option value="clothing">Clothing</option>
-          <option value="dorm">Dorm</option>
-          <option value="textbook">Textbook</option>
-          console.log(tags);
-        </select>
-
-        <TextBox
-          className={"product-name"}
-          placeholder="Product Name*"
-          onTextSubmit={(newText) => setProductName(newText)}
-        />
-
-        <UploadImage
-          w={400}
-          h={400}
-          c={"image"}
-          m={40}
-          onImageChange={(newImage) => setImage(newImage)}
-        />
-
-        <div className="flex-container">
-          <TextBox
-            placeholder="Description*"
-            className={"description"}
-            onTextSubmit={(newText) => setDescription(newText)}
-          />
+          <select
+            placeholder="Product Tags*"
+            className="product-type"
+            onChange={(event) => setTags(event.target.value)}
+          >
+            <option value="none">Set a Product Tag*</option>
+            <option value="clothing">Clothing</option>
+            <option value="dorm">Dorm</option>
+            <option value="textbook">Textbook</option>
+            console.log(tags);
+          </select>
 
           <TextBox
-            placeholder="Add a Price For Your Product*"
-            className={"price"}
-            onTextSubmit={(newText) => setPrice(newText)}
+            className={"product-name"}
+            placeholder="Product Name*"
+            onTextSubmit={(newText) => setProductName(newText)}
           />
-        </div>
 
-        <button className="submitButton" onClick={() => createProduct()}>
-          Submit!
-        </button>
+          <UploadImage
+            w={400}
+            h={400}
+            c={"image"}
+            m={40}
+            onImageChange={(newImage) => setImage(newImage)}
+          />
+
+          <div className="flex-container">
+            <TextBox
+              placeholder="Description*"
+              className={"description"}
+              onTextSubmit={(newText) => setDescription(newText)}
+            />
+
+            <TextBox
+              placeholder="Add a Price For Your Product*"
+              className={"price"}
+              onTextSubmit={(newText) => setPrice(newText)}
+            />
+          </div>
+            
+          <div class="button-container">
+            <button className="submitButton" onClick={() => createProduct()}>
+              Submit!
+            </button>
+          </div>
       </SafeArea>
     </div>
   );
