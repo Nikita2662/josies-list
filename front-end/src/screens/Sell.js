@@ -50,7 +50,7 @@ function Sell() {
     let response = await fetch(url, { method: "POST", headers, body });
     if (response.ok) {
       alert("Product created successfully");
-      navigate("/");
+      navigate("/profile");
     } else {
       alert("Error creating product, please try again");
     }

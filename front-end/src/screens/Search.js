@@ -37,9 +37,19 @@ function Search() {
     return <Navigate to="/sign-in" />;
   }
 
+  getAllProducts(); 
+
   async function getSearchResults(searchQuery, tag) {
     let result = await fetch(
       "http://localhost:5038/search?SearchQuery=" + searchQuery + "&tags=" + tag
+    );
+    let data = await result.json();
+    setSearchResults(data);
+  }
+
+  async function getAllProducts() {
+    let result = await fetch(
+      "http://localhost:5038/products"
     );
     let data = await result.json();
     setSearchResults(data);
