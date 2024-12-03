@@ -19,54 +19,47 @@ function ProfileView() {
 
   useEffect(() => {
   
-    const fetchUser = async () => {
+    const fetchData = async () => {
     
-      //try {
-        const response = await fetch(`http://localhost:5038/users/${userId}`);
-        if (!response.ok) {
-          setError("User not found");
+      try {
+        const [userResponse, productsResponse] = await Promise.all([
+          fetch(`http://localhost:5038/users/${userId}`),
+          fetch(`http://localhost:5038/products/user/${userId}`),
+        ]);
+
+        if (!userResponse.ok || !productsResponse.ok) {
+          setError("Error fetching data");
           return;
         }
-        const data = await response.json();
-        console.log(data);
+        
+        const userData = await userResponse.json();
+        const productsData = await productsResponse.json();
+        
+        console.log(userData);
+        
         let local = {
-          _id: data._id,
-          bio: data.bio,
-          username: data.username,
-          picture: data.picture,
+          _id: userData._id,
+          bio: userData.bio,
+          username: userData.username,
+          picture: userData.picture,
         };
         setLocalUser(local);
-      //} catch (err) {
-      //    setError("Error fetching user data");
-      //} finally {
-      //  setLoading(false);
-      //}
+        setProducts(productsData)
+
+      } catch (err) {
+          setError("Error fetching user data");
+      } finally {
+        setLoading(false);
+      }
       
     };
       
-    fetchUser();
-    setLoading(false);
+    fetchData();
+    
 
   }, [userId]); 
 
-  useEffect(() => {
-
-  async function getUserProducts() {
-    if (loading) return;
-
-    let products = await fetch(
-      `http://localhost:5038/products/user/${userId}`
-    );
-    let data = await products.json();
-    setPLoading(false);
-    setProducts(data);
-  }
-
-  getUserProducts();
-
-  }, [userId]);
-
-  if (loading || ploading) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   function displaySearchResults(data) {
