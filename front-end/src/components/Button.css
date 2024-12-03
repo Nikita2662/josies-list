@@ -65,3 +65,27 @@
 background-color: #ff1f58; /* Darker shade on hover */
 color: #ffd4d9; 
 }
+
+.sold-button {
+  background-color: #DBF4AD; 
+  border: none;              
+  border-radius: 10px;    
+  font-family: Figtree;
+  font-size: 24px;
+  font-weight: 700;
+  color: #3EA467;
+  cursor: pointer;           
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+  position: relative;
+  width: 450px;
+  height: 52px;
+  margin-top: 15px;
+}
+.sold-button:hover {
+background-color: #3EA467; /* Darker shade on hover */
+color: #DBF4AD; 
+}

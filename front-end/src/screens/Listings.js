@@ -7,6 +7,7 @@ import BiddingBox from "../components/Bidding.js";
 import { UserContext } from "../App.js";
 import { useLocation, Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Button from "../components/Button.js"
 
 function Listings() {
   const [product, setProduct] = useState(null);
@@ -14,10 +15,15 @@ function Listings() {
   const [loading, setLoading] = useState(true);
   const [bid, setBid] = useState(null);
   const [prompt, setPrompt]=useState("");
+  const [showSold, setShowSold]=useState(false);
 
   const location = useLocation();
 
   const { user } = React.useContext(UserContext);
+
+  const setToSold = async () => {
+
+  }
 
   if (!user) {
     return <Navigate to="/sign-in" />;
@@ -25,7 +31,10 @@ function Listings() {
 
   const productId = location.state.productId;
 
+  
 
+    
+    
 
 
   const fetchProduct = async () => {
@@ -40,6 +49,7 @@ function Listings() {
 
     setProduct(data);
     setLoading(false);
+
   };
 
 
@@ -72,6 +82,10 @@ function Listings() {
         if ( bid!==null && user._id===product?.seller_email){
           setPrompt(prevPrompt => prevPrompt + `, made by ${bid.highest_bidder}`);
         }
+
+        if (!product?.sold && user._id===product?.seller_email) {
+          setShowSold(true);
+        }
       }
 
     } catch (error) {
@@ -98,6 +112,7 @@ fetchBid();
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  
   return (
     <div>
       <Header />
@@ -131,10 +146,18 @@ fetchBid();
                  prompt : 
                  "No bidding for this product, this product may have been created before the bidding feature was implemented" }
                 </p>
+                { showSold && (
+                  <Button onClick={setToSold} className="sold-button">
+                    Mark as SOLD
+                  </Button>
+                )}
               </div>
             </div>
+            
           </div>
+          
         </div>
+        
 
         <Comment productID={productId} userID={user._id} />
       </SafeArea>
