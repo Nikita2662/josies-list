@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const commentRoutes = express.Router();
 
-// get comments for a product
+// Get all comments for a product
 commentRoutes.route("/comments/all/:id").get(async (req, res) => {
     let comments = await Comment.find({ productID: req.params.id });
     if (comments.length > 0) {
@@ -12,22 +12,23 @@ commentRoutes.route("/comments/all/:id").get(async (req, res) => {
     }   else {
         // If no comments are found, send an empty array (for products that dont have a commment)
         res.json([]);  
+        
     }
     
 });
 
-// 2 - Retrieve a comment
+// Get a comment by id
 commentRoutes.route("/comments/:id").get(async (req, res) => {
     let data = await Comment.findOne({_id: new ObjectId(req.params.id)}); 
 
     if (Object.keys(data).length > 0) {
         res.json(data);
     } else {
-        throw new Error("Error: Data was not found.");
+        console.log("Error in retreiving comment");
     }
 });
 
-// 3 - Create a comment for a Product
+// Create a comment for a Product
 commentRoutes.route("/comments").post(async (req, res) => {
     let commentObject = {
         user: req.body.user,
@@ -38,7 +39,7 @@ commentRoutes.route("/comments").post(async (req, res) => {
     res.json(data);
 });
 
-// 4 - update comment [probably will not be used]
+// Update a comment by id
 commentRoutes.route("/comments/:id").put(async (req, res) => {
     let commentObject = { 
         $set: {
@@ -51,7 +52,7 @@ commentRoutes.route("/comments/:id").put(async (req, res) => {
     res.json(data);
 });
 
-// 5 - Delete One 
+// Delete a comment
 commentRoutes.route("/comments/:id").delete(async (req, res) => {
     let data = await Comment.deleteOne({_id: new ObjectId(req.params.id)}); 
     res.json(data); 

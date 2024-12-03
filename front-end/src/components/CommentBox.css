@@ -3,7 +3,7 @@
     flex-direction: column; 
     margin: 10px 0; 
     font-family: Figtree;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 700;
     display: flex;
     position: relative;
@@ -19,7 +19,7 @@
     flex-direction: column; 
     margin: 10px 0; 
     font-family: Figtree;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 700;
     display: flex;
     position: relative;
@@ -35,7 +35,7 @@
     padding: 10px; 
     border: none; 
     border-radius:10px; 
-    font-size: 24px; 
+    font-size: 14px; 
     width: 100%; 
     box-sizing: border-box; 
     color: black;

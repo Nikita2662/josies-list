@@ -30,6 +30,10 @@ nav {
   line-height: normal;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .container {
   width: 60;
   height: 95px;
@@ -45,6 +49,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .logo-title h1 {

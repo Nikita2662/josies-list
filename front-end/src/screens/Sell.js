@@ -1,118 +1,111 @@
 import Header from "../components/Header";
 import SafeArea from "../components/SafeArea";
 import "./Sell.css";
-import React, { useState } from 'react';
+import React, { useState, useContext } from "react";
+import { UserContext } from "../App";
 import TextBox from "../components/SubmissionBox";
 import UploadImage from "../components/Uploadimage";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Sell() {
-    
-    const [tags, setTags] = useState(null);
-    const [description, setDescription] = useState(null);
-    const [productName, setProductName] = useState(null);
-    const [image, setImage] = useState(null);
-    const [price, setPrice] = useState(null);
+  const [tags, setTags] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [productName, setProductName] = useState(null);
+  const [image, setImage] = useState(null);
+  const [price, setPrice] = useState(null);
 
-    // This function will be used to handle text submission from child
-    const submittedText = (fieldName, newText) => {
-        // Update the state based on fieldName dynamically
-        if (fieldName === "tag") {
+  let { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
-           const validTags = ["Clothing", "Dorm", "TextBook"];
-            if (validTags.includes(newText)) {
-                setTags(newText);
-            } 
-        } else if (fieldName === "productName") {
-           
-            setProductName(newText);
-        } else if (fieldName === "descripted") {
-            setDescription(newText);
-        } else if (fieldName === "price") {
-            if (!isNaN(newText)){
-                setPrice(newText);
-            }
-        else {
-            // Optionally show an error message that the price is invalid
-            console.error("Invalid price value");
-        }
-            
-        }
-    };
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+  }
 
-    async function createProduct(){
-        console.log("THIS IS THE SELL IMAGE URL"+image)
+  async function createProduct() {
 
-        if (!tags || !description || !productName || !price ||!image) {
-            throw new Error('All fields are required' + description+" "+price+" "+productName+" "+tags+" "+image);
-            return; // Optionally display a message to the user or return early
-        }
-   if (tags && description && productName && price){
-        try {
-            const url = 'http://localhost:5038/products';
-            const headers= { 'Content-Type': 'application/json' };
-                const body = JSON.stringify({
-                    itemName: productName,
-                    description: description,
-                    price: price,
-                    image: image, 
-                    //tags:tags
-                    seller: "Test Seller Name (Update Sell.js to grab actuall seller name)"
-                });
-                const response = await fetch(url, { method: 'POST', headers, body }); 
-            
-  
-               
+    let isFormComplete =
+      description &&
+      productName &&
+      Number(price) >= 0  &&
+      image &&
+      (tags === "dorm" || tags === "textbook" || tags === "clothing");
 
+    if (!isFormComplete) {
+      alert("All fields required to create a product");
+      return;
     }
- catch (err) {
-    throw new Error('Failed to add product, refresh again');
 
-}
-   }
-   else{
-    //throw new Error('Failed to add everything, refresh again');
-   }
-};
+    const url = "http://localhost:5038/products";
+    const headers = { "Content-Type": "application/json" };
+    const body = JSON.stringify({
+      itemName: productName,
+      description: description,
+      price: Number(price),
+      image: image,
+      tags: tags.split(" "),
+      seller_name: user.username,
+      seller_email: user._id,
+    });
 
+    let response = await fetch(url, { method: "POST", headers, body });
+    if (response.ok) {
+      alert("Product created successfully");
+      navigate("/profile");
+    } else {
+      alert("Error creating product, please try again");
+    }
+  }
 
-    return (
-        <div>
-            <Header />
-            <SafeArea />
+  return (
+    <div>
+      <Header />
+      <SafeArea>
+        <select
+          placeholder="Product Tags*"
+          className="product-type"
+          onChange={(event) => setTags(event.target.value)}
+        >
+          <option value="none">Set a Product Tag*</option>
+          <option value="clothing">Clothing</option>
+          <option value="dorm">Dorm</option>
+          <option value="textbook">Textbook</option>
+          console.log(tags);
+        </select>
 
-            <TextBox
-                placeholder="Product Tags*"
-                className={"product-type"}
-                onTextSubmit={(newText) => submittedText("tag", newText)}  
-            />
-            
-            <TextBox
-                className={"product-name"}
-                placeholder="Product Name*"
-                onTextSubmit={(newText) => submittedText("productName", newText)} 
-            />
+        <TextBox
+          className={"product-name"}
+          placeholder="Product Name*"
+          onTextSubmit={(newText) => setProductName(newText)}
+        />
 
-            <UploadImage w={400} h={400} c={"image"} m={40} onImageChange={(newImage)=>setImage(newImage)}/>
+        <UploadImage
+          w={400}
+          h={400}
+          c={"image"}
+          m={40}
+          onImageChange={(newImage) => setImage(newImage)}
+        />
 
-            <div className="flex-container">
-                <TextBox
-                    placeholder="Description*"
-                    className={"description"}
-                    onTextSubmit={(newText) => submittedText("descripted", newText)}  
-                />
+        <div className="flex-container">
+          <TextBox
+            placeholder="Description*"
+            className={"description"}
+            onTextSubmit={(newText) => setDescription(newText)}
+          />
 
-                <TextBox
-                    placeholder="Add a Price For Your Product*"
-                    className={"price"}
-                    onTextSubmit={(newText) => submittedText("price", newText)}  
-                />
-            </div>
-
-            <button className="submitButton" onClick={() => createProduct()}>
-                Submit!
-            </button>
+          <TextBox
+            placeholder="Add a Price For Your Product*"
+            className={"price"}
+            onTextSubmit={(newText) => setPrice(newText)}
+          />
         </div>
-    );
+
+        <button className="submitButton" onClick={() => createProduct()}>
+          Submit!
+        </button>
+      </SafeArea>
+    </div>
+  );
 }
 
 export default Sell;
