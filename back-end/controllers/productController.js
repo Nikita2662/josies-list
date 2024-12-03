@@ -1,4 +1,4 @@
-//where we have all methods related to product
+// All methods related to Products
 
 const Product = require("../models/Product");
 
@@ -27,7 +27,7 @@ const checkDuplicateProduct = async ({
 
     return { duplicate: false }; //returns false if a duplicate was not found
   } catch (error) {
-    //
+    
     return { duplicate: true };
   }
 };
