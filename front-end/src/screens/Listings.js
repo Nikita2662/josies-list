@@ -154,15 +154,17 @@ fetchBid();
                 <p className="productPrice">
                   Current Selling Price: ${product?.price}
                 </p>
-                <BiddingBox
+                { !product?.sold && (
+                  <BiddingBox
                   placeholder="Enter Your Bidding Price"
                   className="bidding"
                   isBidding={productId}
                   userEmail={product?.seller_email}
                 />
+                )}
                 
-                <p className="productSeller">{ prompt } 
-                </p>
+                <p className="productSeller">{ prompt } </p>
+                
                 
                 { showSold && (
                   <Button onClick={setToSold} className="sold-button">
