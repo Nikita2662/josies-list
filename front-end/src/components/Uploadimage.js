@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import imgUrl from "./emptyupload.png"; // Placeholder image if no file is selected
 import "../screens/Sell.css";
+import imageCompression from 'browser-image-compression';
 
 function UploadImage({ w, h, c = "photo-button", m = 30, onImageChange }) {
   // State to store the image URL (or placeholder initially)
@@ -23,15 +24,23 @@ function UploadImage({ w, h, c = "photo-button", m = 30, onImageChange }) {
     }
   };
 
-  function handleImageSelect(event) {
+  async function handleImageSelect(event) {
     const file = event.target.files[0];
     if (file) {
+      // Image compression options
+    const options = {
+      maxSizeMB: 0.08,
+      maxWidthOrHeight: 400,
+      useWebWorker: true,
+    }
+    //Compress an image using imageCompression
+      const compressedFile = await imageCompression(file, options);
       const reader = new FileReader();
       reader.onload = (e) => {
         setImage(e.target.result);
         onImageChange(e.target.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(compressedFile);
     }
   }
 
