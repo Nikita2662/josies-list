@@ -8,7 +8,7 @@ const userSchema = new schema({
             validator: function(email) {
                 return /(g\.ucla\.edu)$/.test(email); // true if g.ucla.edu email, false otherwise
             },
-            message: props => ' is not a valid g.ucla.edu email!' // send 400 message 
+            message: props => ' This not a valid g.ucla.edu email! \nPlease re-route to sign in, and use a valid email.' // send 400 message 
         }
     },
     username: String,
