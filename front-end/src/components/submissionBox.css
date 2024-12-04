@@ -24,6 +24,7 @@
     position: relative;
     margin-left: 94px;   
     margin-top: 60px;
+    margin-bottom: 20px;
     width: 455px;
     height: 52px;
     flex-shrink: 0;
@@ -33,14 +34,28 @@
     padding: 10px; 
     border: none; 
     border-radius:10px; 
-    font-size: 24px; 
+    font-size: 14px; 
+    width: 100%; 
+    box-sizing: border-box; 
+    color: black;
+    font-family: Figtree;
+    margin-bottom: 20px;
+}
+.text-box:focus {
+    border-color: none; 
+    outline: none; 
+}
+
+.text-button{
+    word-wrap: break-word;
+    padding: 10px; 
+    border: none; 
+    border-radius:10px; 
+    font-size: 14px; 
     width: 100%; 
     box-sizing: border-box; 
     color: black;
     font-family: Figtree;
     background-color: #ffd4d9;
-}
-.text-box:focus {
-    border-color: none; 
-    outline: none; 
+    margin-bottom: 20px;
 }
