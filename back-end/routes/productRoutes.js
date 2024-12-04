@@ -118,7 +118,12 @@ productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
 
 // SELLER marks product as sold
 productRoutes.route("/products/:id/acceptbid").put(async (req, res) => {
-  Product.findByIdAndUpdate(req.params.id, {"sold": true}, { new: true });
+  const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {"sold": true}, { new: true });
+  if (!updatedProduct) {
+    return res.status(404).json({ message: "Product not found" });
+  }
+
+  res.status(200).json(updatedProduct);
 })
 
 // Retrieve all products under a specific user
@@ -153,6 +158,7 @@ productRoutes.route("/products").post(async (req, res) => {
     image: req.body.image,
     seller_name: req.body.seller_name,
     seller_email: req.body.seller_email,
+    sold: req.body.sold,
    
   };
   let data = await Product.create(productObject);
@@ -170,6 +176,7 @@ productRoutes.route("/products/:id").put(async (req, res) => {
       image: req.body.image,
       seller_name: req.body.seller_name,
       seller_email: req.body.seller_email,
+      sold: req.body.sold,
     },
   };
   let data = await Product.updateOne(

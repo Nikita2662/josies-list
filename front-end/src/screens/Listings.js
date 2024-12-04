@@ -5,7 +5,7 @@ import React, { useState,useEffect } from "react";
 import Comment from "../components/Comments.js";
 import BiddingBox from "../components/Bidding.js";
 import { UserContext } from "../App.js";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "../components/Button.js"
 
@@ -18,12 +18,9 @@ function Listings() {
   const [showSold, setShowSold]=useState(false);
 
   const location = useLocation();
-
+  const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
-
-  const setToSold = async () => {
-
-  }
+  
 
   if (!user) {
     return <Navigate to="/sign-in" />;
@@ -32,7 +29,29 @@ function Listings() {
   const productId = location.state.productId;
 
   
+  const setToSold = async () => {
 
+    const updatedProductData = {
+      ...product,
+      itemName: product?.itemName + " - SOLD", 
+      sold: "true",
+    };
+      
+    const nameResponse = await fetch(`http://localhost:5038/products/${productId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProductData),
+    });
+    
+    if (!nameResponse.ok) {
+      throw new Error("Failed to set item as sold.");
+    }
+    
+    navigate("/profile");
+
+  }
     
     
 
@@ -52,14 +71,15 @@ function Listings() {
 
   };
 
-
   async function fetchBid(){
     try {
       const response = await fetch(
         `http://localhost:5038/products/${productId}/viewbid`
       );
     
-
+      if (!product?.sold && user._id===product?.seller_email) {
+        setShowSold(true);
+      }
 
       const data = await response.json();
      
@@ -76,6 +96,7 @@ function Listings() {
       
       if ( bid===null ||bid.highest_bid===-1){
         setPrompt("No bidding created yet")
+
       }else{
         setPrompt(`The current bid is $ ${bid.highest_bid}`);
 
@@ -83,9 +104,6 @@ function Listings() {
           setPrompt(prevPrompt => prevPrompt + `, made by ${bid.highest_bidder}`);
         }
 
-        if (!product?.sold && user._id===product?.seller_email) {
-          setShowSold(true);
-        }
       }
 
     } catch (error) {
@@ -142,10 +160,10 @@ fetchBid();
                   isBidding={productId}
                   userEmail={product?.seller_email}
                 />
-                <p className="productSeller">{ bid!==null ?
-                 prompt : 
-                 "No bidding for this product, this product may have been created before the bidding feature was implemented" }
+                
+                <p className="productSeller">{ prompt } 
                 </p>
+                
                 { showSold && (
                   <Button onClick={setToSold} className="sold-button">
                     Mark as SOLD
