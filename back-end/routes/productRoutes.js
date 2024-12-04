@@ -49,6 +49,20 @@ productRoutes.route("/products").get(async (req, res) => {
   }
 });
 
+// Retrieve products that have not been sold
+productRoutes.route("/products/notsold").get(async (req, res) => {
+  let products = await Product.find({ sold: false });
+
+  if (products.length > 0) {
+    res.json(products);
+  } else {
+    res.status(400).send({
+      status: false,
+      message: "No products left to sell",
+    });
+  }
+});
+
 // Retrieve one product by id
 productRoutes.route("/products/:id").get(async (req, res) => {
   let data = await Product.findOne({ _id: new ObjectId(req.params.id) });
