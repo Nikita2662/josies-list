@@ -3,7 +3,7 @@ import "./Comments.css";
 import { UserContext } from "../App.js";
 import { useLocation, Navigate } from "react-router-dom";
 
-const BiddingBox = ({ label, placeholder, className="text-box-comment" , isBidding, userEmail}) => {
+const BiddingBox = ({ label, placeholder, className="text-box-comment" , isBidding, userEmail,onBidUpdate}) => {
 
     const [authorName, setAuthorName] = useState('Submit Your Offer?');
     const [commentText, setCommentText] = useState('');
@@ -82,9 +82,10 @@ const BiddingBox = ({ label, placeholder, className="text-box-comment" , isBiddi
           
           if (!response.ok) {
           alert(result.message);
-        
           }
           alert("Bid sent");
+          onBidUpdate();
+
   
         }
         else{

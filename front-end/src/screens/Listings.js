@@ -22,9 +22,6 @@ function Listings() {
   const { user } = React.useContext(UserContext);
   
 
-  if (!user) {
-    return <Navigate to="/sign-in" />;
-  }
 
   const productId = location.state.productId;
 
@@ -56,22 +53,28 @@ function Listings() {
     
 
 
-  const fetchProduct = async () => {
-    if (!loading) return;
-
+  const fetchProduct = async () =>{
+    
+    console.log("fetch product");
+    try{
     const response = await fetch(`http://localhost:5038/products/${productId}`);
     if (!response.ok) {
       setError("Product not found");
-      return;
+     
     }
     const data = await response.json();
 
     setProduct(data);
-    setLoading(false);
+  } catch (error) {
+    alert("Product not found");
+  }
 
   };
 
   async function fetchBid(){
+   
+    console.log("fetch bid");
+
     try {
       const response = await fetch(
         `http://localhost:5038/products/${productId}/viewbid`
@@ -87,11 +90,11 @@ function Listings() {
       if (!response.ok) {
         setBid(null);
         //setError("");
-        setLoading(false); // Stop loading if there's an error
+        // Stop loading if there's an error
         //alert(data.message);
       } else{
         setBid(data); 
-        setLoading(false);
+       
       }
       
       if ( bid===null ||bid.highest_bid===-1){
@@ -114,12 +117,25 @@ function Listings() {
     }
   };
 
+  useEffect(() => {
+    fetchProduct();
+    fetchBid();
+   // fetchBid();
+    setLoading(false);
+  
+  }, [productId,user]);
 
-// Only re-run if productId changes
+useEffect(() => {
+    if (product) {
+      fetchBid();
+    }
+  }, [product]);
+
+  if (!user) {
+    return <Navigate to="/sign-in" />;
+ }
 
 
-fetchProduct();
-fetchBid();
 
    
 
@@ -160,6 +176,7 @@ fetchBid();
                   className="bidding"
                   isBidding={productId}
                   userEmail={product?.seller_email}
+                  onBidUpdate={fetchBid}
                 />
                 )}
                 
