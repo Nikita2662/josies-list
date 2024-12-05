@@ -7,6 +7,7 @@ import "./ProfileView.css";
 import { Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+// same as profile page but without create account button for viewing other users profile
 function ProfileView() {
   const [products, setProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -16,6 +17,7 @@ function ProfileView() {
 
   const userId = location.state?.userId;
 
+  // get usr and product data based on userID
   useEffect(() => {
   
     const fetchData = async () => {
@@ -61,6 +63,7 @@ function ProfileView() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  // display search results
   function displaySearchResults(data) {
     if (typeof data === "object" && data.message) {
       return <h1>{data.message}</h1>;
