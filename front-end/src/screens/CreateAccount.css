@@ -15,7 +15,7 @@
     margin: 0;
     width: fit-content;
 }
-.small-text {
+.small-text-ca {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -25,14 +25,14 @@
     top: 0px;
     left: 95px;
 }
-.small-text h1 {
+.small-text-ca h1 {
     font-size: 24px;
     font-weight: 700;
     font-family: "Figtree";
     color: black;
     width: fit-content;
 }
-.small-text h2 {
+.small-text-ca h2 {
     font-size: 24px;
     font-weight: 700;
     font-family: "Figtree";

@@ -60,7 +60,7 @@ function CreateAccount() {
         </div>
         <div className="grid-container-ca">
           <div className="grid-item">
-            <div className="small-text">
+            <div className="small-text-ca">
               <h1>Profile Picture</h1>
             </div>
 
