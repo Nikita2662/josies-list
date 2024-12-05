@@ -31,6 +31,7 @@ function Search() {
   const [searchQuery, setSearchQuery] = useState("");
   const [tag, setTag] = useState("");
   const [loading, setLoading] = useState(true);
+  const [working, setWorking] = useState(false);
 
   const { user } = useContext(UserContext);
 
@@ -39,13 +40,16 @@ function Search() {
   }
 
   async function getSearchResults(searchQuery, tag) {
-    if (!loading) return;
+    if (!loading || working) return;
+    setWorking(true);
+
     let result = await fetch(
       "http://localhost:5038/search?SearchQuery=" + searchQuery + "&tags=" + tag
     );
     let data = await result.json();
     setSearchResults(data);
     setLoading(false);
+    setWorking(false);
   }
 
   getSearchResults(searchQuery, tag);
