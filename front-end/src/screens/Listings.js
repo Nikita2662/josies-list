@@ -20,12 +20,12 @@ function Listings() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = React.useContext(UserContext);
-  
 
-
+  // get productId for fetching product from passed in state
   const productId = location.state.productId;
 
-  
+  // set an item as sold: fetch product edit function based on product id, change name and sold boolean
+  // after, navigate to profile
   const setToSold = async () => {
 
     const updatedProductData = {
@@ -50,9 +50,7 @@ function Listings() {
 
   }
     
-    
-
-
+  // fetch the product from backend based on id for listing page information
   const fetchProduct = async () =>{
     
     console.log("fetch product");
@@ -71,6 +69,7 @@ function Listings() {
 
   };
 
+  // fetch the highest bid for the product based on productId
   async function fetchBid(){
    
     console.log("fetch bid");
@@ -80,6 +79,7 @@ function Listings() {
         `http://localhost:5038/products/${productId}/viewbid`
       );
     
+      // if the product was not sold, set boolean for frontend showing sold button
       if (!product?.sold && user._id===product?.seller_email) {
         setShowSold(true);
       }
@@ -97,6 +97,7 @@ function Listings() {
        
       }
       
+      // set appropriate bid message based on bid state -- if user is seller, show bidder email
       if ( bid===null ||bid.highest_bid===-1){
         setPrompt("No bidding created yet")
 
@@ -117,6 +118,7 @@ function Listings() {
     }
   };
 
+  // when productID and user change, fetch bid and product
   useEffect(() => {
     fetchProduct();
     fetchBid();
@@ -135,10 +137,6 @@ useEffect(() => {
     return <Navigate to="/sign-in" />;
  }
 
-
-
-   
-
  
   //Bidding function goes here where Listings calls child class Bidding.js, Bidding.js sends text on an event,
   // Bidding calls bidding backend routes to check if acceptable number, and if yes, then we send in a new bid and display 
@@ -146,7 +144,9 @@ useEffect(() => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  
+  // frontend for listing: show image, name, description, seller price, 
+  // seller with link to profile, bidder, current bid, sold button if user is seller
+  // if product has been sold, take away bidding and selling features
   return (
     <div>
       <Header />

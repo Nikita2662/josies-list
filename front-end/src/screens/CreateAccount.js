@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../App.js";
 import UploadImage from "../components/Uploadimage.js";
 
+// build create account page for new users
 function CreateAccount() {
   const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ function CreateAccount() {
 
   const { setUser } = React.useContext(UserContext);
 
+  // create user object when page submitted
   const createUser = async () => {
     const body1 = {
       _id: email,
@@ -28,6 +30,7 @@ function CreateAccount() {
       picture: image,
     };
 
+    // fetch from backend database the create user tool
     const response1 = await fetch("http://localhost:5038/users", {
       method: "POST",
       headers: {
@@ -43,14 +46,17 @@ function CreateAccount() {
       return;
     }
 
+    // when user created, navigate to profile
     setUser(body1);
     navigate("/profile");
   };
 
+  // when image button clicked, upload image
   const handleClick = (image) => {
     setImage(image);
   };
 
+  // create page frontend with two textbooks taking in name/bio, image upload, and create account button
   return (
     <div>
       <Header />

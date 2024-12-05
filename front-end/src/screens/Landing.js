@@ -3,6 +3,7 @@ import Logo from "../components/Logo";
 import SafeArea from "../components/SafeArea";
 import "./Landing.css";
 
+// landing page, logo and title
 function Landing() {
   return (
     <>

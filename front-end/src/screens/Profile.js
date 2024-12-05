@@ -14,10 +14,12 @@ function Profile() {
   const [loading, setLoading] = React.useState(true);
   const navigate = useNavigate();
 
+  // if the user doesn't exist, go to sign in
   if (!user) {
     return <Navigate to="/sign-in" />;
   }
 
+  // display the users products in form from ListedItem component
   function displaySearchResults(data) {
     if (typeof data === "object" && data.message) {
       return <h1>{data.message}</h1>;
@@ -35,6 +37,7 @@ function Profile() {
     ));
   }
 
+  // fetch all user products from backend based on userID
   async function getUserProducts() {
     if (!loading) return;
 
@@ -46,9 +49,10 @@ function Profile() {
     setProducts(data);
   }
 
+  // get all user products
   getUserProducts();
 
-  
+  // go to create listing page when button clicked
   function goToProduct(user, navigate) {
     if (user == null) {
       navigate("/sign-in");
@@ -57,6 +61,7 @@ function Profile() {
     }
   }
 
+  // create profile frontend: user info (pic, bio, name) and user products with create listing button
   return (
     <div>
       <Header />
