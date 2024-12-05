@@ -30,6 +30,7 @@ function Search() {
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [tag, setTag] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const { user } = useContext(UserContext);
 
@@ -37,23 +38,17 @@ function Search() {
     return <Navigate to="/sign-in" />;
   }
 
-  getAllProducts(); 
-
   async function getSearchResults(searchQuery, tag) {
+    if (!loading) return;
     let result = await fetch(
       "http://localhost:5038/search?SearchQuery=" + searchQuery + "&tags=" + tag
     );
     let data = await result.json();
     setSearchResults(data);
+    setLoading(false);
   }
 
-  async function getAllProducts() {
-    let result = await fetch(
-      "http://localhost:5038/products"
-    );
-    let data = await result.json();
-    setSearchResults(data);
-  }
+  getSearchResults(searchQuery, tag);
 
   return (
     <>
@@ -64,7 +59,12 @@ function Search() {
             placeholder="search"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button onClick={() => getSearchResults(searchQuery, tag)}>
+          <button
+            onClick={() => {
+              setLoading(true);
+              getSearchResults(searchQuery, tag);
+            }}
+          >
             <SearchIcon size={50} />
           </button>
         </div>
@@ -79,7 +79,8 @@ function Search() {
           <option value="textbook">Textbook</option>
         </select>
         <div className="search-results">
-          {displaySearchResults(searchResults)}
+          {!loading && displaySearchResults(searchResults)}
+          {loading && <h1>Loading...</h1>}
         </div>
       </SafeArea>
     </>

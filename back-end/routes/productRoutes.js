@@ -9,21 +9,23 @@ const productRoutes = express.Router();
 productRoutes.route("/search").get(async (req, res) => {
   const { SearchQuery, tags } = req.query;
   try {
-    const query = [];
+    const orQuery = [];
     if (SearchQuery) {
-      query.push(
+      orQuery.push(
         { itemName: { $regex: SearchQuery, $options: "i" } },
         { description: { $regex: SearchQuery, $options: "i" } }
       );
     }
 
-    const tagsQuery = [];
+    const andQuery = [];
     if (tags) {
       const tagsArray = tags.split(",");
-      tagsQuery.push({ tags: { $in: tagsArray } });
+      andQuery.push({ tags: { $in: tagsArray } });
     }
 
-    let data = await Product.find({ $or: query, $and: tagsQuery });
+    andQuery.push({ sold: false });
+
+    let data = await Product.find({ $or: orQuery, $and: andQuery });
 
     if (data.length > 0) {
       res.json(data).status(200);
@@ -83,34 +85,37 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
   let bid = req.body.bid;
   let bidder = req.body.bidder_email;
 
-  if (bid < 0) { // bid is invalid: should be positive
+  if (bid < 0) {
+    // bid is invalid: should be positive
     res.status(400).send({
       status: false,
       message: "Bid must be a positive value.",
     });
-  }
-  
-  else { // bid is valid
-    try { // if bid is higher than current highest_bid, update
-      let result = await Product.updateOne({
-        _id: req.params.id,
-        highest_bid: { $lt: bid }
-      },
-      { 
-        $set: {
-          highest_bid: bid,
-          highest_bidder: bidder
-        }}
+  } else {
+    // bid is valid
+    try {
+      // if bid is higher than current highest_bid, update
+      let result = await Product.updateOne(
+        {
+          _id: req.params.id,
+          highest_bid: { $lt: bid },
+        },
+        {
+          $set: {
+            highest_bid: bid,
+            highest_bidder: bidder,
+          },
+        }
       );
 
       res.status(201).send({
         status: true,
-        message: "Bid sent successfully."
+        message: "Bid sent successfully.",
       });
     } catch (error) {
       res.status(400).send({
         status: false,
-        message: error, 
+        message: error,
       });
     }
   }
@@ -119,26 +124,34 @@ productRoutes.route("/products/:id/bid").put(async (req, res) => {
 // Retrieve highest bid and bidder for a given product (SELLER)
 // if highest bid is returned as -1, that means there are no bids yet
 productRoutes.route("/products/:id/viewbid").get(async (req, res) => {
-  let bid = await Product.findOne({ _id: req.params.id }, { highest_bid: 1, highest_bidder: 1, _id: 0 });
+  let bid = await Product.findOne(
+    { _id: req.params.id },
+    { highest_bid: 1, highest_bidder: 1, _id: 0 }
+  );
 
   if (bid != null) res.send(bid).status(200);
   else
     res.status(400).send({
       // ERROR HANDLING
       status: false,
-      message: "Error retrieving highest bid, possibly this product may have been created before bidding feature was set",
+      message:
+        "Error retrieving highest bid, possibly this product may have been created before bidding feature was set",
     });
 });
 
 // SELLER marks product as sold
 productRoutes.route("/products/:id/acceptbid").put(async (req, res) => {
-  const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {"sold": true}, { new: true });
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    { sold: true },
+    { new: true }
+  );
   if (!updatedProduct) {
     return res.status(404).json({ message: "Product not found" });
   }
 
   res.status(200).json(updatedProduct);
-})
+});
 
 // Retrieve all products under a specific user
 productRoutes.route("/products/user/:id").get(async (req, res) => {
@@ -173,7 +186,6 @@ productRoutes.route("/products").post(async (req, res) => {
     seller_name: req.body.seller_name,
     seller_email: req.body.seller_email,
     sold: req.body.sold,
-   
   };
   let data = await Product.create(productObject);
   res.json(data);
