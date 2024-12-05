@@ -1,8 +1,8 @@
-# Josies List
+# Josie's List
 35L collaborative project Fall 2024
 
 ## Description
-Josies List is a localized marketplace for UCLA students to buy and sell items in 
+Josie's List is a localized marketplace for UCLA students to buy and sell items in 
 different categories such as clothing, textbooks, and dorm items.
 
 ## Key Features
@@ -87,3 +87,4 @@ Screenshots:
 - Search Page:
 <img width="1440" alt="sing-in-page" src="front-end/public/search-page.png">
 - Bid Page:
+<img width="1440" alt="sing-in-page" src="front-end/public/search-page.png">
