@@ -40,7 +40,7 @@
     width: fit-content;
     margin-left: 426px;
 }
-.grid-container {
+.grid-container-ca {
     display: grid; 
     grid-template-columns: 360px 455px; 
     gap: 116px; 

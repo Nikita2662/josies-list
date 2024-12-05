@@ -58,7 +58,7 @@ function CreateAccount() {
         <div className="ca-container">
           <h1>Create Your Account</h1>
         </div>
-        <div className="grid-container">
+        <div className="grid-container-ca">
           <div className="grid-item">
             <div className="small-text">
               <h1>Profile Picture</h1>
