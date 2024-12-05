@@ -89,13 +89,13 @@ function Sell() {
           <div className="flex-container">
             <TextBox
               placeholder="Description*"
-              className={"description"}
+              className={"description"}  autoHeight={false}
               onTextSubmit={(newText) => setDescription(newText)}
             />
 
             <TextBox
               placeholder="Add a Price For Your Product*"
-              className={"price"}
+              className={"price"} autoHeight={false}
               onTextSubmit={(newText) => setPrice(newText)}
             />
           </div>

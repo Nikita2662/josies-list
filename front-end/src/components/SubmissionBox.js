@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import "../screens/Sell.css";
 
-const SubmissionBox = ({ label, placeholder, className, onTextSubmit }) => {
+const SubmissionBox = ({ label, placeholder, className, onTextSubmit, autoHeight=true }) => {
   const [text, setText] = useState("");
 
   const handleChange = (event) => {
     setText(event.target.value);
+    if (autoHeight){
     const textarea = event.target;
     textarea.style.height = "auto";
     textarea.style.height = `${textarea.scrollHeight}px`;
-
+    }
     if (onTextSubmit) {
       onTextSubmit(event.target.value);
     }
