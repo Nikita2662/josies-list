@@ -23,7 +23,7 @@ function Listings() {
   
 
 
-  const productId = location.state.productId;
+  const productId = location.state?.productId;
 
   
   const setToSold = async () => {
@@ -54,7 +54,9 @@ function Listings() {
 
 
   const fetchProduct = async () =>{
-    
+    if (!user) {
+      return <Navigate to="/sign-in" />;
+   }
     console.log("fetch product");
     try{
     const response = await fetch(`http://localhost:5038/products/${productId}`);
@@ -72,6 +74,9 @@ function Listings() {
   };
 
   async function fetchBid(){
+    if (!user) {
+      return <Navigate to="/sign-in" />;
+   }
    
     console.log("fetch bid");
 
@@ -118,12 +123,13 @@ function Listings() {
   };
 
   useEffect(() => {
+   
     fetchProduct();
     fetchBid();
    // fetchBid();
     setLoading(false);
   
-  }, [productId,user]);
+  }, [user,productId]);
 
 useEffect(() => {
     if (product) {
