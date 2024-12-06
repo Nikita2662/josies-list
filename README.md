@@ -47,7 +47,14 @@ cd front-end
 npm install
 ```
 
-4. Start the backend and frontend servers:
+4. To connect your application to a database, create a .env file in the back-end directory 
+and add your MongoDB URI in the following format
+```
+DATABASE_URI= <your_mongo_db_URI>
+```
+Make sure you replace <your_mongo_db_URI> with the actual connection string for your MongoDB database.
+
+5. Start the backend and frontend servers:
 
 Backend:
 
@@ -62,7 +69,7 @@ cd front-end
 npm start
 ```
 
-5. Visit the app in your browser at http://localhost:3000.
+6. Visit the app in your browser at http://localhost:3000.
 
 ## Usage
 
@@ -86,5 +93,5 @@ Screenshots:
 <img width="1440" alt="sing-in-page" src="front-end/public/sell-page.png">
 - Search Page:
 <img width="1440" alt="sing-in-page" src="front-end/public/search-page.png">
-- Bid Page:
-<img width="1440" alt="sing-in-page" src="front-end/public/search-page.png">
+- Listing Page:
+<img width="1440" alt="sing-in-page" src="front-end/public/bid-page.png">
