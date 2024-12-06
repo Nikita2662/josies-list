@@ -47,8 +47,8 @@ cd front-end
 npm install
 ```
 
-4. To connect your application to a database, create a .env file in the back-end directory 
-and add your MongoDB URI in the following format
+4. Connect your application to a database by creating a .env file in the back-end directory 
+and adding your MongoDB URI in the following format:
 ```
 DATABASE_URI= <your_mongo_db_URI>
 ```
