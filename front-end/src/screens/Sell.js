@@ -22,19 +22,20 @@ function Sell() {
   }
 
   async function createProduct() {
-
+    //verify form is filled
     let isFormComplete =
       description &&
       productName &&
-      Number(price) >= 0  &&
+      Number(price) >= 0 &&
       image &&
-      (tags === "dorm" || tags === "textbook" || tags === "clothing");
+      tags !== "none";
 
     if (!isFormComplete) {
       alert("All fields required to create a product");
       return;
     }
 
+    //create product in backend
     const url = "http://localhost:5038/products";
     const headers = { "Content-Type": "application/json" };
     const body = JSON.stringify({
@@ -60,51 +61,54 @@ function Sell() {
     <div>
       <Header />
       <SafeArea>
-          <select
-            placeholder="Product Tags*"
-            className="product-type"
-            onChange={(event) => setTags(event.target.value)}
-          >
-            <option value="none">Set a Product Tag*</option>
-            <option value="clothing">Clothing</option>
-            <option value="dorm">Dorm</option>
-            <option value="textbook">Textbook</option>
-            console.log(tags);
-          </select>
+        <select
+          placeholder="Product Tags*"
+          className="product-type"
+          onChange={(event) => setTags(event.target.value)}
+        >
+          <option selected value="none">
+            Set a Product Tag*
+          </option>
+          <option value="clothing">Clothing</option>
+          <option value="dorm">Dorm</option>
+          <option value="textbook">Textbook</option>
+        </select>
+
+        <TextBox
+          className={"product-name"}
+          placeholder="Product Name*"
+          onTextSubmit={(newText) => setProductName(newText)}
+        />
+
+        <UploadImage
+          w={400}
+          h={400}
+          c={"image"}
+          m={40}
+          onImageChange={(newImage) => setImage(newImage)}
+        />
+
+        <div className="flex-container">
+          <TextBox
+            placeholder="Description*"
+            className={"description"}
+            autoHeight={false}
+            onTextSubmit={(newText) => setDescription(newText)}
+          />
 
           <TextBox
-            className={"product-name"}
-            placeholder="Product Name*"
-            onTextSubmit={(newText) => setProductName(newText)}
+            placeholder="Add a Price For Your Product*"
+            className={"price"}
+            autoHeight={false}
+            onTextSubmit={(newText) => setPrice(newText)}
           />
+        </div>
 
-          <UploadImage
-            w={400}
-            h={400}
-            c={"image"}
-            m={40}
-            onImageChange={(newImage) => setImage(newImage)}
-          />
-
-          <div className="flex-container">
-            <TextBox
-              placeholder="Description*"
-              className={"description"}  autoHeight={false}
-              onTextSubmit={(newText) => setDescription(newText)}
-            />
-
-            <TextBox
-              placeholder="Add a Price For Your Product*"
-              className={"price"} autoHeight={false}
-              onTextSubmit={(newText) => setPrice(newText)}
-            />
-          </div>
-            
-          <div class="button-container">
-            <button className="submitButton" onClick={() => createProduct()}>
-              Submit!
-            </button>
-          </div>
+        <div class="button-container">
+          <button className="submitButton" onClick={() => createProduct()}>
+            Submit!
+          </button>
+        </div>
       </SafeArea>
     </div>
   );

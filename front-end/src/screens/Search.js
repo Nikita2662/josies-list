@@ -10,6 +10,7 @@ import { UserContext } from "../App.js";
 import "./Search.css";
 
 function displaySearchResults(data) {
+  //no items found
   if (typeof data === "string") {
     return <h1>{data}</h1>;
   }
@@ -40,6 +41,7 @@ function Search() {
   }
 
   async function getSearchResults(searchQuery, tag) {
+    //only want to run this function if not currently fetching search results
     if (!loading || working) return;
     setWorking(true);
 
@@ -54,6 +56,7 @@ function Search() {
 
   getSearchResults(searchQuery, tag);
 
+  //display a search bar, tags filter, and search results
   return (
     <>
       <Header />
